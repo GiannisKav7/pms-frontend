@@ -7,7 +7,6 @@ const LeasePage = () => {
 
   return (
     <div>
-      <h1>Lease Details for {id}</h1>
       <LeaseDetails />
     </div>
   );
