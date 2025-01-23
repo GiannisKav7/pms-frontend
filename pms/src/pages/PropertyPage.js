@@ -1,15 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import UnitDetails from '../components/Unit/UnitDetails';
-
-const UnitPage = () => {
+import PropertyDetails from '../components/Property/PropertyDetails';
+const PropertyPage = () => {
   const { id } = useParams();  // Get lease ID from the URL
 
   return (
     <div>
-      <UnitDetails />
+      <PropertyDetails />
     </div>
   );
 };
 
-export default UnitPage;
+export default PropertyPage;
