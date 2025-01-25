@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider, Select } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -21,6 +22,7 @@ const RoomDetails = () => {
     roomStatus: "Vacant Unrented Ready",
   };
 
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
   const [details, setDetails] = useState(initialDetails);
@@ -37,6 +39,10 @@ const RoomDetails = () => {
       setDetails(values);
       setIsEditing(false);
     });
+  };
+
+  const handleNavigation = (code, path) => {
+    navigate(`/${path}/${code}`);
   };
 
   const attributesData = [
@@ -77,7 +83,16 @@ const RoomDetails = () => {
       { title: "Accessibility (Yes/No)", dataIndex: "accessibility", key: "accessibility" },
     ],
     beds: [
-      { title: "Bed Code", dataIndex: "bedCode", key: "bedCode" },
+      {
+        title: "Bed Code",
+        dataIndex: "bedCode",
+        key: "bedCode",
+        render: (text) => (
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "bed")}>
+            {text}
+          </a>
+        ),
+      },
       { title: "Description", dataIndex: "description", key: "description" },
       { title: "Status", dataIndex: "status", key: "status" },
     ],
@@ -108,7 +123,14 @@ const RoomDetails = () => {
         <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
           {Object.entries(details).map(([key, value]) => (
             <Descriptions.Item label={key.replace(/([A-Z])/g, " $1")} key={key}>
-              {isEditing && key === "roomStatus" ? (
+              {key.toLowerCase().includes("code") && !isEditing ? (
+                <a
+                  style={{ color: "#1890ff" }}
+                  onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
+                >
+                  {value}
+                </a>
+              ) : isEditing && key === "roomStatus" ? (
                 <Form.Item name={key} noStyle rules={[{ required: true, message: `${key} is required` }]}>
                   <Select style={{ margin: "4px 0" }}>
                     {roomStatusOptions.map((option) => (

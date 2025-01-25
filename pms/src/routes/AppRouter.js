@@ -8,6 +8,9 @@ import LegalEntityOwnerPage from '../pages/LegalEntityOwnerPage';
 import ContactPage from '../pages/ContactPage';
 import PropertyPage from '../pages/PropertyPage';
 import RoomPage from '../pages/RoomPage';
+import BuildingPage from '../pages/BuildingPage';
+import FloorPage from '../pages/FloorPage';
+import UnitTypePage from '../pages/UnitTypePage';
 
 const AppRouter = () => {
   return (
@@ -20,6 +23,10 @@ const AppRouter = () => {
         <Route path="/contact/:id" element={<ContactPage />} />
         <Route path="/property/:id" element={<PropertyPage />} />
         <Route path="/room/:id" element={<RoomPage />} />
+        <Route path="/building/:id" element={<BuildingPage />} />
+        <Route path="/floor/:id" element={<FloorPage />} />
+        <Route path="/unittype/:id" element={<UnitTypePage />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
