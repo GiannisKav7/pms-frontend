@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
 const UnitDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const initialDetails = {
-    propertyInformation: "test",
+    propertyInformation: "Test",
     unitTypeCode: "144241",
     propertyCode: "545422",
     weeklyRent: "100",
@@ -47,15 +49,19 @@ const UnitDetails = () => {
     });
   };
 
+  const handleNavigation = (code, path) => {
+    navigate(`/${path}/${code}`);
+  };
+
   const tabData = {
     occupancyInfo: [
-      { key: "1", unitStatus: "", dateAvailable: "", dateReady: "", furnished: "" },
+      { key: "1", unitStatus: "Available", dateAvailable: "2024-02-01", dateReady: "2024-01-15", furnished: "Yes" },
     ],
     roomTotals: [
-      { key: "1", totalRooms: "", occupiedRooms: "", unoccupiedRooms: "", totalBeds: "", occupiedBeds: "", unoccupiedBeds: "", assignableCapacity: "", maxCapacity: "" },
+      { key: "1", totalRooms: "3", occupiedRooms: "2", unoccupiedRooms: "1", totalBeds: "3", occupiedBeds: "2", unoccupiedBeds: "1", assignableCapacity: "3", maxCapacity: "4" },
     ],
     rooms: [
-      { key: "1", roomCode: "", descriptionNotes: "", roomStatus: "", area: "", accessibleDisabled: "", dateAvailable: "", dateVacant: "", tenantCode: "" },
+      { key: "1", roomCode: "R-001", descriptionNotes: "Master Bedroom", roomStatus: "Occupied", area: "20 sqm", accessibleDisabled: "No", dateAvailable: "2024-03-01", dateVacant: "2024-06-01", tenantCode: "T-001" },
     ],
   };
 
@@ -64,7 +70,7 @@ const UnitDetails = () => {
       { title: "Unit Status", dataIndex: "unitStatus", key: "unitStatus" },
       { title: "Date Available", dataIndex: "dateAvailable", key: "dateAvailable" },
       { title: "Date Ready", dataIndex: "dateReady", key: "dateReady" },
-      { title: "Furnished (Flag)", dataIndex: "furnished", key: "furnished" },
+      { title: "Furnished", dataIndex: "furnished", key: "furnished" },
     ],
     roomTotals: [
       { title: "Total Rooms", dataIndex: "totalRooms", key: "totalRooms" },
@@ -77,14 +83,28 @@ const UnitDetails = () => {
       { title: "Maximum Capacity", dataIndex: "maxCapacity", key: "maxCapacity" },
     ],
     rooms: [
-      { title: "Room Code", dataIndex: "roomCode", key: "roomCode" },
+      {
+        title: "Room Code",
+        dataIndex: "roomCode",
+        key: "roomCode",
+        render: (text) => (
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "room")}>{text}</a>
+        ),
+      },
       { title: "Description - Notes", dataIndex: "descriptionNotes", key: "descriptionNotes" },
       { title: "Room Status", dataIndex: "roomStatus", key: "roomStatus" },
       { title: "Area (sqm/sqft)", dataIndex: "area", key: "area" },
-      { title: "Accessible for Disabled (Flag)", dataIndex: "accessibleDisabled", key: "accessibleDisabled" },
+      { title: "Accessible for Disabled", dataIndex: "accessibleDisabled", key: "accessibleDisabled" },
       { title: "Date Available", dataIndex: "dateAvailable", key: "dateAvailable" },
       { title: "Date Vacant", dataIndex: "dateVacant", key: "dateVacant" },
-      { title: "Tenant Code", dataIndex: "tenantCode", key: "tenantCode" },
+      {
+        title: "Tenant Code",
+        dataIndex: "tenantCode",
+        key: "tenantCode",
+        render: (text) => (
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "tenant")}>{text}</a>
+        ),
+      },
     ],
   };
 
@@ -100,8 +120,15 @@ const UnitDetails = () => {
         <Divider>Basic Information</Divider>
         <Descriptions bordered column={2} style={{ background: "#fff", padding: "16px", borderRadius: "8px" }}>
           {Object.entries(unitDetails).map(([key, value]) => (
-            <Descriptions.Item label={key.replace(/([A-Z])/g, " $1")} key={key}>
-              {isEditing ? (
+            <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
+              {key.toLowerCase().includes("code") && !isEditing ? (
+                <a
+                  style={{ color: "#1890ff" }}
+                  onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
+                >
+                  {value}
+                </a>
+              ) : isEditing ? (
                 <Form.Item
                   name={key}
                   noStyle

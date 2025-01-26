@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
@@ -40,6 +41,7 @@ const ContactDetails = () => {
         contactNotes: "Available during office hours",
     };
 
+    const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
     const [form] = Form.useForm();
     const [details, setDetails] = useState(initialDetails);
@@ -58,6 +60,10 @@ const ContactDetails = () => {
         });
     };
 
+    const handleNavigation = (code, path) => {
+        navigate(`/${path}/${code}`);
+    };
+
     const contactTypeAssociationData = [
         { key: "1", role: "Manager" },
         { key: "2", role: "Assistant" },
@@ -70,7 +76,7 @@ const ContactDetails = () => {
     return (
         <div style={{ padding: 24, background: "#f9f9f9" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-                <h2 style={{ margin: 0 }}>Contacts Details</h2>
+                <h2 style={{ margin: 0 }}>Contact Details</h2>
                 <Button type="primary" onClick={isEditing ? handleSave : handleEditToggle}>
                     {isEditing ? "Save" : "Edit"}
                 </Button>
@@ -79,8 +85,18 @@ const ContactDetails = () => {
                 <Divider>Contact Information</Divider>
                 <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
                     {Object.entries(details).slice(0, 8).map(([key, value]) => (
-                        <Descriptions.Item label={key.replace(/([A-Z])/g, " $1")} key={key}>
-                            {isEditing ? (
+                        <Descriptions.Item
+                            label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+                            key={key}
+                        >
+                            {key.toLowerCase().includes("code") && !isEditing ? (
+                                <a
+                                    style={{ color: "#1890ff" }}
+                                    onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
+                                >
+                                    {value}
+                                </a>
+                            ) : isEditing ? (
                                 <Form.Item
                                     name={key}
                                     noStyle
@@ -98,7 +114,10 @@ const ContactDetails = () => {
                 <Divider>Address</Divider>
                 <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
                     {Object.entries(details).slice(8, 15).map(([key, value]) => (
-                        <Descriptions.Item label={key.replace(/([A-Z])/g, " $1")} key={key}>
+                        <Descriptions.Item
+                            label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+                            key={key}
+                        >
                             {isEditing ? (
                                 <Form.Item
                                     name={key}
@@ -117,7 +136,10 @@ const ContactDetails = () => {
                 <Divider>Contact Details</Divider>
                 <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
                     {Object.entries(details).slice(15).map(([key, value]) => (
-                        <Descriptions.Item label={key.replace(/([A-Z])/g, " $1")} key={key}>
+                        <Descriptions.Item
+                            label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+                            key={key}
+                        >
                             {isEditing ? (
                                 <Form.Item
                                     name={key}

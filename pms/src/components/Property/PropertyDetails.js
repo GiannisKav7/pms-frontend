@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
@@ -24,6 +25,7 @@ const PropertyDetails = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [form] = Form.useForm();
     const [details, setDetails] = useState(initialDetails);
+    const navigate = useNavigate();
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
@@ -37,6 +39,10 @@ const PropertyDetails = () => {
             setDetails(values);
             setIsEditing(false);
         });
+    };
+
+    const handleNavigation = (code, path) => {
+        navigate(`/${path}/${code}`);
     };
 
     const attributesData = [
@@ -72,12 +78,26 @@ const PropertyDetails = () => {
             { title: "Value", dataIndex: "value", key: "value" },
         ],
         contacts: [
-            { title: "Contact Code", dataIndex: "contactCode", key: "contactCode" },
+            {
+                title: "Contact Code",
+                dataIndex: "contactCode",
+                key: "contactCode",
+                render: (text) => (
+                    <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "contact")}>{text}</a>
+                ),
+            },
             { title: "Name", dataIndex: "name", key: "name" },
             { title: "Role", dataIndex: "role", key: "role" },
         ],
         taxInfo: [
-            { title: "Legal Entity/Owner Code", dataIndex: "legalEntityOwnerCode", key: "legalEntityOwnerCode" },
+            {
+                title: "Legal Entity/Owner Code",
+                dataIndex: "legalEntityOwnerCode",
+                key: "legalEntityOwnerCode",
+                render: (text) => (
+                    <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "legalEntity")}>{text}</a>
+                ),
+            },
             { title: "Tax Authority", dataIndex: "taxAuthority", key: "taxAuthority" },
             { title: "Base Currency", dataIndex: "baseCurrency", key: "baseCurrency" },
             { title: "Tax Opted (Yes/No)", dataIndex: "taxOpted", key: "taxOpted" },
@@ -86,7 +106,14 @@ const PropertyDetails = () => {
             { title: "Default Sales Transaction Type", dataIndex: "defaultSalesTransactionType", key: "defaultSalesTransactionType" },
             { title: "Default Purchases Transaction Type", dataIndex: "defaultPurchasesTransactionType", key: "defaultPurchasesTransactionType" },
             { title: "Tax Point", dataIndex: "taxPoint", key: "taxPoint" },
-            { title: "Report Entity Code", dataIndex: "reportEntityCode", key: "reportEntityCode" },
+            {
+                title: "Report Entity Code",
+                dataIndex: "reportEntityCode",
+                key: "reportEntityCode",
+                render: (text) => (
+                    <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "reportEntity")}>{text}</a>
+                ),
+            },
         ],
     };
 
@@ -102,8 +129,15 @@ const PropertyDetails = () => {
                 <Divider>Basic Information</Divider>
                 <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
                     {Object.entries(details).map(([key, value]) => (
-                        <Descriptions.Item label={key.replace(/([A-Z])/g, " $1")} key={key}>
-                            {isEditing ? (
+                        <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
+                            {key.toLowerCase().includes("code") && !isEditing ? (
+                                <a
+                                    style={{ color: "#1890ff" }}
+                                    onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
+                                >
+                                    {value}
+                                </a>
+                            ) : isEditing ? (
                                 <Form.Item
                                     name={key}
                                     noStyle

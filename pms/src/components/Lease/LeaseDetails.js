@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
 const LeaseDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const initialDetails = {
     leaseCode: "LC-001",
@@ -51,10 +53,14 @@ const LeaseDetails = () => {
     });
   };
 
+  const handleNavigation = (code, path) => {
+    navigate(`/${path}/${code}`);
+  };
+
   const tabData = {
     units: [
-      { key: "1", UnitCode: "101", type: "Apartment", size: "120 sqm" },
-      { key: "2", UnitCode: "102", type: "Office", size: "300 sqm" },
+      { key: "1", unitCode: "101", type: "Apartment", size: "120 sqm" },
+      { key: "2", unitCode: "102", type: "Office", size: "300 sqm" },
     ],
     chargeSchedules: [
       { key: "1", chargeType: "Rent", amount: "$1200", frequency: "Monthly" },
@@ -70,65 +76,74 @@ const LeaseDetails = () => {
       { key: "1", option: "Renewal", details: "Renewable every 12 months." },
     ],
     contacts: [
-      { key: "1", name: "John Doe", role: "Tenant", phone: "123-456-7890" },
-      { key: "2", name: "Jane Smith", role: "Landlord", phone: "987-654-3210" },
+      {
+        key: "1",
+        contactCode: "C-001",
+        role: "Manager",
+        primary: "Yes",
+        companyName: "Alpha Corp",
+        firstName: "John",
+        lastName: "Doe",
+        phoneNumber1: "+30 210 1234567",
+        phoneNumber2: "+30 210 7654321",
+        email: "john.doe@example.com",
+        inactiveDate: "2024-01-01",
+      },
+      {
+        key: "2",
+        contactCode: "C-002",
+        role: "Tenant",
+        primary: "No",
+        companyName: "Beta Ltd",
+        firstName: "Jane",
+        lastName: "Smith",
+        phoneNumber1: "+30 210 9876543",
+        phoneNumber2: "+30 210 1239876",
+        email: "jane.smith@betaltd.com",
+        inactiveDate: "N/A",
+      },
     ],
   };
 
   const tabColumns = {
     units: [
-      { title: "Unit Code", dataIndex: "unitCode", key: "unitCode" },
-      { title: "Building code", dataIndex: "buildingCode", key: "buildingCode" },
-      { title: "Floor Code", dataIndex: "floorCode", key: "floorCode" },
-      { title: "Name", dataIndex: "name", key: "name" },
-      { title: "Location", dataIndex: "location", key: "location" },
-      { title: "From Date", dataIndex: "fromDate", key: "fromDate" },
-      { title: "To Date", dataIndex: "toDate", key: "toDate" },
-      { title: "Moving in Date", dataIndex: "movingInDate", key: "movingInDate" },
-      { title: "Moving out Date", dataIndex: "movingOutDate", key: "movingOutDate" },
+      {
+        title: "Unit Code",
+        dataIndex: "unitCode",
+        key: "unitCode",
+        render: (text) => (
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "unit")}>{text}</a>
+        ),
+      },
+      { title: "Type", dataIndex: "type", key: "type" },
+      { title: "Size", dataIndex: "size", key: "size" },
     ],
     chargeSchedules: [
       { title: "Charge Type", dataIndex: "chargeType", key: "chargeType" },
-      { title: "Charge Code", dataIndex: "chargeCode", key: "chargeCode" },
-      { title: "From", dataIndex: "from", key: "from" },
-      { title: "To/Inactive", dataIndex: "toInactive", key: "toInactive" },
       { title: "Amount", dataIndex: "amount", key: "amount" },
-      { title: "Currency", dataIndex: "currency", key: "currency" },
-      { title: "Amount/Contr.Area ($/sqm)", dataIndex: "amountPerContrArea", key: "amountPerContrArea" },
-      { title: "Amount Period", dataIndex: "amountPeriod", key: "amountPeriod" },
-      { title: "Unit(s)", dataIndex: "units", key: "units" },
-      { title: "View", dataIndex: "view", key: "view" },
-
+      { title: "Frequency", dataIndex: "frequency", key: "frequency" },
     ],
-
     amendments: [
-      { title: "Type", dataIndex: "type", key: "type" },
-      { title: "Status", dataIndex: "status", key: "status" },
-      { title: "Date From", dataIndex: "dateFrom", key: "dateFrom" },
-      { title: "Date To", dataIndex: "dateTo", key: "dateTo" },
-      { title: "Period", dataIndex: "period", key: "period" },
-      { title: "Description (Notes)", dataIndex: "description", key: "description" },
+      { title: "Amendment", dataIndex: "amendment", key: "amendment" },
+      { title: "Date", dataIndex: "date", key: "date" },
     ],
     clauses: [
-      { title: "Name", dataIndex: "name", key: "name" },
+      { title: "Clause", dataIndex: "clause", key: "clause" },
       { title: "Description", dataIndex: "description", key: "description" },
-      { title: "Date", dataIndex: "date", key: "date" },
-      { title: "End Date", dataIndex: "endDate", key: "endDate" },
-      { title: "Reference", dataIndex: "reference", key: "reference" },
-      { title: "Unit(s)", dataIndex: "units", key: "units" },
-
     ],
     options: [
-      { title: "Type", dataIndex: "type", key: "type" },
-      { title: "Status", dataIndex: "status", key: "status" },
-      { title: "Expirations Date", dataIndex: "expirationDate", key: "expirationDate" },
-      { title: "Notice Date", dataIndex: "noticeDate", key: "noticeDate" },
-      { title: "Description (Notes)", dataIndex: "description", key: "description" },
-      { title: "Unit(s)", dataIndex: "units", key: "units" },
-      { title: "Area (sqm)", dataIndex: "area", key: "area" },
+      { title: "Option", dataIndex: "option", key: "option" },
+      { title: "Details", dataIndex: "details", key: "details" },
     ],
     contacts: [
-      { title: "Contact Code", dataIndex: "contactCode", key: "contactCode" },
+      {
+        title: "Contact Code",
+        dataIndex: "contactCode",
+        key: "contactCode",
+        render: (text) => (
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "contact")}>{text}</a>
+        ),
+      },
       { title: "Role", dataIndex: "role", key: "role" },
       { title: "Primary", dataIndex: "primary", key: "primary" },
       { title: "Company Name", dataIndex: "companyName", key: "companyName" },
@@ -153,8 +168,15 @@ const LeaseDetails = () => {
         <Divider>Lease Information</Divider>
         <Descriptions bordered column={2} style={{ background: "#fff", padding: "16px", borderRadius: "8px" }}>
           {Object.entries(leaseDetails).map(([key, value]) => (
-            <Descriptions.Item label={key.replace(/([A-Z])/g, " $1")} key={key}>
-              {isEditing ? (
+            <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
+              {key.toLowerCase().includes("code") && !isEditing ? (
+                <a
+                  style={{ color: "#1890ff" }}
+                  onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
+                >
+                  {value}
+                </a>
+              ) : isEditing ? (
                 <Form.Item
                   name={key}
                   noStyle

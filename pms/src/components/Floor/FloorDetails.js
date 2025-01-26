@@ -64,8 +64,22 @@ const FloorDetails = () => {
           <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "property")}>{text}</a>
         ),
       },
-      { title: "Unit Type Code", dataIndex: "unitTypeCode", key: "unitTypeCode" },
-      { title: "Unit Code", dataIndex: "unitCode", key: "unitCode" },
+      {
+        title: "Unit Type Code",
+        dataIndex: "unitTypeCode",
+        key: "unitTypeCode",
+        render: (text) => (
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "unitType")}>{text}</a>
+        ),
+      },
+      {
+        title: "Unit Code",
+        dataIndex: "unitCode",
+        key: "unitCode",
+        render: (text) => (
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "unit")}>{text}</a>
+        ),
+      },
     ],
   };
 

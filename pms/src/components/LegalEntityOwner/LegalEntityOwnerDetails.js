@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
@@ -29,6 +30,7 @@ const LegalEntityOwnerDetails = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [form] = Form.useForm();
     const [details, setDetails] = useState(initialDetails);
+    const navigate = useNavigate();
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
@@ -42,6 +44,10 @@ const LegalEntityOwnerDetails = () => {
             setDetails(values);
             setIsEditing(false);
         });
+    };
+
+    const handleNavigation = (code, path) => {
+        navigate(`/${path}/${code}`);
     };
 
     const tabData = {
@@ -97,7 +103,14 @@ const LegalEntityOwnerDetails = () => {
 
     const tabColumns = {
         properties: [
-            { title: "Property Code", dataIndex: "propertyCode", key: "propertyCode" },
+            {
+                title: "Property Code",
+                dataIndex: "propertyCode",
+                key: "propertyCode",
+                render: (text) => (
+                    <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "property")}>{text}</a>
+                ),
+            },
             { title: "Property Name", dataIndex: "propertyName", key: "propertyName" },
             { title: "Address", dataIndex: "address", key: "address" },
             { title: "Percent Owned", dataIndex: "percentOwned", key: "percentOwned" },
@@ -117,7 +130,14 @@ const LegalEntityOwnerDetails = () => {
             { title: "VAT Reporting Cycle", dataIndex: "vatReportingCycle", key: "vatReportingCycle" },
             { title: "VAT Last Reported through", dataIndex: "vatLastReportedThrough", key: "vatLastReportedThrough" },
             { title: "Initial Reporting Period", dataIndex: "initialReportingPeriod", key: "initialReportingPeriod" },
-            { title: "Fiscal Entity Code", dataIndex: "fiscalEntityCode", key: "fiscalEntityCode" },
+            {
+                title: "Fiscal Entity Code",
+                dataIndex: "fiscalEntityCode",
+                key: "fiscalEntityCode",
+                render: (text) => (
+                    <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "fiscalEntity")}>{text}</a>
+                ),
+            },
         ],
         otherInformation: [
             { title: "Contractor (Yes/No)", dataIndex: "contractor", key: "contractor" },
@@ -151,8 +171,15 @@ const LegalEntityOwnerDetails = () => {
                 <Divider>Basic Information</Divider>
                 <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
                     {Object.entries(details).map(([key, value]) => (
-                        <Descriptions.Item label={key.replace(/([A-Z])/g, " $1")} key={key}>
-                            {isEditing ? (
+                        <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
+                            {key.toLowerCase().includes("code") && !isEditing ? (
+                                <a
+                                    style={{ color: "#1890ff" }}
+                                    onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
+                                >
+                                    {value}
+                                </a>
+                            ) : isEditing ? (
                                 <Form.Item
                                     name={key}
                                     noStyle
