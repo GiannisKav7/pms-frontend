@@ -27,7 +27,7 @@ const AppRouter = () => {
         <Route path="/floor/:id" element={<FloorPage />} />
         <Route path="/unittype/:id" element={<UnitTypePage />} />
 
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<HomePage />} />
       </Routes>
     </Router>
   );
