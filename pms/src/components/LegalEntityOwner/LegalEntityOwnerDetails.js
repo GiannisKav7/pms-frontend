@@ -99,6 +99,21 @@ const LegalEntityOwnerDetails = () => {
                 paymentMethod: "Wire Transfer",
             },
         ],
+        contacts: [
+            {
+                key: "1",
+                contactCode: "C-001",
+                role: "Manager",
+                primary: "Yes",
+                companyName: "Alpha Corp",
+                firstName: "John",
+                lastName: "Doe",
+                phoneNumber1: "+30 210 1234567",
+                phoneNumber2: "+30 210 7654321",
+                email: "john.doe@example.com",
+                inactiveDate: "2024-01-01",
+            },
+        ],
     };
 
     const tabColumns = {
@@ -157,6 +172,25 @@ const LegalEntityOwnerDetails = () => {
             { title: "Consolidate Cheques (Yes/No)", dataIndex: "consolidateCheques", key: "consolidateCheques" },
             { title: "Payment Method", dataIndex: "paymentMethod", key: "paymentMethod" },
         ],
+        contacts: [
+            {
+                title: "Contact Code",
+                dataIndex: "contactCode",
+                key: "contactCode",
+                render: (text) => (
+                    <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "contact")}>{text}</a>
+                ),
+            },
+            { title: "Role", dataIndex: "role", key: "role" },
+            { title: "Primary", dataIndex: "primary", key: "primary" },
+            { title: "Company Name", dataIndex: "companyName", key: "companyName" },
+            { title: "First Name", dataIndex: "firstName", key: "firstName" },
+            { title: "Last Name", dataIndex: "lastName", key: "lastName" },
+            { title: "Phone Number 1", dataIndex: "phoneNumber1", key: "phoneNumber1" },
+            { title: "Phone Number 2", dataIndex: "phoneNumber2", key: "phoneNumber2" },
+            { title: "Email", dataIndex: "email", key: "email" },
+            { title: "Inactive Date", dataIndex: "inactiveDate", key: "inactiveDate" },
+        ],
     };
 
     return (
@@ -206,6 +240,9 @@ const LegalEntityOwnerDetails = () => {
                 </TabPane>
                 <TabPane tab="Payment Information" key="4">
                     <Table dataSource={tabData.paymentInfo} columns={tabColumns.paymentInfo} pagination={false} />
+                </TabPane>
+                <TabPane tab="Contacts" key="5">
+                    <Table dataSource={tabData.contacts} columns={tabColumns.contacts} pagination={false} />
                 </TabPane>
             </Tabs>
         </div>

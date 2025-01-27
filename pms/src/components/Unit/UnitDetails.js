@@ -63,6 +63,30 @@ const UnitDetails = () => {
     rooms: [
       { key: "1", roomCode: "R-001", descriptionNotes: "Master Bedroom", roomStatus: "Occupied", area: "20 sqm", accessibleDisabled: "No", dateAvailable: "2024-03-01", dateVacant: "2024-06-01", tenantCode: "T-001" },
     ],
+    userDefinedFields: [
+      { key: "1", bedrooms: "3", bathrooms: "2", parking: "Yes", appliance: "Yes", furniture: "Fully Furnished", utilities: "Included", other1: "N/A", other2: "N/A", other3: "N/A" },
+    ],
+    residentialRules: [
+      { key: "1", ruleType: "No Smoking" },
+    ],
+    contacts: [
+      {
+        key: "1",
+        contactCode: "C-001",
+        role: "Manager",
+        primary: "Yes",
+        companyName: "Alpha Corp",
+        firstName: "John",
+        lastName: "Doe",
+        phoneNumber1: "+30 210 1234567",
+        phoneNumber2: "+30 210 7654321",
+        email: "john.doe@example.com",
+        inactiveDate: "2024-01-01",
+      },
+    ],
+    academicTerms: [
+      { key: "1", academicTermCode: "AT-001", level: "Undergraduate", unitOverride: "Yes" },
+    ],
   };
 
   const tabColumns = {
@@ -105,6 +129,44 @@ const UnitDetails = () => {
           <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "tenant")}>{text}</a>
         ),
       },
+    ],
+    userDefinedFields: [
+      { title: "Bedrooms", dataIndex: "bedrooms", key: "bedrooms" },
+      { title: "Bathrooms", dataIndex: "bathrooms", key: "bathrooms" },
+      { title: "Parking", dataIndex: "parking", key: "parking" },
+      { title: "Appliance", dataIndex: "appliance", key: "appliance" },
+      { title: "Furniture", dataIndex: "furniture", key: "furniture" },
+      { title: "Utilities", dataIndex: "utilities", key: "utilities" },
+      { title: "Other 1", dataIndex: "other1", key: "other1" },
+      { title: "Other 2", dataIndex: "other2", key: "other2" },
+      { title: "Other 3", dataIndex: "other3", key: "other3" },
+    ],
+    residentialRules: [
+      { title: "Rule Type", dataIndex: "ruleType", key: "ruleType" },
+    ],
+    contacts: [
+      {
+        title: "Contact Code",
+        dataIndex: "contactCode",
+        key: "contactCode",
+        render: (text) => (
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "contact")}>{text}</a>
+        ),
+      },
+      { title: "Role", dataIndex: "role", key: "role" },
+      { title: "Primary", dataIndex: "primary", key: "primary" },
+      { title: "Company Name", dataIndex: "companyName", key: "companyName" },
+      { title: "First Name", dataIndex: "firstName", key: "firstName" },
+      { title: "Last Name", dataIndex: "lastName", key: "lastName" },
+      { title: "Phone Number 1", dataIndex: "phoneNumber1", key: "phoneNumber1" },
+      { title: "Phone Number 2", dataIndex: "phoneNumber2", key: "phoneNumber2" },
+      { title: "Email", dataIndex: "email", key: "email" },
+      { title: "Inactive Date", dataIndex: "inactiveDate", key: "inactiveDate" },
+    ],
+    academicTerms: [
+      { title: "Academic Term Code", dataIndex: "academicTermCode", key: "academicTermCode" },
+      { title: "Level", dataIndex: "level", key: "level" },
+      { title: "Unit Override", dataIndex: "unitOverride", key: "unitOverride" },
     ],
   };
 
@@ -152,6 +214,18 @@ const UnitDetails = () => {
         </TabPane>
         <TabPane tab="Rooms" key="3">
           <Table dataSource={tabData.rooms} columns={tabColumns.rooms} pagination={false} />
+        </TabPane>
+        <TabPane tab="User Defined Fields" key="4">
+          <Table dataSource={tabData.userDefinedFields} columns={tabColumns.userDefinedFields} pagination={false} />
+        </TabPane>
+        <TabPane tab="Residential - Rules" key="5">
+          <Table dataSource={tabData.residentialRules} columns={tabColumns.residentialRules} pagination={false} />
+        </TabPane>
+        <TabPane tab="Contacts" key="6">
+          <Table dataSource={tabData.contacts} columns={tabColumns.contacts} pagination={false} />
+        </TabPane>
+        <TabPane tab="Academic Terms" key="7">
+          <Table dataSource={tabData.academicTerms} columns={tabColumns.academicTerms} pagination={false} />
         </TabPane>
       </Tabs>
     </div>

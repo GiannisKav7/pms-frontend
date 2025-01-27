@@ -51,8 +51,32 @@ const PropertyDetails = () => {
     ];
 
     const contactsData = [
-        { key: "1", contactCode: "C-001", name: "John Doe", role: "Manager" },
-        { key: "2", contactCode: "C-002", name: "Jane Smith", role: "Assistant" },
+        {
+            key: "1",
+            contactCode: "C-001",
+            role: "Manager",
+            primary: "Yes",
+            companyName: "Alpha Corp",
+            firstName: "John",
+            lastName: "Doe",
+            phoneNumber1: "+30 210 1234567",
+            phoneNumber2: "+30 210 7654321",
+            email: "john.doe@example.com",
+            inactiveDate: "2024-01-01",
+        },
+        {
+            key: "2",
+            contactCode: "C-002",
+            role: "Assistant",
+            primary: "No",
+            companyName: "Beta Corp",
+            firstName: "Jane",
+            lastName: "Smith",
+            phoneNumber1: "+30 210 9876543",
+            phoneNumber2: "+30 210 6549873",
+            email: "jane.smith@betacorp.com",
+            inactiveDate: "N/A",
+        },
     ];
 
     const taxInfoData = [
@@ -86,8 +110,15 @@ const PropertyDetails = () => {
                     <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "contact")}>{text}</a>
                 ),
             },
-            { title: "Name", dataIndex: "name", key: "name" },
             { title: "Role", dataIndex: "role", key: "role" },
+            { title: "Primary", dataIndex: "primary", key: "primary" },
+            { title: "Company Name", dataIndex: "companyName", key: "companyName" },
+            { title: "First Name", dataIndex: "firstName", key: "firstName" },
+            { title: "Last Name", dataIndex: "lastName", key: "lastName" },
+            { title: "Phone Number 1", dataIndex: "phoneNumber1", key: "phoneNumber1" },
+            { title: "Phone Number 2", dataIndex: "phoneNumber2", key: "phoneNumber2" },
+            { title: "Email", dataIndex: "email", key: "email" },
+            { title: "Inactive Date", dataIndex: "inactiveDate", key: "inactiveDate" },
         ],
         taxInfo: [
             {

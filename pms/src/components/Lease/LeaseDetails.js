@@ -12,7 +12,7 @@ const LeaseDetails = () => {
   const initialDetails = {
     leaseCode: "LC-001",
     leaseName: "Office Lease - Main Street",
-    customerCode: "CUST-123 (Ενοικιαστής)",
+    customerCode: "CUST-123",
     leaseType: "Commercial",
     status: "Active",
     atRisk: "No",
@@ -59,21 +59,21 @@ const LeaseDetails = () => {
 
   const tabData = {
     units: [
-      { key: "1", unitCode: "101", type: "Apartment", size: "120 sqm" },
-      { key: "2", unitCode: "102", type: "Office", size: "300 sqm" },
+      { key: "1", unitCode: "101", buildingCode: "B-001", floorCode: "F-001", name: "Unit A", location: "North Wing", fromDate: "2023-01-01", toDate: "2023-12-31", movingInDate: "2023-01-15", movingOutDate: "2023-12-15" },
+      { key: "2", unitCode: "102", buildingCode: "B-002", floorCode: "F-002", name: "Unit B", location: "South Wing", fromDate: "2023-01-01", toDate: "2023-12-31", movingInDate: "2023-01-20", movingOutDate: "2023-12-20" },
     ],
     chargeSchedules: [
-      { key: "1", chargeType: "Rent", amount: "$1200", frequency: "Monthly" },
-      { key: "2", chargeType: "Maintenance", amount: "$100", frequency: "Monthly" },
+      { key: "1", chargeType: "Rent", chargeCode: "CH-001", from: "2023-01-01", toInactive: "2023-12-31", amount: "$1200", currency: "USD", amountPerContrArea: "$8", amountPeriod: "Monthly", units: "Unit A", view: "View Details" },
+      { key: "2", chargeType: "Maintenance", chargeCode: "CH-002", from: "2023-01-01", toInactive: "2023-12-31", amount: "$100", currency: "USD", amountPerContrArea: "$0.5", amountPeriod: "Monthly", units: "Unit B", view: "View Details" },
     ],
     amendments: [
-      { key: "1", amendment: "Extended Lease", date: "2023-06-01" },
+      { key: "1", type: "Extension", status: "Approved", dateFrom: "2024-01-01", dateTo: "2024-12-31", period: "12 months", description: "Lease extended by one year." },
     ],
     clauses: [
-      { key: "1", clause: "No pets allowed", description: "Strictly no pets." },
+      { key: "1", name: "No Pets", description: "No pets allowed in the premises.", date: "2023-01-01", endDate: "2023-12-31", reference: "CL-001", units: "Unit A" },
     ],
     options: [
-      { key: "1", option: "Renewal", details: "Renewable every 12 months." },
+      { key: "1", type: "Renewal", status: "Available", expirationDate: "2024-06-01", noticeDate: "2024-03-01", description: "Option to renew for another year.", units: "Unit A", area: "150 sqm" },
     ],
     contacts: [
       {
@@ -115,25 +115,51 @@ const LeaseDetails = () => {
           <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "unit")}>{text}</a>
         ),
       },
-      { title: "Type", dataIndex: "type", key: "type" },
-      { title: "Size", dataIndex: "size", key: "size" },
+      { title: "Building Code", dataIndex: "buildingCode", key: "buildingCode" },
+      { title: "Floor Code", dataIndex: "floorCode", key: "floorCode" },
+      { title: "Name", dataIndex: "name", key: "name" },
+      { title: "Location", dataIndex: "location", key: "location" },
+      { title: "From Date", dataIndex: "fromDate", key: "fromDate" },
+      { title: "To Date", dataIndex: "toDate", key: "toDate" },
+      { title: "Moving in Date", dataIndex: "movingInDate", key: "movingInDate" },
+      { title: "Moving out Date", dataIndex: "movingOutDate", key: "movingOutDate" },
     ],
     chargeSchedules: [
       { title: "Charge Type", dataIndex: "chargeType", key: "chargeType" },
+      { title: "Charge Code", dataIndex: "chargeCode", key: "chargeCode" },
+      { title: "From", dataIndex: "from", key: "from" },
+      { title: "To/Inactive", dataIndex: "toInactive", key: "toInactive" },
       { title: "Amount", dataIndex: "amount", key: "amount" },
-      { title: "Frequency", dataIndex: "frequency", key: "frequency" },
+      { title: "Currency", dataIndex: "currency", key: "currency" },
+      { title: "Amount/Contr.Area ($/sqm)", dataIndex: "amountPerContrArea", key: "amountPerContrArea" },
+      { title: "Amount Period", dataIndex: "amountPeriod", key: "amountPeriod" },
+      { title: "Unit(s)", dataIndex: "units", key: "units" },
+      { title: "View", dataIndex: "view", key: "view" },
     ],
     amendments: [
-      { title: "Amendment", dataIndex: "amendment", key: "amendment" },
-      { title: "Date", dataIndex: "date", key: "date" },
+      { title: "Type", dataIndex: "type", key: "type" },
+      { title: "Status", dataIndex: "status", key: "status" },
+      { title: "Date From", dataIndex: "dateFrom", key: "dateFrom" },
+      { title: "Date To", dataIndex: "dateTo", key: "dateTo" },
+      { title: "Period", dataIndex: "period", key: "period" },
+      { title: "Description (Notes)", dataIndex: "description", key: "description" },
     ],
     clauses: [
-      { title: "Clause", dataIndex: "clause", key: "clause" },
+      { title: "Name", dataIndex: "name", key: "name" },
       { title: "Description", dataIndex: "description", key: "description" },
+      { title: "Date", dataIndex: "date", key: "date" },
+      { title: "End Date", dataIndex: "endDate", key: "endDate" },
+      { title: "Reference", dataIndex: "reference", key: "reference" },
+      { title: "Unit(s)", dataIndex: "units", key: "units" },
     ],
     options: [
-      { title: "Option", dataIndex: "option", key: "option" },
-      { title: "Details", dataIndex: "details", key: "details" },
+      { title: "Type", dataIndex: "type", key: "type" },
+      { title: "Status", dataIndex: "status", key: "status" },
+      { title: "Expirations Date", dataIndex: "expirationDate", key: "expirationDate" },
+      { title: "Notice Date", dataIndex: "noticeDate", key: "noticeDate" },
+      { title: "Description (Notes)", dataIndex: "description", key: "description" },
+      { title: "Unit(s)", dataIndex: "units", key: "units" },
+      { title: "Area (sqm)", dataIndex: "area", key: "area" },
     ],
     contacts: [
       {
