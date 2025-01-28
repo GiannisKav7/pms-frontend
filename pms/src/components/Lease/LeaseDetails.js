@@ -1,8 +1,79 @@
 import React, { useState } from "react";
-import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import { Descriptions, Tabs, Table, Button, Input, Form, Divider, Select, DatePicker, Radio, InputNumber, Switch} from "antd";
 import { useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
+
+const fieldConfig = {
+  leaseType: {
+    type: 'select',
+    options: [
+      { label: 'Commercial', value: 'Commercial' },
+      { label: 'Residential', value: 'Residential' },
+    ]
+  },
+  status: {
+    type: 'radio',
+    options: [
+      { label: 'Active', value: 'Active' },
+      { label: 'Inactive', value: 'Inactive' }
+    ]
+  },
+  atRisk:{
+    type: 'radio',
+    options:[
+      { label: 'True', value: 'True' },
+      { label: 'False', value: 'False' }
+    ]
+  },
+  contractedArea:{
+    type: 'number',
+    min: 0,
+    step: 1,
+    prefix: 'sqm',
+  },
+  rentMonthly:{
+    type: 'number',
+    min: 0,
+    step: 10,
+    prefix: 'Euro',
+  },
+  rentYearly:{
+    type: 'number',
+    min: 0,
+    step: 10,
+    prefix: 'Euro',
+  },
+  leaseFromDate: { type: 'date' },
+  leaseToDate: { type: 'date' },
+  moveInDate: { type: 'date' },
+  moveOutDate: { type: 'date' },
+  lastRenewalDate: { type: 'date' },
+  signDate: { type: 'date' },
+  nextBreakDate: { type: 'date' },
+  nextRentReviewDate: { type: 'date' },
+  security:{
+    type: 'switch',
+  },
+  depositsRequired:{
+    type: 'number',
+    min: 0,
+    step: 10,
+    prefix: 'Euro',
+  },
+  depositsBilled:{
+    type: 'number',
+    min: 0,
+    step: 10,
+    prefix: 'Euro',
+  },
+  depositsReceived:{
+    type: 'number',
+    min: 0,
+    step: 10,
+    prefix: 'Euro',
+  },
+};
 
 const LeaseDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -23,14 +94,14 @@ const LeaseDetails = () => {
     rentYearly: "$14,400 / year",
     rentPerSqmMonthly: "$8 / sqm",
     rentPerSqmYearly: "$96 / sqm",
-    leaseFromDate: "2023-01-01",
-    leaseToDate: "2024-01-01",
-    moveInDate: "2023-01-01",
+    leaseFromDate: dayjs("2023-01-01", "YYYY-MM-DD"),
+    leaseToDate: dayjs("2023-01-01", "YYYY-MM-DD"),
+    moveInDate: dayjs("2023-01-01", "YYYY-MM-DD"),
     moveOutDate: "N/A",
-    lastRenewalDate: "2023-12-01",
-    signDate: "2022-12-15",
-    nextBreakDate: "2024-06-01",
-    nextRentReviewDate: "2024-12-01",
+    lastRenewalDate: dayjs("2023-01-01", "YYYY-MM-DD"),,
+    signDate: dayjs("2023-01-01", "YYYY-MM-DD"),,
+    nextBreakDate: dayjs("2023-01-01", "YYYY-MM-DD"),,
+    nextRentReviewDate: dayjs("2023-01-01", "YYYY-MM-DD"),,
     security: "Yes",
     depositsRequired: "$2,400 (Εγγύηση)",
     depositsBilled: "$2,400",
@@ -180,6 +251,51 @@ const LeaseDetails = () => {
       { title: "Email", dataIndex: "email", key: "email" },
       { title: "Inactive Date", dataIndex: "inactiveDate", key: "inactiveDate" },
     ],
+  };
+
+  const renderFieldByType = (key) => {
+    const config = fieldConfig[key] || { type: 'text' };
+
+    switch (config.type) {
+      case 'text':
+        return <Input style={{ margin: '4px 0' }} />;
+
+      case 'select':
+        return (
+          <Select style={{ width: '100%' }}>
+            {config.options?.map(opt => (
+              <Select.Option key={opt.value} value={opt.value}>
+                {opt.label}
+              </Select.Option>
+            ))}
+          </Select>
+        );
+
+      case 'date':
+        return <DatePicker format="YYYY-MM-DD" style={{ width: '100%' }} />;
+
+      case 'radio':
+        return (
+          <Radio.Group>
+            {config.options?.map(opt => (
+              <Radio key={opt.value} value={opt.value}>
+                {opt.label}
+              </Radio>
+            ))}
+          </Radio.Group>
+        );
+
+      case 'number':
+        return (
+          <InputNumber
+            style={{ width: '100%' }}
+            {...config} // Spread the props like min, step, prefix, etc.
+          />
+        );  
+
+      default:
+        return <Input style={{ margin: '4px 0' }} />;
+    }
   };
 
   return (
