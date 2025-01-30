@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Descriptions, Tabs, Table, Button, Input, Form, Divider, Select, DatePicker, Radio, InputNumber, Switch} from "antd";
+import {Descriptions, Tabs, Table, Button, Form, Divider,} from "antd";
 import { useNavigate } from "react-router-dom";
+import dayjs from 'dayjs';
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
 
 const { TabPane } = Tabs;
 
+// Field config with numeric, date, radio, etc.
 const fieldConfig = {
   leaseType: {
     type: 'select',
@@ -19,30 +22,42 @@ const fieldConfig = {
       { label: 'Inactive', value: 'Inactive' }
     ]
   },
-  atRisk:{
+  atRisk: {
     type: 'radio',
-    options:[
-      { label: 'True', value: 'True' },
-      { label: 'False', value: 'False' }
+    options: [
+      { label: 'Yes', value: 'Yes' },
+      { label: 'No', value: 'No' },
     ]
   },
-  contractedArea:{
+  contractedArea: {
     type: 'number',
     min: 0,
     step: 1,
     prefix: 'sqm',
   },
-  rentMonthly:{
+  rentMonthly: {
     type: 'number',
     min: 0,
     step: 10,
     prefix: 'Euro',
   },
-  rentYearly:{
+  rentYearly: {
     type: 'number',
     min: 0,
     step: 10,
-    prefix: 'Euro',
+    prefix: '€',
+  },
+  rentPerSqmMonthly: {
+    type: 'number',
+    min: 0,
+    step: 1,
+    prefix: '€/sqm',
+  },
+  rentPerSqmYearly: {
+    type: 'number',
+    min: 0,
+    step: 10,
+    prefix: '€/sqm',
   },
   leaseFromDate: { type: 'date' },
   leaseToDate: { type: 'date' },
@@ -52,26 +67,26 @@ const fieldConfig = {
   signDate: { type: 'date' },
   nextBreakDate: { type: 'date' },
   nextRentReviewDate: { type: 'date' },
-  security:{
+  security: {
     type: 'switch',
   },
-  depositsRequired:{
+  depositsRequired: {
     type: 'number',
     min: 0,
     step: 10,
-    prefix: 'Euro',
+    prefix: '€',
   },
-  depositsBilled:{
+  depositsBilled: {
     type: 'number',
     min: 0,
     step: 10,
-    prefix: 'Euro',
+    prefix: '€',
   },
-  depositsReceived:{
+  depositsReceived: {
     type: 'number',
     min: 0,
     step: 10,
-    prefix: 'Euro',
+    prefix: '€',
   },
 };
 
@@ -80,32 +95,34 @@ const LeaseDetails = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
+  // Updated numeric fields to plain numbers
+  // atRisk => "Yes" / "No" to align with radio
   const initialDetails = {
     leaseCode: "LC-001",
     leaseName: "Office Lease - Main Street",
     customerCode: "CUST-123",
     leaseType: "Commercial",
     status: "Active",
-    atRisk: "No",
+    atRisk: "No", // or "Yes"
     propertyCode: "PROP-456",
     ownerCode: "Holdings Kavvetsos IKE",
-    contractedArea: "150 sqm / 1,614 ft²",
-    rentMonthly: "$1,200 / month",
-    rentYearly: "$14,400 / year",
-    rentPerSqmMonthly: "$8 / sqm",
-    rentPerSqmYearly: "$96 / sqm",
+    contractedArea: 150,
+    rentMonthly: 1200,
+    rentYearly: 14400,
+    rentPerSqmMonthly: 8,
+    rentPerSqmYearly: 96,
     leaseFromDate: dayjs("2023-01-01", "YYYY-MM-DD"),
-    leaseToDate: dayjs("2023-01-01", "YYYY-MM-DD"),
+    leaseToDate: dayjs("2024-01-01", "YYYY-MM-DD"),
     moveInDate: dayjs("2023-01-01", "YYYY-MM-DD"),
-    moveOutDate: "N/A",
-    lastRenewalDate: dayjs("2023-01-01", "YYYY-MM-DD"),,
-    signDate: dayjs("2023-01-01", "YYYY-MM-DD"),,
-    nextBreakDate: dayjs("2023-01-01", "YYYY-MM-DD"),,
-    nextRentReviewDate: dayjs("2023-01-01", "YYYY-MM-DD"),,
-    security: "Yes",
-    depositsRequired: "$2,400 (Εγγύηση)",
-    depositsBilled: "$2,400",
-    depositsReceived: "$2,400",
+    moveOutDate: null,
+    lastRenewalDate: dayjs("2023-01-01", "YYYY-MM-DD"),
+    signDate: dayjs("2023-01-01", "YYYY-MM-DD"),
+    nextBreakDate: dayjs("2023-01-01", "YYYY-MM-DD"),
+    nextRentReviewDate: dayjs("2023-01-01", "YYYY-MM-DD"),
+    security: true,
+    depositsRequired: 2400,
+    depositsBilled: 2400,
+    depositsReceived: 2400,
   };
 
   const [leaseDetails, setLeaseDetails] = useState(initialDetails);
@@ -119,6 +136,17 @@ const LeaseDetails = () => {
 
   const handleSave = () => {
     form.validateFields().then((values) => {
+      // Convert dayjs -> string if needed
+      const dateFields = [
+        'leaseFromDate','leaseToDate','moveInDate','moveOutDate',
+        'lastRenewalDate','signDate','nextBreakDate','nextRentReviewDate'
+      ];
+      dateFields.forEach(field => {
+        if (values[field]) {
+          values[field] = values[field].format("YYYY-MM-DD");
+        }
+      });
+
       setLeaseDetails(values);
       setIsEditing(false);
     });
@@ -128,6 +156,7 @@ const LeaseDetails = () => {
     navigate(`/${path}/${code}`);
   };
 
+  // Tab data/columns unchanged...
   const tabData = {
     units: [
       { key: "1", unitCode: "101", buildingCode: "B-001", floorCode: "F-001", name: "Unit A", location: "North Wing", fromDate: "2023-01-01", toDate: "2023-12-31", movingInDate: "2023-01-15", movingOutDate: "2023-12-15" },
@@ -183,7 +212,9 @@ const LeaseDetails = () => {
         dataIndex: "unitCode",
         key: "unitCode",
         render: (text) => (
-          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "unit")}>{text}</a>
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "unit")}>
+            {text}
+          </a>
         ),
       },
       { title: "Building Code", dataIndex: "buildingCode", key: "buildingCode" },
@@ -238,7 +269,8 @@ const LeaseDetails = () => {
         dataIndex: "contactCode",
         key: "contactCode",
         render: (text) => (
-          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "contact")}>{text}</a>
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "contact")}>\n            {text}
+          </a>
         ),
       },
       { title: "Role", dataIndex: "role", key: "role" },
@@ -253,64 +285,31 @@ const LeaseDetails = () => {
     ],
   };
 
-  const renderFieldByType = (key) => {
-    const config = fieldConfig[key] || { type: 'text' };
-
-    switch (config.type) {
-      case 'text':
-        return <Input style={{ margin: '4px 0' }} />;
-
-      case 'select':
-        return (
-          <Select style={{ width: '100%' }}>
-            {config.options?.map(opt => (
-              <Select.Option key={opt.value} value={opt.value}>
-                {opt.label}
-              </Select.Option>
-            ))}
-          </Select>
-        );
-
-      case 'date':
-        return <DatePicker format="YYYY-MM-DD" style={{ width: '100%' }} />;
-
-      case 'radio':
-        return (
-          <Radio.Group>
-            {config.options?.map(opt => (
-              <Radio key={opt.value} value={opt.value}>
-                {opt.label}
-              </Radio>
-            ))}
-          </Radio.Group>
-        );
-
-      case 'number':
-        return (
-          <InputNumber
-            style={{ width: '100%' }}
-            {...config} // Spread the props like min, step, prefix, etc.
-          />
-        );  
-
-      default:
-        return <Input style={{ margin: '4px 0' }} />;
-    }
-  };
-
   return (
     <div style={{ padding: 24, background: "#f9f9f9" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+      <div
+        style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}
+      >
         <h2 style={{ margin: 0 }}>Lease Details</h2>
         <Button type="primary" onClick={isEditing ? handleSave : handleEditToggle}>
           {isEditing ? "Save" : "Edit"}
         </Button>
       </div>
+
       <Form form={form} layout="vertical">
         <Divider>Lease Information</Divider>
-        <Descriptions bordered column={2} style={{ background: "#fff", padding: "16px", borderRadius: "8px" }}>
+        <Descriptions
+          bordered
+          column={2}
+          style={{ background: "#fff", padding: "16px", borderRadius: "8px" }}
+        >
           {Object.entries(leaseDetails).map(([key, value]) => (
-            <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
+            <Descriptions.Item
+              label={key
+                .replace(/([A-Z])/g, " $1")
+                .replace(/^./, (str) => str.toUpperCase())}
+              key={key}
+            >
               {key.toLowerCase().includes("code") && !isEditing ? (
                 <a
                   style={{ color: "#1890ff" }}
@@ -323,16 +322,23 @@ const LeaseDetails = () => {
                   name={key}
                   noStyle
                   rules={[{ required: true, message: `${key} is required` }]}
+                  // For Switch, ensure we tie form item to 'checked' if we do not handle it manually
+                  valuePropName={fieldConfig[key]?.type === 'switch' ? 'checked' : undefined}
                 >
-                  <Input style={{ margin: "4px 0" }} />
+                  {renderFieldByType(key, fieldConfig, form)}
                 </Form.Item>
               ) : (
-                <span style={{ color: "#595959" }}>{value}</span>
+                <span style={{ color: "#595959" }}>
+                  {typeof value === "number"
+                    ? value.toLocaleString()
+                    : `${value}`}
+                </span>
               )}
             </Descriptions.Item>
           ))}
         </Descriptions>
       </Form>
+
       <Tabs defaultActiveKey="1" style={{ marginTop: 24 }}>
         <TabPane tab="Unit(s)" key="1">
           <Table dataSource={tabData.units} columns={tabColumns.units} pagination={false} />

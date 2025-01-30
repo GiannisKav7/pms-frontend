@@ -1,9 +1,64 @@
 import React, { useState } from "react";
-import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import { Descriptions, Tabs, Table, Button, Form, Divider } from "antd";
 import { useNavigate } from "react-router-dom";
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
 
 const { TabPane } = Tabs;
 
+// 1. Define the field config here (or import from a separate file).
+const fieldConfig = {
+    legalEntityCode: { type: "text" },
+    name1: { type: "text" },
+    name2: { type: "text" },
+    address1: { type: "text" },
+    address2: { type: "text" },
+    address3: { type: "text" },
+    address4: { type: "text" },
+    city: {
+      type: "select",
+      options: [
+        { label: "Athens", value: "Athens" },
+        { label: "Thessaloniki", value: "Thessaloniki" },
+        
+      ],
+    },
+    countyMunicipality: {
+      type: "select",
+      options: [
+        { label: "County1", value: "County1" },
+        { label: "County2", value: "County2" },
+      ],
+    },
+    prefecture: {
+      type: "select",
+      options: [
+        { label: "Attica", value: "Attica" },
+        { label: "Central Macedonia", value: "Central Macedonia" },
+      ],
+    },
+    region: {
+      type: "select",
+      options: [
+        { label: "Southern Greece", value: "Southern Greece" },
+        { label: "Northern Greece", value: "Northern Greece" },
+      ],
+    },
+    postcode: { type: "text" },
+    country: {
+      type: "select",
+      options: [
+        { label: "Greece", value: "Greece" },
+        { label: "Other", value: "Other" },
+      ],
+    },
+    descriptionNotes: { type: "text" },
+    emailAddress: { type: "email" },
+    alternateEmailAddress: { type: "email" },
+    officePhoneNumber: { type: "tel" },
+    cellphoneNumber: { type: "tel" },
+  };
+
+  
 const LegalEntityOwnerDetails = () => {
 
     const initialDetails = {
@@ -25,7 +80,7 @@ const LegalEntityOwnerDetails = () => {
         alternateEmailAddress: "contact@alphacorp.com",
         officePhoneNumber: "+30 210 1234567",
         cellphoneNumber: "+30 690 9876543",
-    };
+      };
 
     const [isEditing, setIsEditing] = useState(false);
     const [form] = Form.useForm();
@@ -200,51 +255,51 @@ const LegalEntityOwnerDetails = () => {
                 <Button type="primary" onClick={isEditing ? handleSave : handleEditToggle}>
                     {isEditing ? "Save" : "Edit"}
                 </Button>
-            </div>
-            <Form form={form} layout="vertical">
-                <Divider>Basic Information</Divider>
-                <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
-                    {Object.entries(details).map(([key, value]) => (
-                        <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
-                            {key.toLowerCase().includes("code") && !isEditing ? (
-                                <a
-                                    style={{ color: "#1890ff" }}
-                                    onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
-                                >
-                                    {value}
-                                </a>
-                            ) : isEditing ? (
-                                <Form.Item
-                                    name={key}
-                                    noStyle
-                                    rules={[{ required: true, message: `${key} is required` }]}
-                                >
-                                    <Input style={{ margin: "4px 0" }} />
-                                </Form.Item>
-                            ) : (
-                                <span style={{ color: "#595999" }}>{value}</span>
-                            )}
-                        </Descriptions.Item>
-                    ))}
-                </Descriptions>
-            </Form>
-            <Tabs defaultActiveKey="1" style={{ marginTop: 24 }}>
-                <TabPane tab="Properties" key="1">
-                    <Table dataSource={tabData.properties} columns={tabColumns.properties} pagination={false} />
-                </TabPane>
-                <TabPane tab="Tax Information" key="2">
-                    <Table dataSource={tabData.taxInformation} columns={tabColumns.taxInformation} pagination={false} />
-                </TabPane>
-                <TabPane tab="Other Information" key="3">
-                    <Table dataSource={tabData.otherInformation} columns={tabColumns.otherInformation} pagination={false} />
-                </TabPane>
-                <TabPane tab="Payment Information" key="4">
-                    <Table dataSource={tabData.paymentInfo} columns={tabColumns.paymentInfo} pagination={false} />
-                </TabPane>
-                <TabPane tab="Contacts" key="5">
-                    <Table dataSource={tabData.contacts} columns={tabColumns.contacts} pagination={false} />
-                </TabPane>
-            </Tabs>
+        </div>
+        <Form form={form} layout="vertical">
+            <Divider>Basic Information</Divider>
+            <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
+            {Object.entries(details).map(([key, value]) => (
+                <Descriptions.Item
+                label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+                key={key}
+                >
+                {key.toLowerCase().includes("code") && !isEditing ? (
+                    <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}>
+                    {value}
+                    </a>
+                ) : isEditing ? (
+                    <Form.Item
+                    name={key}
+                    noStyle
+                    rules={[{ required: true, message: `${key} is required` }]}
+                    >
+                    {renderFieldByType(key, fieldConfig)}
+                    </Form.Item>
+                ) : (
+                    <span style={{ color: "#595999" }}>{value}</span>
+                )}
+                </Descriptions.Item>
+            ))}
+            </Descriptions>
+        </Form>
+        <Tabs defaultActiveKey="1" style={{ marginTop: 24 }}>
+            <TabPane tab="Properties" key="1">
+                <Table dataSource={tabData.properties} columns={tabColumns.properties} pagination={false} />
+            </TabPane>
+            <TabPane tab="Tax Information" key="2">
+                <Table dataSource={tabData.taxInformation} columns={tabColumns.taxInformation} pagination={false} />
+            </TabPane>
+            <TabPane tab="Other Information" key="3">
+                <Table dataSource={tabData.otherInformation} columns={tabColumns.otherInformation} pagination={false} />
+            </TabPane>
+            <TabPane tab="Payment Information" key="4">
+                <Table dataSource={tabData.paymentInfo} columns={tabColumns.paymentInfo} pagination={false} />
+            </TabPane>
+            <TabPane tab="Contacts" key="5">
+                <Table dataSource={tabData.contacts} columns={tabColumns.contacts} pagination={false} />
+            </TabPane>
+        </Tabs>
         </div>
     );
 };

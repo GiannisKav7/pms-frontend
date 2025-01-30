@@ -1,9 +1,40 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider, Select } from "antd";
 import { useNavigate } from "react-router-dom";
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
+
+// roomFieldConfig.js (or inline in your file)
+export const roomFieldConfig = {
+  PropertyCode: { type: "text" },
+  BuildingCode: { type: "text" },
+  FloorCode: { type: "text" },
+  UnitCode: { type: "text" },
+  NotesDescription: { type: "text" },
+  RoomCode: { type: "text" },
+  TotalRent: { type: "number" },
+  RentPerSqm: { type: "number" },
+  GrossArea: { type: "number" },
+  NetArea: { type: "number" },
+  RoomDescription: { type: "text" },
+  RoomType: { type: "text" },
+
+  // We'll treat RoomStatus as a select:
+  RoomStatus: {
+    type: "select",
+    // We can store options here if you want
+    options: [
+      "Vacant Unrented Not Ready",
+      "Vacant Unrented Ready",
+      "Vacant Rented",
+      "Occupied",
+      "Occupied No Notice",
+    ],
+  },
+};
+
 
 const RoomDetails = () => {
   const initialDetails = {
@@ -122,36 +153,32 @@ const RoomDetails = () => {
         <Divider>Basic Information</Divider>
         <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
           {Object.entries(details).map(([key, value]) => (
-            <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
+            <Descriptions.Item
+              label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+              key={key}
+            >
+              {/* If it's a code field (contains the substring 'code') and not editing, treat as link */}
               {key.toLowerCase().includes("code") && !isEditing ? (
-                <a
-                  style={{ color: "#1890ff" }}
-                  onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
-                >
+                <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}>
                   {value}
                 </a>
-              ) : isEditing && key === "RoomStatus" ? (
-                <Form.Item name={key} noStyle rules={[{ required: true, message: `${key} is required` }]}>
-                  <Select style={{ margin: "4px 0" }}>
-                    {roomStatusOptions.map((option) => (
-                      <Option key={option} value={option}>
-                        {option}
-                      </Option>
-                    ))}
-                  </Select>
-                </Form.Item>
               ) : isEditing ? (
-                <Form.Item name={key} noStyle rules={[{ required: true, message: `${key} is required` }]}>
-                  <Input style={{ margin: "4px 0" }} />
+                <Form.Item
+                  name={key}
+                  noStyle
+                  rules={[{ required: true, message: `${key} is required` }]}
+                >
+                  {renderFieldByType(key, roomFieldConfig)}
                 </Form.Item>
               ) : (
+                // Read-only
                 <span style={{ color: "#595999" }}>{value}</span>
               )}
             </Descriptions.Item>
           ))}
         </Descriptions>
       </Form>
-
+      
       <Tabs defaultActiveKey="1" style={{ marginTop: 24 }}>
         <TabPane tab="Attributes" key="1">
           <Table dataSource={attributesData} columns={tabColumns.attributes} pagination={false} />

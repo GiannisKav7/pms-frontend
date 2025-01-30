@@ -1,9 +1,63 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
 import { useNavigate } from "react-router-dom";
-
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
 const { TabPane } = Tabs;
 
+// propertyFieldConfig.js (or inline in the same file)
+
+export const propertyFieldConfig = {
+    propertyCode: { type: "text" },
+    name: { type: "text" },
+    address1: { type: "text" },
+    address2: { type: "text" },
+    address3: { type: "text" },
+    address4: { type: "text" },
+    city: {
+      type: "select",
+      options: [
+        { label: "Athens", value: "Athens" },
+        { label: "Thessaloniki", value: "Thessaloniki" },
+        // ...
+      ],
+    },
+    countyMunicipality: {
+      type: "select",
+      options: [
+        { label: "County1", value: "County1" },
+        { label: "County2", value: "County2" },
+        // ...
+      ],
+    },
+    prefecture: {
+      type: "select",
+      options: [
+        { label: "Attica", value: "Attica" },
+        { label: "Central Macedonia", value: "Central Macedonia" },
+        // ...
+      ],
+    },
+    region: {
+      type: "select",
+      options: [
+        { label: "Southern Greece", value: "Southern Greece" },
+        { label: "Northern Greece", value: "Northern Greece" },
+        // ...
+      ],
+    },
+    postcode: { type: "text" },
+    country: {
+      type: "select",
+      options: [
+        { label: "Greece", value: "Greece" },
+        { label: "Other", value: "Other" },
+        // ...
+      ],
+    },
+    descriptionNotes: { type: "text" },
+  };
+
+  
 const PropertyDetails = () => {
 
     const initialDetails = {
@@ -159,28 +213,32 @@ const PropertyDetails = () => {
             <Form form={form} layout="vertical">
                 <Divider>Basic Information</Divider>
                 <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
-                    {Object.entries(details).map(([key, value]) => (
-                        <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
-                            {key.toLowerCase().includes("code") && !isEditing ? (
-                                <a
-                                    style={{ color: "#1890ff" }}
-                                    onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
-                                >
-                                    {value}
-                                </a>
-                            ) : isEditing ? (
-                                <Form.Item
-                                    name={key}
-                                    noStyle
-                                    rules={[{ required: true, message: `${key} is required` }]}
-                                >
-                                    <Input style={{ margin: "4px 0" }} />
-                                </Form.Item>
-                            ) : (
-                                <span style={{ color: "#595999" }}>{value}</span>
-                            )}
-                        </Descriptions.Item>
-                    ))}
+                {Object.entries(details).map(([key, value]) => (
+                    <Descriptions.Item
+                    label={key
+                        .replace(/([A-Z])/g, " $1")
+                        .replace(/^./, (str) => str.toUpperCase())}
+                    key={key}
+                    >
+                    {key.toLowerCase().includes("code") && !isEditing ? (
+                        // If it's a code field in read-only mode, treat it as a link
+                        <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}>
+                        {value}
+                        </a>
+                    ) : isEditing ? (
+                        <Form.Item
+                        name={key}
+                        noStyle
+                        rules={[{ required: true, message: `${key} is required` }]}
+                        >
+                        {renderFieldByType(key, propertyFieldConfig)}
+                        </Form.Item>
+                    ) : (
+                        // read-only
+                        <span style={{ color: "#595999" }}>{value}</span>
+                    )}
+                    </Descriptions.Item>
+                ))}
                 </Descriptions>
             </Form>
 

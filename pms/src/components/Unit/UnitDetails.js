@@ -1,8 +1,86 @@
 import React, { useState } from "react";
-import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import { Descriptions, Tabs, Table, Button, Input, Form, Divider, Select, InputNumber } from "antd";
 import { useNavigate } from "react-router-dom";
 
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
+
 const { TabPane } = Tabs;
+
+const fieldConfig = {
+  propertyInformation: { type: "text" },
+  unitTypeCode: { type: "text" },
+  propertyCode: { type: "text" },
+  buildingCode: { type: "text" },
+  floorCode: { type: "text" },
+  unitCode: { type: "text" },
+  address1: { type: "text" }, // Street Address
+  address2: { type: "number" }, // Number
+  address3: { type: "text" },
+  address4: { type: "text" },
+
+  // The dropdown fields (city, county, etc.) each have a "select" type with placeholder options
+  city: {
+    type: "select",
+    options: [
+      { label: "Athens", value: "Athens" },
+      { label: "Thessaloniki", value: "Thessaloniki" },
+    ],
+  },
+  countyMunicipality: {
+    type: "select",
+    options: [
+      { label: "County1", value: "County1" },
+      { label: "County2", value: "County2" },
+    ],
+  },
+  prefecture: {
+    type: "select",
+    options: [
+      { label: "Prefecture1", value: "Prefecture1" },
+      { label: "Prefecture2", value: "Prefecture2" },
+    ],
+  },
+  region: {
+    type: "select",
+    options: [
+      { label: "Region1", value: "Region1" },
+      { label: "Region2", value: "Region2" },
+    ],
+  },
+  country: {
+    type: "select",
+    options: [
+      { label: "Greece", value: "Greece" },
+      { label: "Other", value: "Other" },
+    ],
+  },
+  postcode: { type: "text" },
+
+  weeklyRent: { 
+    type: 'number',
+    min: 0,
+    step: 1,
+    prefix: '€/sqm',
+  },             
+  area: { 
+    type: 'number',
+    min: 0,
+    step: 1,
+    prefix: 'sqm',
+  },                    // e.g. 45 (sqm or sqft)
+  residentialBedrooms: { 
+    type: 'number',
+    min: 0,
+    step: 1,
+  },     // e.g. 1
+  residentialBathrooms: { 
+    type: 'number',
+    min: 0,
+    step: 1,
+  },    // e.g. 1
+
+  descriptionNotes: { type: "text" },
+};
 
 const UnitDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -13,15 +91,11 @@ const UnitDetails = () => {
     propertyInformation: "Test",
     unitTypeCode: "144241",
     propertyCode: "545422",
-    weeklyRent: "100",
     buildingCode: "155611",
-    area: "45",
     floorCode: "251551",
-    residentialBedrooms: "1",
-    residentialBathrooms: "1",
     unitCode: "125115",
     address1: "",
-    address2: "",
+    address2: "", // if you want it numeric, store it as a number initially e.g. 0
     address3: "",
     address4: "",
     city: "",
@@ -30,6 +104,10 @@ const UnitDetails = () => {
     region: "",
     postcode: "",
     country: "",
+    weeklyRent: 100,             
+    area: 50,                    
+    residentialBedrooms: 1,      
+    residentialBathrooms: 1,     
     descriptionNotes: "",
   };
 
@@ -178,30 +256,36 @@ const UnitDetails = () => {
           {isEditing ? "Save" : "Edit"}
         </Button>
       </div>
+
+      {/** Form for Basic Information */}
       <Form form={form} layout="vertical">
         <Divider>Basic Information</Divider>
         <Descriptions bordered column={2} style={{ background: "#fff", padding: "16px", borderRadius: "8px" }}>
           {Object.entries(unitDetails).map(([key, value]) => (
-            <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
-              {key.toLowerCase().includes("code") && !isEditing ? (
-                <a
-                  style={{ color: "#1890ff" }}
-                  onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
-                >
-                  {value}
-                </a>
-              ) : isEditing ? (
-                <Form.Item
-                  name={key}
-                  noStyle
-                  rules={[{ required: true, message: `${key} is required` }]}
-                >
-                  <Input style={{ margin: "4px 0" }} />
-                </Form.Item>
-              ) : (
-                <span style={{ color: "#595959" }}>{value}</span>
-              )}
-            </Descriptions.Item>
+            <Descriptions.Item
+            label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+            key={key}
+          >
+            {/* If it's a code field and not editing, render link */}
+            {key.toLowerCase().includes("code") && !isEditing ? (
+              <a
+                style={{ color: "#1890ff" }}
+                onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
+              >
+                {value}
+              </a>
+            ) : isEditing ? (
+              <Form.Item
+                name={key}
+                noStyle
+                rules={[{ required: true, message: `${key} is required` }]}
+              >
+                {renderFieldByType(key, fieldConfig, form)}
+              </Form.Item>
+            ) : (
+              <span style={{ color: "#595959" }}>{value}</span>
+            )}
+          </Descriptions.Item>
           ))}
         </Descriptions>
       </Form>

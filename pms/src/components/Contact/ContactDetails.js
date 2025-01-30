@@ -1,8 +1,70 @@
 import React, { useState } from "react";
-import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import { Descriptions, Tabs, Table, Button, Form, Divider } from "antd";
 import { useNavigate } from "react-router-dom";
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
 
 const { TabPane } = Tabs;
+
+// contactFieldConfig.js (or inline)
+
+export const contactFieldConfig = {
+    contactCode: { type: "text" },
+    firstName: { type: "text" },
+    lastName: { type: "text" },
+    salutation1: { type: "text" },
+    salutation2: { type: "text" },
+    companyName: { type: "text" },
+    description: { type: "text" },
+    title: { type: "text" },
+    url: { type: "text" },
+  
+    address1: { type: "text" },
+    address2: { type: "text" },
+    address3: { type: "text" },
+    address4: { type: "text" },
+    city: {
+      type: "select",
+      options: [
+        { label: "Athens", value: "Athens" },
+        { label: "Thessaloniki", value: "Thessaloniki" },
+        // ...
+      ],
+    },
+    countyMunicipality: {
+      type: "select",
+      options: [
+        { label: "County1", value: "County1" },
+        { label: "County2", value: "County2" },
+        // ...
+      ],
+    },
+    prefecture: {
+      type: "select",
+      options: [
+        { label: "Attica", value: "Attica" },
+        { label: "Central Macedonia", value: "Central Macedonia" },
+        // ...
+      ],
+    },
+    region: {
+      type: "select",
+      options: [
+        { label: "Southern Greece", value: "Southern Greece" },
+        { label: "Northern Greece", value: "Northern Greece" },
+        // ...
+      ],
+    },
+    postcode: { type: "text" },
+    country: {
+      type: "select",
+      options: [
+        { label: "Greece", value: "Greece" },
+        { label: "Other", value: "Other" },
+        // ...
+      ],
+    },
+  };
+  
 
 const ContactDetails = () => {
 
@@ -82,77 +144,77 @@ const ContactDetails = () => {
                 </Button>
             </div>
             <Form form={form} layout="vertical">
+                {/* GROUP 1: First ~8 fields */}
                 <Divider>Contact Information</Divider>
                 <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
-                    {Object.entries(details).slice(0, 8).map(([key, value]) => (
-                        <Descriptions.Item
-                            label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
-                            key={key}
+                {Object.entries(details).slice(0, 8).map(([key, value]) => (
+                    <Descriptions.Item
+                    label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+                    key={key}
+                    >
+                    {key.toLowerCase().includes("code") && !isEditing ? (
+                        <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}>
+                        {value}
+                        </a>
+                    ) : isEditing ? (
+                        <Form.Item
+                        name={key}
+                        noStyle
+                        rules={[{ required: true, message: `${key} is required` }]}
                         >
-                            {key.toLowerCase().includes("code") && !isEditing ? (
-                                <a
-                                    style={{ color: "#1890ff" }}
-                                    onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
-                                >
-                                    {value}
-                                </a>
-                            ) : isEditing ? (
-                                <Form.Item
-                                    name={key}
-                                    noStyle
-                                    rules={[{ required: true, message: `${key} is required` }]}
-                                >
-                                    <Input style={{ margin: "4px 0" }} />
-                                </Form.Item>
-                            ) : (
-                                <span style={{ color: "#595999" }}>{value}</span>
-                            )}
-                        </Descriptions.Item>
-                    ))}
+                        {renderFieldByType(key, contactFieldConfig)}
+                        </Form.Item>
+                    ) : (
+                        <span style={{ color: "#595999" }}>{value}</span>
+                    )}
+                    </Descriptions.Item>
+                ))}
                 </Descriptions>
 
+                {/* GROUP 2: Next ~7 fields (8..15) */}
                 <Divider>Address</Divider>
                 <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
-                    {Object.entries(details).slice(8, 15).map(([key, value]) => (
-                        <Descriptions.Item
-                            label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
-                            key={key}
+                {Object.entries(details).slice(8, 15).map(([key, value]) => (
+                    <Descriptions.Item
+                    label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+                    key={key}
+                    >
+                    {isEditing ? (
+                        <Form.Item
+                        name={key}
+                        noStyle
+                        rules={[{ required: true, message: `${key} is required` }]}
                         >
-                            {isEditing ? (
-                                <Form.Item
-                                    name={key}
-                                    noStyle
-                                    rules={[{ required: true, message: `${key} is required` }]}
-                                >
-                                    <Input style={{ margin: "4px 0" }} />
-                                </Form.Item>
-                            ) : (
-                                <span style={{ color: "#595999" }}>{value}</span>
-                            )}
-                        </Descriptions.Item>
-                    ))}
+                        {renderFieldByType(key, contactFieldConfig)}
+                        </Form.Item>
+                    ) : (
+                        <span style={{ color: "#595999" }}>{value}</span>
+                    )}
+                    </Descriptions.Item>
+                ))}
                 </Descriptions>
 
+                {/* GROUP 3: Remainder of fields (15..end) */}
                 <Divider>Contact Details</Divider>
                 <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
-                    {Object.entries(details).slice(15).map(([key, value]) => (
-                        <Descriptions.Item
-                            label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
-                            key={key}
+                {Object.entries(details).slice(15).map(([key, value]) => (
+                    <Descriptions.Item
+                    label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+                    key={key}
+                    >
+                    {isEditing ? (
+                        <Form.Item
+                        name={key}
+                        noStyle
+                        rules={[{ required: true, message: `${key} is required` }]}
                         >
-                            {isEditing ? (
-                                <Form.Item
-                                    name={key}
-                                    noStyle
-                                    rules={[{ required: true, message: `${key} is required` }]}
-                                >
-                                    <Input style={{ margin: "4px 0" }} />
-                                </Form.Item>
-                            ) : (
-                                <span style={{ color: "#595999" }}>{value}</span>
-                            )}
-                        </Descriptions.Item>
-                    ))}
+                        {renderFieldByType(key, contactFieldConfig)}
+                        </Form.Item>
+                    ) : (
+                        <span style={{ color: "#595999" }}>{value}</span>
+                    )}
+                    </Descriptions.Item>
+                ))}
                 </Descriptions>
             </Form>
 
