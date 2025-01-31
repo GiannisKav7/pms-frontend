@@ -1,8 +1,26 @@
 import React, { useState } from "react";
-import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import {
+  Descriptions, Tabs, Table, Button, Form, Divider
+} from "antd";
 import { useNavigate } from "react-router-dom";
 
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
+
 const { TabPane } = Tabs;
+
+const floorFieldConfig = {
+  propertyCode: { type: "text" },
+  buildingCode: { type: "text" },
+  floorCode: { type: "text" },
+  floorName: { type: "text" },
+  floorNumber: {
+    type: 'number',
+    min: 0,
+    step: 1,
+  },
+  elevator: { type: "switch" },
+  descriptionNotes: { type: "text" },
+};
 
 const FloorDetails = () => {
   const initialDetails = {
@@ -95,24 +113,34 @@ const FloorDetails = () => {
         <Divider>Basic Information</Divider>
         <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
           {Object.entries(details).map(([key, value]) => (
-            <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
+            <Descriptions.Item
+              label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+              key={key}
+            >
               {key.toLowerCase().includes("code") && !isEditing ? (
-                <a
-                  style={{ color: "#1890ff" }}
-                  onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
-                >
-                  {value}
+                <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}>
+                  {String(value)}
                 </a>
               ) : isEditing ? (
                 <Form.Item
                   name={key}
                   noStyle
+                  // if you want to require them, do:
                   rules={[{ required: true, message: `${key} is required` }]}
+                  // For the switch field, we'll connect the boolean to 'checked':
+                  valuePropName={floorFieldConfig[key]?.type === "switch" ? "checked" : undefined}
                 >
-                  <Input style={{ margin: "4px 0" }} />
+                  {renderFieldByType(key, floorFieldConfig)}
                 </Form.Item>
               ) : (
-                <span style={{ color: "#595999" }}>{value}</span>
+                // read-only
+                <span style={{ color: "#595999" }}>
+                  {/* If 'elevator' is boolean, you can show 'Yes'/'No' in read-only mode */}
+                  {key === "elevator"
+                    ? value ? "Yes" : "No"
+                    : String(value)
+                  }
+                </span>
               )}
             </Descriptions.Item>
           ))}

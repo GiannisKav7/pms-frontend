@@ -1,8 +1,92 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
 import { useNavigate } from "react-router-dom";
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
 
 const { TabPane } = Tabs;
+
+const unitTypeFieldConfig = {
+  unitTypeCode: { type: "text" },
+  propertyCode: { type: "text" },
+  description: { type: "text" },
+  bedrooms: { 
+    type: 'number',
+    min: 0,
+    step: 1,
+  },
+  bathrooms: { 
+    type: 'number',
+    min: 0,
+    step: 1,
+  },
+  rent: { 
+    type: 'number',
+    min: 0,
+    step: 10,
+    prefix:"€"
+  },
+  deposit: { 
+    type: 'number',
+    min: 0,
+    step: 10,
+    prefix:"€"
+  },
+  minimumRent: { 
+    type: 'number',
+    min: 0,
+    step: 10,
+    prefix:"€"
+  },
+  maximumRent: { 
+    type: 'number',
+    min: 0,
+    step: 10,
+    prefix:"€"
+  },
+  totalUnits: { 
+    type: 'number',
+    min: 0,
+    step: 1, 
+  },
+  totalRooms: { 
+    type: 'number',
+    min: 0,
+    step: 1,
+   },
+  totalBeds: { 
+    type: 'number',
+    min: 0,
+    step: 1,
+   },
+  category: {
+    type: "select",
+    options: [
+      { label: "Residential", value: "Residential" },
+      { label: "Commercial", value: "Commercial" },
+      { label: "Mixed-Use", value: "Mixed-Use" },
+    ],
+  },
+  type: {
+    type: "select",
+    options: [
+      { label: "Apartment", value: "Apartment" },
+      { label: "House", value: "House" },
+      { label: "Condo", value: "Condo" },
+    ],
+  },
+  features: {
+    type: "multiSelect",
+    options: ["Pool", "Gym", "Parking", "Garden"],
+  },
+  options: {
+    type: "select",
+    options: [
+      { label: "Furnished", value: "Furnished" },
+      { label: "Pet-friendly", value: "Pet-friendly" },
+      { label: "None", value: "None" },
+    ],
+  },
+};
 
 const UnitTypeDetails = () => {
   const initialDetails = {
@@ -180,28 +264,31 @@ const UnitTypeDetails = () => {
       <Form form={form} layout="vertical">
         <Divider>Basic Information</Divider>
         <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
-          {Object.entries(details).map(([key, value]) => (
-            <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
-              {key.toLowerCase().includes("code") && !isEditing ? (
-                <a
-                  style={{ color: "#1890ff" }}
-                  onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
-                >
-                  {value}
-                </a>
-              ) : isEditing ? (
-                <Form.Item
-                  name={key}
-                  noStyle
-                  rules={[{ required: true, message: `${key} is required` }]}
-                >
-                  <Input style={{ margin: "4px 0" }} />
-                </Form.Item>
-              ) : (
-                <span style={{ color: "#595999" }}>{value}</span>
-              )}
-            </Descriptions.Item>
-          ))}
+          {Object.entries(details).map(([key, value]) => {
+            const label = key
+              .replace(/([A-Z])/g, " $1")
+              .replace(/^./, (str) => str.toUpperCase());
+
+            return (
+              <Descriptions.Item label={label} key={key}>
+                {key.toLowerCase().includes("code") && !isEditing ? (
+                  // If it's a code field in read-only mode, render as a link
+                  <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}>
+                    {Array.isArray(value) ? value.join(", ") : String(value)}
+                  </a>
+                ) : isEditing ? (
+                  <Form.Item name={key} noStyle rules={[{ required: true, message: `${label} is required` }]}>
+                    {renderUnitTypeField(key, unitTypeFieldConfig)}
+                  </Form.Item>
+                ) : (
+                  // Read-only mode
+                  <span style={{ color: "#595999" }}>
+                    {Array.isArray(value) ? value.join(", ") : String(value)}
+                  </span>
+                )}
+              </Descriptions.Item>
+            );
+          })}
         </Descriptions>
       </Form>
 

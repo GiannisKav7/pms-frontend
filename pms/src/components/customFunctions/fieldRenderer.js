@@ -28,7 +28,17 @@ export function renderFieldByType(fieldName, fieldConfig, form) {
           ))}
         </Select>
       );
-
+    case "multiSelect":
+      return (
+        <Select mode="multiple" style={{ width: "100%" }}>
+          {field.options?.map((opt) => (
+            <Option key={opt} value={opt}>
+              {opt}
+            </Option>
+          ))}
+        </Select>
+      );
+  
     case "radio":
       return (
         <Radio.Group>

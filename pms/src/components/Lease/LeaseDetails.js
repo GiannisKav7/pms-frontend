@@ -39,7 +39,7 @@ const fieldConfig = {
     type: 'number',
     min: 0,
     step: 10,
-    prefix: 'Euro',
+    prefix: '€',
   },
   rentYearly: {
     type: 'number',

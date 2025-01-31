@@ -1,8 +1,60 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
 import { useNavigate } from "react-router-dom";
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
 
 const { TabPane } = Tabs;
+
+const buildingFieldConfig = {
+  propertyCode: { type: "text" },
+  buildingCode: { type: "text" },
+  name: { type: "text" },
+  address1: { type: "text" },
+  address2: { type: "text" },
+  address3: { type: "text" },
+  address4: { type: "text" },
+  city: {
+    type: "select",
+    options: [
+      { label: "Athens", value: "Athens" },
+      { label: "Thessaloniki", value: "Thessaloniki" },
+      // ... add more if needed
+    ],
+  },
+  countyMunicipality: {
+    type: "select",
+    options: [
+      { label: "County1", value: "County1" },
+      { label: "County2", value: "County2" },
+      // ...
+    ],
+  },
+  prefecture: {
+    type: "select",
+    options: [
+      { label: "Attica", value: "Attica" },
+      { label: "Central Macedonia", value: "Central Macedonia" },
+      // ...
+    ],
+  },
+  region: {
+    type: "select",
+    options: [
+      { label: "Southern Greece", value: "Southern Greece" },
+      { label: "Northern Greece", value: "Northern Greece" },
+      // ...
+    ],
+  },
+  postcode: { type: "text" },
+  country: {
+    type: "select",
+    options: [
+      { label: "Greece", value: "Greece" },
+      { label: "Other", value: "Other" },
+    ],
+  },
+  descriptionNotes: { type: "text" },
+};
 
 const BuildingDetails = () => {
   const initialDetails = {
@@ -125,7 +177,11 @@ const BuildingDetails = () => {
         <Divider>Basic Information</Divider>
         <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
           {Object.entries(details).map(([key, value]) => (
-            <Descriptions.Item label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())} key={key}>
+            <Descriptions.Item
+              label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
+              key={key}
+            >
+              {/* If it includes \"code\" and not editing, link out */}
               {key.toLowerCase().includes("code") && !isEditing ? (
                 <a
                   style={{ color: "#1890ff" }}
@@ -139,15 +195,17 @@ const BuildingDetails = () => {
                   noStyle
                   rules={[{ required: true, message: `${key} is required` }]}
                 >
-                  <Input style={{ margin: "4px 0" }} />
+                  {renderBuildingField(key, buildingFieldConfig)}
                 </Form.Item>
               ) : (
+                // Read-only display
                 <span style={{ color: "#595999" }}>{value}</span>
               )}
             </Descriptions.Item>
           ))}
         </Descriptions>
       </Form>
+
 
       <Tabs defaultActiveKey="1" style={{ marginTop: 24 }}>
         <TabPane tab="General" key="1">
