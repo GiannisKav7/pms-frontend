@@ -195,7 +195,7 @@ const BuildingDetails = () => {
                   noStyle
                   rules={[{ required: true, message: `${key} is required` }]}
                 >
-                  {renderBuildingField(key, buildingFieldConfig)}
+                  {renderFieldByType(key, buildingFieldConfig)}
                 </Form.Item>
               ) : (
                 // Read-only display
