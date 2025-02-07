@@ -278,7 +278,7 @@ const UnitTypeDetails = () => {
                   </a>
                 ) : isEditing ? (
                   <Form.Item name={key} noStyle rules={[{ required: true, message: `${label} is required` }]}>
-                    {renderUnitTypeField(key, unitTypeFieldConfig)}
+                    {renderFieldByType(key, unitTypeFieldConfig)}
                   </Form.Item>
                 ) : (
                   // Read-only mode

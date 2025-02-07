@@ -31,10 +31,10 @@ export function renderFieldByType(fieldName, fieldConfig, form) {
     case "multiSelect":
       return (
         <Select mode="multiple" style={{ width: "100%" }}>
-          {field.options?.map((opt) => (
-            <Option key={opt} value={opt}>
+          {fieldName.options?.map((opt) => (
+            <Select.Option key={opt} value={opt}>
               {opt}
-            </Option>
+            </Select.Option>
           ))}
         </Select>
       );

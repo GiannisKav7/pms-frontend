@@ -11,6 +11,7 @@ import RoomPage from '../pages/RoomPage';
 import BuildingPage from '../pages/BuildingPage';
 import FloorPage from '../pages/FloorPage';
 import UnitTypePage from '../pages/UnitTypePage';
+import TestPage from '../components/testing/TestPage';
 
 const AppRouter = () => {
   return (
@@ -26,6 +27,7 @@ const AppRouter = () => {
         <Route path="/building/:id" element={<BuildingPage />} />
         <Route path="/floor/:id" element={<FloorPage />} />
         <Route path="/unittype/:id" element={<UnitTypePage />} />
+        <Route path="/test" element={<TestPage />} />
 
         <Route path="*" element={<HomePage />} />
       </Routes>
