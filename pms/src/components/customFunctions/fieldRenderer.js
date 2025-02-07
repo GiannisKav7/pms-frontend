@@ -1,6 +1,5 @@
 import React from "react";
-import { Input, InputNumber, Switch, Select, Radio, DatePicker} from "antd";
-const { Option } = Select; // Add this line
+import { Input, InputNumber, Switch, Select, Radio, DatePicker } from "antd";
 
 /**
  * Dynamically returns the correct form field component
@@ -11,8 +10,6 @@ const { Option } = Select; // Add this line
  * @param {Object} form - (Optional) antd Form instance if needed for advanced usage.
  * @returns React Element (Input, Select, Radio, etc.)
  */
-
-
 export function renderFieldByType(fieldName, fieldConfig, form) {
   // fallback type
   const config = fieldConfig[fieldName] || { type: "text" };
@@ -34,7 +31,7 @@ export function renderFieldByType(fieldName, fieldConfig, form) {
     case "multiSelect":
       return (
         <Select mode="multiple" style={{ width: "100%" }}>
-          {config.options?.map((opt) => (
+          {field.options?.map((opt) => (
             <Option key={opt} value={opt}>
               {opt}
             </Option>
