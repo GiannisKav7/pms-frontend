@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import {Descriptions, Tabs, Table, Button, Form, Divider,} from "antd";
+import { Descriptions, Table, Button, Form, Divider, Layout } from "antd";
 import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 import { renderFieldByType } from "../customFunctions/fieldRenderer";
+import LeaseDetailsSidebar from "./LeaseDetailsSidebar";
+import LeaseDetailsBasicInfo from "./LeaseDetailsBasicInfo";
 
-const { TabPane } = Tabs;
+const { Sider, Content } = Layout;
 
-// Field config with numeric, date, radio, etc.
 const fieldConfig = {
   leaseType: {
     type: 'select',
@@ -94,16 +95,15 @@ const LeaseDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const [selectedMenuItem, setSelectedMenuItem] = useState("overview");
 
-  // Updated numeric fields to plain numbers
-  // atRisk => "Yes" / "No" to align with radio
   const initialDetails = {
     leaseCode: "LC-001",
     leaseName: "Office Lease - Main Street",
     customerCode: "CUST-123",
     leaseType: "Commercial",
     status: "Active",
-    atRisk: "No", // or "Yes"
+    atRisk: "No",
     propertyCode: "PROP-456",
     ownerCode: "Holdings Kavvetsos IKE",
     contractedArea: 150,
@@ -136,7 +136,6 @@ const LeaseDetails = () => {
 
   const handleSave = () => {
     form.validateFields().then((values) => {
-      // Convert dayjs -> string if needed
       const dateFields = [
         'leaseFromDate','leaseToDate','moveInDate','moveOutDate',
         'lastRenewalDate','signDate','nextBreakDate','nextRentReviewDate'
@@ -156,7 +155,6 @@ const LeaseDetails = () => {
     navigate(`/${path}/${code}`);
   };
 
-  // Tab data/columns unchanged...
   const tabData = {
     units: [
       { key: "1", unitCode: "101", buildingCode: "B-001", floorCode: "F-001", name: "Unit A", location: "North Wing", fromDate: "2023-01-01", toDate: "2023-12-31", movingInDate: "2023-01-15", movingOutDate: "2023-12-15" },
@@ -269,7 +267,8 @@ const LeaseDetails = () => {
         dataIndex: "contactCode",
         key: "contactCode",
         render: (text) => (
-          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "contact")}>\n            {text}
+          <a style={{ color: "#1890ff" }} onClick={() => handleNavigation(text, "contact")}>
+            {text}
           </a>
         ),
       },
@@ -285,81 +284,59 @@ const LeaseDetails = () => {
     ],
   };
 
+  const renderContent = () => {
+    switch (selectedMenuItem) {
+      case "overview":
+        return (
+          <LeaseDetailsBasicInfo
+            form={form}
+            leaseDetails={leaseDetails}
+            isEditing={isEditing}
+            handleNavigation={handleNavigation}
+            fieldConfig={fieldConfig}
+          />
+        );
+      case "units":
+        return <Table dataSource={tabData.units} columns={tabColumns.units} pagination={false} />;
+      case "chargeSchedules":
+        return <Table dataSource={tabData.chargeSchedules} columns={tabColumns.chargeSchedules} pagination={false} />;
+      case "amendments":
+        return <Table dataSource={tabData.amendments} columns={tabColumns.amendments} pagination={false} />;
+      case "clauses":
+        return <Table dataSource={tabData.clauses} columns={tabColumns.clauses} pagination={false} />;
+      case "options":
+        return <Table dataSource={tabData.options} columns={tabColumns.options} pagination={false} />;
+      case "contacts":
+        return <Table dataSource={tabData.contacts} columns={tabColumns.contacts} pagination={false} />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div style={{ padding: 24, background: "#f9f9f9" }}>
-      <div
-        style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}
-      >
-        <h2 style={{ margin: 0 }}>Lease Details</h2>
-        <Button type="primary" onClick={isEditing ? handleSave : handleEditToggle}>
-          {isEditing ? "Save" : "Edit"}
-        </Button>
-      </div>
-
-      <Form form={form} layout="vertical">
-        <Divider>Lease Information</Divider>
-        <Descriptions
-          bordered
-          column={2}
-          style={{ background: "#fff", padding: "16px", borderRadius: "8px" }}
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider width={200} className="site-layout-background">
+        <LeaseDetailsSidebar selectedMenuItem={selectedMenuItem} setSelectedMenuItem={setSelectedMenuItem} />
+      </Sider>
+      <Layout style={{ padding: "0 24px 24px" }}>
+        <Content
+          style={{
+            padding: 24,
+            margin: 0,
+            minHeight: 280,
+            background: "#fff",
+          }}
         >
-          {Object.entries(leaseDetails).map(([key, value]) => (
-            <Descriptions.Item
-              label={key
-                .replace(/([A-Z])/g, " $1")
-                .replace(/^./, (str) => str.toUpperCase())}
-              key={key}
-            >
-              {key.toLowerCase().includes("code") && !isEditing ? (
-                <a
-                  style={{ color: "#1890ff" }}
-                  onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
-                >
-                  {value}
-                </a>
-              ) : isEditing ? (
-                <Form.Item
-                  name={key}
-                  noStyle
-                  rules={[{ required: true, message: `${key} is required` }]}
-                  // For Switch, ensure we tie form item to 'checked' if we do not handle it manually
-                  valuePropName={fieldConfig[key]?.type === 'switch' ? 'checked' : undefined}
-                >
-                  {renderFieldByType(key, fieldConfig, form)}
-                </Form.Item>
-              ) : (
-                <span style={{ color: "#595959" }}>
-                  {typeof value === "number"
-                    ? value.toLocaleString()
-                    : `${value}`}
-                </span>
-              )}
-            </Descriptions.Item>
-          ))}
-        </Descriptions>
-      </Form>
-
-      <Tabs defaultActiveKey="1" style={{ marginTop: 24 }}>
-        <TabPane tab="Unit(s)" key="1">
-          <Table dataSource={tabData.units} columns={tabColumns.units} pagination={false} />
-        </TabPane>
-        <TabPane tab="Charge Schedules" key="2">
-          <Table dataSource={tabData.chargeSchedules} columns={tabColumns.chargeSchedules} pagination={false} />
-        </TabPane>
-        <TabPane tab="Amendments" key="3">
-          <Table dataSource={tabData.amendments} columns={tabColumns.amendments} pagination={false} />
-        </TabPane>
-        <TabPane tab="Clauses" key="4">
-          <Table dataSource={tabData.clauses} columns={tabColumns.clauses} pagination={false} />
-        </TabPane>
-        <TabPane tab="Options" key="5">
-          <Table dataSource={tabData.options} columns={tabColumns.options} pagination={false} />
-        </TabPane>
-        <TabPane tab="Contacts" key="6">
-          <Table dataSource={tabData.contacts} columns={tabColumns.contacts} pagination={false} />
-        </TabPane>
-      </Tabs>
-    </div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+            <h2 style={{ margin: 0 }}>Lease Details</h2>
+            <Button type="primary" onClick={isEditing ? handleSave : handleEditToggle}>
+              {isEditing ? "Save" : "Edit"}
+            </Button>
+          </div>
+          {renderContent()}
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 
