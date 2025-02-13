@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
+import { Descriptions, Table, Button, Form, Divider, Layout } from "antd";
 import { useNavigate } from "react-router-dom";
 import { renderFieldByType } from "../customFunctions/fieldRenderer";
+import BuildingDetailsSidebar from "./BuildingDetailsSidebar";
+import BuildingDetailsBasicInfo from "./BuildingDetailsBasicInfo";
 
-const { TabPane } = Tabs;
+const { Sider, Content } = Layout;
 
 const buildingFieldConfig = {
   propertyCode: { type: "text" },
@@ -18,7 +20,6 @@ const buildingFieldConfig = {
     options: [
       { label: "Athens", value: "Athens" },
       { label: "Thessaloniki", value: "Thessaloniki" },
-      // ... add more if needed
     ],
   },
   countyMunicipality: {
@@ -26,7 +27,6 @@ const buildingFieldConfig = {
     options: [
       { label: "County1", value: "County1" },
       { label: "County2", value: "County2" },
-      // ...
     ],
   },
   prefecture: {
@@ -34,7 +34,6 @@ const buildingFieldConfig = {
     options: [
       { label: "Attica", value: "Attica" },
       { label: "Central Macedonia", value: "Central Macedonia" },
-      // ...
     ],
   },
   region: {
@@ -42,7 +41,6 @@ const buildingFieldConfig = {
     options: [
       { label: "Southern Greece", value: "Southern Greece" },
       { label: "Northern Greece", value: "Northern Greece" },
-      // ...
     ],
   },
   postcode: { type: "text" },
@@ -78,6 +76,8 @@ const BuildingDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
   const [details, setDetails] = useState(initialDetails);
+  const [selectedMenuItem, setSelectedMenuItem] = useState("basicInfo");
+  const [collapsed, setCollapsed] = useState(false);
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -165,60 +165,61 @@ const BuildingDetails = () => {
     ],
   };
 
+  const renderContent = () => {
+    switch (selectedMenuItem) {
+      case "basicInfo":
+        return (
+          <BuildingDetailsBasicInfo
+            form={form}
+            details={details}
+            isEditing={isEditing}
+            handleNavigation={handleNavigation}
+            buildingFieldConfig={buildingFieldConfig}
+          />
+        );
+      case "general":
+        return <Table dataSource={generalData} columns={tabColumns.general} pagination={false} />;
+      case "units":
+        return <Table dataSource={unitsData} columns={tabColumns.units} pagination={false} />;
+      case "contacts":
+        return <Table dataSource={contactsData} columns={tabColumns.contacts} pagination={false} />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div style={{ padding: 24, background: "#f9f9f9" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-        <h2 style={{ margin: 0 }}>Building Details</h2>
-        <Button type="primary" onClick={isEditing ? handleSave : handleEditToggle}>
-          {isEditing ? "Save" : "Edit"}
-        </Button>
-      </div>
-      <Form form={form} layout="vertical">
-        <Divider>Basic Information</Divider>
-        <Descriptions bordered column={2} style={{ background: "#fff", padding: "0px", borderRadius: "8px" }}>
-          {Object.entries(details).map(([key, value]) => (
-            <Descriptions.Item
-              label={key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}
-              key={key}
-            >
-              {/* If it includes \"code\" and not editing, link out */}
-              {key.toLowerCase().includes("code") && !isEditing ? (
-                <a
-                  style={{ color: "#1890ff" }}
-                  onClick={() => handleNavigation(value, key.replace("Code", "").toLowerCase())}
-                >
-                  {value}
-                </a>
-              ) : isEditing ? (
-                <Form.Item
-                  name={key}
-                  noStyle
-                  rules={[{ required: true, message: `${key} is required` }]}
-                >
-                  {renderFieldByType(key, buildingFieldConfig)}
-                </Form.Item>
-              ) : (
-                // Read-only display
-                <span style={{ color: "#595999" }}>{value}</span>
-              )}
-            </Descriptions.Item>
-          ))}
-        </Descriptions>
-      </Form>
-
-
-      <Tabs defaultActiveKey="1" style={{ marginTop: 24 }}>
-        <TabPane tab="General" key="1">
-          <Table dataSource={generalData} columns={tabColumns.general} pagination={false} />
-        </TabPane>
-        <TabPane tab="Unit(s)" key="2">
-          <Table dataSource={unitsData} columns={tabColumns.units} pagination={false} />
-        </TabPane>
-        <TabPane tab="Contacts" key="3">
-          <Table dataSource={contactsData} columns={tabColumns.contacts} pagination={false} />
-        </TabPane>
-      </Tabs>
-    </div>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider
+        width={200}
+        className="site-layout-background"
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(collapsed) => setCollapsed(collapsed)}
+        breakpoint="lg"
+        collapsedWidth="0"
+      >
+        <BuildingDetailsSidebar selectedMenuItem={selectedMenuItem} setSelectedMenuItem={setSelectedMenuItem} />
+      </Sider>
+      <Layout style={{ padding: "0 24px 24px" }}>
+        <Content
+          style={{
+            padding: 24,
+            margin: 0,
+            minHeight: 280,
+            background: "#fff",
+          }}
+        >
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+            <h2 style={{ margin: 0 }}>Building Details</h2>
+            <Button type="primary" onClick={isEditing ? handleSave : handleEditToggle}>
+              {isEditing ? "Save" : "Edit"}
+            </Button>
+          </div>
+          {renderContent()}
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 
