@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import GoalComponent from "./GoalComponent";
+import TextInput from "../customElements/TextInput";
+import Add from "./Add";
+import NumberInput from "../customElements/NumberInput";
 
 const goalData1 = { title: "Finish the course", description: "Notes notes notes" };
 const { title, description } = goalData1;
@@ -110,7 +113,9 @@ function SearchAncestor(){
 const TestPage = () => {
     return (
         <>
-            
+            <TextInput />
+            <NumberInput />
+            <Add/>
         </>
     );
 }
