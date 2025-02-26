@@ -16,7 +16,7 @@ export function renderFieldByType(fieldName, fieldConfig, form) {
 
   switch (config.type) {
     case "text":
-      return <Input style={{ margin: "4px 0" }} />;
+      return <Input style={{ margin: "4px 0" }} {...config} />;
 
     case "select":
       return (
@@ -31,9 +31,9 @@ export function renderFieldByType(fieldName, fieldConfig, form) {
     case "multiSelect":
       return (
         <Select mode="multiple" style={{ width: "100%" }}>
-          {fieldName.options?.map((opt) => (
-            <Select.Option key={opt} value={opt}>
-              {opt}
+          {config.options?.map((opt) => (
+            <Select.Option key={opt.value} value={opt.value}>
+              {opt.label}
             </Select.Option>
           ))}
         </Select>
