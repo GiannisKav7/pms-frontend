@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Row, Col, Card, Table, Button, Form, Divider, Layout } from "antd";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import RentChargesTable from "./RentChargesTable";
 import LeaseDetailsSidebar from "./LeaseDetailsSidebar";
-
 import { fieldConfig } from "../../config/leaseConfig";
 import { tabData } from "../../config/leaseTabData";
 import { getTabColumns } from "../../config/leaseTabColumns";
@@ -212,13 +212,7 @@ const LeaseDetails = () => {
           />
         );
       case "chargeSchedules":
-        return (
-          <Table
-            dataSource={tabData.chargeSchedules}
-            columns={tabColumns.chargeSchedules}
-            pagination={false}
-          />
-        );
+        return <RentChargesTable />;
       case "amendments":
         return (
           <Table
