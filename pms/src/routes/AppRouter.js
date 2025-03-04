@@ -27,7 +27,6 @@ const AppRouter = () => {
         <Route path="/building/:id" element={<BuildingPage />} />
         <Route path="/floor/:id" element={<FloorPage />} />
         <Route path="/unittype/:id" element={<UnitTypePage />} />
-        <Route path="/test" element={<TestPage />} />
 
         <Route path="*" element={<HomePage />} />
       </Routes>
