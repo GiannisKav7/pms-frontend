@@ -11,7 +11,6 @@ import RoomPage from '../pages/RoomPage';
 import BuildingPage from '../pages/BuildingPage';
 import FloorPage from '../pages/FloorPage';
 import UnitTypePage from '../pages/UnitTypePage';
-import TestPage from '../components/testing/TestPage';
 
 const AppRouter = () => {
   return (
