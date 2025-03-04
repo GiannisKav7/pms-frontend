@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "property-management-syst-ac197"
-  }
+    "default": "property-management-plat-37148",
+    "property-management-system": "property-management-plat-37148",
+    "pms": "property-management-plat-37148"
+  },
+  "targets": {},
+  "etags": {}
 }
