@@ -1,21 +1,19 @@
-import { onRequest } from "firebase-functions/v2/https";
-import { Pool } from "pg";
+/**
+ * Import function triggers from their respective submodules:
+ *
+ * import {onCall} from "firebase-functions/v2/https";
+ * import {onDocumentWritten} from "firebase-functions/v2/firestore";
+ *
+ * See a full list of supported triggers at https://firebase.google.com/docs/functions
+ */
 
-// Load database credentials from Firebase environment config
-const pool = new Pool({
-    user: process.env.PGUSER || "postgres",
-    host: process.env.PGHOST || "34.69.91.248",
-    database: process.env.PGDATABASE || "property-management-db",
-    password: process.env.PGPASSWORD || "15nST4?Lai?n9&7c",
-    port: 5432, // Default PostgreSQL port
-});
+import {onRequest} from "firebase-functions/v2/https";
+import * as logger from "firebase-functions/logger";
 
-export const getLeases = onRequest(async (req, res) => {
-    try {
-        const result = await pool.query("SELECT * FROM lease");
-        res.status(200).json(result.rows);
-    } catch (error) {
-        console.error("Database error:", error);
-        res.status(500).send("Error fetching leases");
-    }
-});
+// Start writing functions
+// https://firebase.google.com/docs/functions/typescript
+
+// export const helloWorld = onRequest((request, response) => {
+//   logger.info("Hello logs!", {structuredData: true});
+//   response.send("Hello from Firebase!");
+// });

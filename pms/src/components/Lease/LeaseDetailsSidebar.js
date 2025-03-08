@@ -1,20 +1,48 @@
 import React from "react";
 import { Menu } from "antd";
+import {
+    HomeOutlined,
+    TableOutlined,
+    DollarOutlined,
+    EditOutlined,
+    FileTextOutlined,
+    SettingOutlined,
+    ContactsOutlined,
+} from "@ant-design/icons";
 
 const LeaseDetailsSidebar = ({ selectedMenuItem, setSelectedMenuItem }) => (
   <Menu
     mode="inline"
     selectedKeys={[selectedMenuItem]}
     onClick={(e) => setSelectedMenuItem(e.key)}
-    style={{ height: "100%", borderRight: 0 }}
+    style={{
+      height: "100%",
+      borderRight: 0,
+      boxShadow: "2px 0 2px rgba(0, 0, 0, 0.15)", // added elevation effect
+      background: "#fff",
+    }}
   >
-    <Menu.Item key="overview">Lease Overview</Menu.Item>
-    <Menu.Item key="units">Unit(s)</Menu.Item>
-    <Menu.Item key="chargeSchedules">Charge Schedules</Menu.Item>
-    <Menu.Item key="amendments">Amendments</Menu.Item>
-    <Menu.Item key="clauses">Clauses</Menu.Item>
-    <Menu.Item key="options">Options</Menu.Item>
-    <Menu.Item key="contacts">Contacts</Menu.Item>
+    <Menu.Item key="overview" icon={<HomeOutlined />}>
+      Lease Overview
+    </Menu.Item>
+    <Menu.Item key="units" icon={<TableOutlined />}>
+      Unit(s)
+    </Menu.Item>
+    <Menu.Item key="chargeSchedules" icon={<DollarOutlined />}>
+      Charge Schedules
+    </Menu.Item>
+    <Menu.Item key="amendments" icon={<EditOutlined />}>
+      Amendments
+    </Menu.Item>
+    <Menu.Item key="clauses" icon={<FileTextOutlined />}>
+      Clauses
+    </Menu.Item>
+    <Menu.Item key="options" icon={<SettingOutlined />}>
+      Options
+    </Menu.Item>
+    <Menu.Item key="contacts" icon={<ContactsOutlined />}>
+      Contacts
+    </Menu.Item>
   </Menu>
 );
 
