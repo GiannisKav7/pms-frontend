@@ -10,7 +10,7 @@ const MainLayout = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Navbar />
-      <Content style={{ padding: "24px", background: "#f0f2f5" }}>
+      <Content style={{background: "#f0f2f5" }}>
         <Outlet />
       </Content>
       <Footer style={{ textAlign: "center" }}>

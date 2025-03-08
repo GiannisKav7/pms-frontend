@@ -15,7 +15,12 @@ const LeaseDetailsSidebar = ({ selectedMenuItem, setSelectedMenuItem }) => (
     mode="inline"
     selectedKeys={[selectedMenuItem]}
     onClick={(e) => setSelectedMenuItem(e.key)}
-    style={{ height: "100%", borderRight: 0 }}
+    style={{
+      height: "100%",
+      borderRight: 0,
+      boxShadow: "2px 0 2px rgba(0, 0, 0, 0.15)", // added elevation effect
+      background: "#fff",
+    }}
   >
     <Menu.Item key="overview" icon={<HomeOutlined />}>
       Lease Overview

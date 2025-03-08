@@ -7,10 +7,12 @@ import LeaseDetailsSidebar from "./LeaseDetailsSidebar";
 import { fieldConfig } from "../../config/leaseConfig";
 import { tabData } from "../../config/leaseTabData";
 import { getTabColumns } from "../../config/leaseTabColumns";
-import { renderFieldByType } from "../customFunctions/fieldRenderer"; // Custom Field Renderer
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
+import OverviewContent from "./OverviewContent";
+import BasicInfoBar from "./BasicInfoBar";
 
 const { Sider, Content } = Layout;
-// You can place this near the top of your file:
+
 const overviewGroups = [
   {
     title: "Basic Info",
@@ -51,7 +53,12 @@ const overviewGroups = [
   },
   {
     title: "Security/Deposits",
-    fields: ["security", "depositsRequired", "depositsBilled", "depositsReceived"],
+    fields: [
+      "security",
+      "depositsRequired",
+      "depositsBilled",
+      "depositsReceived",
+    ],
   },
 ];
 
@@ -118,15 +125,14 @@ const LeaseDetails = () => {
           values[field] = values[field].format("YYYY-MM-DD");
         }
       });
-
       setLeaseDetails(values);
       setIsEditing(false);
     });
   };
 
   const handleCancel = () => {
-    form.resetFields(); // Reset any unsaved changes
-    setIsEditing(false); // Revert back to read-only mode
+    form.resetFields();
+    setIsEditing(false);
   };
 
   const handleNavigation = (code, path) => {
@@ -137,72 +143,13 @@ const LeaseDetails = () => {
     switch (selectedMenuItem) {
       case "overview":
         return (
-          <Form form={form} layout="vertical">
-            <Divider>Lease Information</Divider>
-            {/* Grid container for cards */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                gap: "16px",
-              }}
-            >
-              {overviewGroups.map((group) => (
-                <Card key={group.title} title={group.title}>
-                  <Row gutter={16}>
-                  {group.fields.map((fieldKey) => {
-                    const label = fieldKey
-                      .replace(/([A-Z])/g, " $1")
-                      .replace(/^./, (str) => str.toUpperCase());
-                    const fieldValue = leaseDetails[fieldKey];
-                    const fieldCfg = fieldConfig[fieldKey] || {};
-                    
-                    const isNumberField = fieldCfg.type === "number";
-                    const isDateField = fieldCfg.type === "date";
-                    
-                    let displayValue;
-                    
-                    if (isDateField) {
-                      displayValue = fieldValue
-                        ? dayjs(fieldValue).format(fieldCfg.format || 'DD/MM/YYYY')
-                        : "";
-                    } else if (isNumberField) {
-                      displayValue = `${fieldCfg.prefix ? fieldCfg.prefix + " " : ""}${Number(fieldValue).toLocaleString()}`;
-                    } else {
-                      displayValue = `${fieldValue}`;
-                    }
-                    
-                    return (
-                      <Col span={24} key={fieldKey}>
-                        {isEditing ? (
-                          <Form.Item
-                            label={label}
-                            name={fieldKey}
-                            rules={[{ required: true, message: `${label} is required` }]}
-                            valuePropName={fieldCfg.type === "switch" ? "checked" : undefined}
-                          >
-                            {renderFieldByType(fieldKey, fieldConfig, form)}
-                          </Form.Item>
-                        ) : (
-                          <div style={{ marginBottom: 16 }}>
-                            <div style={{ fontWeight: "bold", marginBottom: 4 }}>
-                              {label}
-                            </div>
-                            <div style={{ color: "#595959" }}>
-                              {displayValue}
-                            </div>
-                          </div>
-                        )}
-                      </Col>
-                    );
-                  })}
-                  </Row>
-                </Card>
-              ))}
-            </div>
-          </Form>
+          <OverviewContent
+            form={form}
+            overviewGroups={overviewGroups}
+            leaseDetails={leaseDetails}
+            isEditing={isEditing}
+          />
         );
-
       case "units":
         return (
           <Table
@@ -252,35 +199,39 @@ const LeaseDetails = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider
-        collapsible
-        collapsed={sidebarCollapsed}
-        onCollapse={(collapsed) => setSidebarCollapsed(collapsed)}
-        width={200}
-        className="site-layout-background"
-      >
-        <LeaseDetailsSidebar
-          selectedMenuItem={selectedMenuItem}
-          setSelectedMenuItem={setSelectedMenuItem}
-        />
-      </Sider>
+      {/* BasicInfoBar appears directly below the Navbar (handled in MainLayout) */}
+      <div style={{ background: "#fff" }}>
+        <BasicInfoBar leaseDetails={leaseDetails} />
+      </div>
       <Layout style={{ padding: "0 0px 0px" }}>
+        <Sider
+          collapsible
+          collapsed={sidebarCollapsed}
+          onCollapse={(collapsed) => setSidebarCollapsed(collapsed)}
+          width={200}
+          className="site-layout-background"
+        >
+          <LeaseDetailsSidebar
+            selectedMenuItem={selectedMenuItem}
+            setSelectedMenuItem={setSelectedMenuItem}
+          />
+        </Sider>
         <Content
           style={{
             padding: 24,
             margin: 0,
             minHeight: 280,
-            background: "#f0f2f5", // grey background for contrast
+            background: "#f0f2f5",
           }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 16,
+            }}
           >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "16px",
-              }}
-            >
             <h2 style={{ margin: 0 }}>Lease Details</h2>
             <div style={{ display: "flex", gap: "8px" }}>
               <Button onClick={() => setSidebarCollapsed(!sidebarCollapsed)}>
@@ -300,7 +251,6 @@ const LeaseDetails = () => {
               )}
             </div>
           </div>
-
           {renderContent()}
         </Content>
       </Layout>
