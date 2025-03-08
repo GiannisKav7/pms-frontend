@@ -12,7 +12,6 @@ import RoomPage from '../pages/RoomPage';
 import BuildingPage from '../pages/BuildingPage';
 import FloorPage from '../pages/FloorPage';
 import UnitTypePage from '../pages/UnitTypePage';
-import TestPage from '../pages/TestPage'; // Ensure this page exists
 
 const AppRouter = () => {
   return (
@@ -30,7 +29,6 @@ const AppRouter = () => {
           <Route path="building/:id" element={<BuildingPage />} />
           <Route path="floor/:id" element={<FloorPage />} />
           <Route path="unittype/:id" element={<UnitTypePage />} />
-          <Route path="test" element={<TestPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
