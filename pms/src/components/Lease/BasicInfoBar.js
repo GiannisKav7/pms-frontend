@@ -1,23 +1,37 @@
 import React from "react";
-import { Card, Row, Col } from "antd";
+import { Card, Row, Col, Tag } from "antd";
 
 const BasicInfoBar = ({ leaseDetails }) => {
   const { leaseCode, leaseName, leaseType, status } = leaseDetails;
+  
+  const statusColor = status === "Active" ? "green" : "red";
+  
   return (
-    <Card style={{width: "100%", borderRadius: 0}}>
-      <Row gutter={16}>
+    <Card style={{ width: "100%", borderRadius: 0 }}>
+      {/* Top row: Name (bold), Code (small text), and Status Tag */}
+      <Row justify="space-between" align="middle">
         <Col>
-          <strong>Lease Code:</strong> {leaseCode}
+          {/* Lease Name in bold, bigger font */}
+          <div style={{ fontSize: 16, fontWeight: "bold" }}>
+            {leaseName}
+          </div>
+          {/* Lease Code as sub-label */}
+          <div style={{ fontSize: 12, color: "#999" }}>
+            {leaseCode}
+          </div>
         </Col>
         <Col>
-          <strong>Lease Name:</strong> {leaseName}
+          {/* Status displayed as a Tag */}
+          <Tag color={statusColor}>{status}</Tag>
         </Col>
+      </Row>
+
+      {/* Second row (optional): Additional fields to the right */}
+      <Row gutter={[16, 16]} style={{ marginTop: 8 }}>
         <Col>
           <strong>Lease Type:</strong> {leaseType}
         </Col>
-        <Col>
-          <strong>Status:</strong> {status}
-        </Col>
+        {/* Add more fields if needed */}
       </Row>
     </Card>
   );

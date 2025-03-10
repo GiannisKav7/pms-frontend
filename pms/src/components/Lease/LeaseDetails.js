@@ -4,10 +4,8 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import RentChargesTable from "./RentChargesTable";
 import LeaseDetailsSidebar from "./LeaseDetailsSidebar";
-import { fieldConfig } from "../../config/leaseConfig";
 import { tabData } from "../../config/leaseTabData";
 import { getTabColumns } from "../../config/leaseTabColumns";
-import { renderFieldByType } from "../customFunctions/fieldRenderer";
 import OverviewContent from "./OverviewContent";
 import BasicInfoBar from "./BasicInfoBar";
 
