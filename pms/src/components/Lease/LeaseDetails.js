@@ -6,26 +6,19 @@ import RentChargesTable from "./RentChargesTable";
 import LeaseDetailsSidebar from "./LeaseDetailsSidebar";
 import { tabData } from "../../config/leaseTabData";
 import { getTabColumns } from "../../config/leaseTabColumns";
-import OverviewContent from "./OverviewContent";
-import BasicInfoBar from "./BasicInfoBar";
+import LeaseOverviewContent from "./LeaseOverviewContent";
+import LeaseBasicInfoBar from "./LeaseBasicInfoBar";
 
 const { Sider, Content } = Layout;
 
 const overviewGroups = [
   {
-    title: "Basic Info",
-    fields: [
-      "leaseCode",
-      "leaseName",
-      "customerCode",
-      "leaseType",
-      "status",
-      "atRisk",
-    ],
-  },
-  {
     title: "Property Info",
-    fields: ["propertyCode", "ownerCode", "contractedArea"],
+    fields: [
+      "propertyCode",
+      "ownerCode", 
+      "contractedArea",
+      "atRisk"],
   },
   {
     title: "Rent Info",
@@ -141,11 +134,10 @@ const LeaseDetails = () => {
     switch (selectedMenuItem) {
       case "overview":
         return (
-          <OverviewContent
+          <LeaseOverviewContent
             form={form}
             overviewGroups={overviewGroups}
             leaseDetails={leaseDetails}
-            isEditing={isEditing}
           />
         );
       case "units":
@@ -197,9 +189,8 @@ const LeaseDetails = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      {/* BasicInfoBar appears directly below the Navbar (handled in MainLayout) */}
       <div style={{ background: "#fff" }}>
-        <BasicInfoBar leaseDetails={leaseDetails} />
+        <LeaseBasicInfoBar leaseDetails={leaseDetails} />
       </div>
       <Layout style={{ padding: "0 0px 0px" }}>
         <Sider
@@ -230,7 +221,6 @@ const LeaseDetails = () => {
               marginBottom: 16,
             }}
           >
-            <h2 style={{ margin: 0 }}>Lease Details</h2>
             <div style={{ display: "flex", gap: "8px" }}>
               <Button onClick={() => setSidebarCollapsed(!sidebarCollapsed)}>
                 {sidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
