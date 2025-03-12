@@ -23,7 +23,6 @@ const overviewGroups = [
   {
     title: "Rent Info",
     fields: [
-      "rentMonthly",
       "rentYearly",
       "rentPerSqmMonthly",
       "rentPerSqmYearly",
@@ -32,8 +31,6 @@ const overviewGroups = [
   {
     title: "Key Dates",
     fields: [
-      "leaseFromDate",
-      "leaseToDate",
       "moveInDate",
       "moveOutDate",
       "lastRenewalDate",
