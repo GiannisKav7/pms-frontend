@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { Row, Col, Card, Table, Button, Form, Divider, Layout } from "antd";
+import { Table, Button, Form, Layout } from "antd";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import RentChargesTable from "./RentChargesTable";
+import UnitTable from "./UnitTable";
+import AmendmentsTable from "./AmendmentsTable";
+import ClausesTable from "./ClausesTable";
+import OptionsTable from "./OptionsTable";
+import ContactsTable from "./ContactsTable"; // <-- Added import
 import LeaseDetailsSidebar from "./LeaseDetailsSidebar";
 import { tabData } from "../../config/leaseTabData";
 import { getTabColumns } from "../../config/leaseTabColumns";
@@ -14,19 +19,11 @@ const { Sider, Content } = Layout;
 const overviewGroups = [
   {
     title: "Property Info",
-    fields: [
-      "propertyCode",
-      "ownerCode", 
-      "contractedArea",
-      "atRisk"],
+    fields: ["propertyCode", "ownerCode", "contractedArea", "atRisk"],
   },
   {
     title: "Rent Info",
-    fields: [
-      "rentYearly",
-      "rentPerSqmMonthly",
-      "rentPerSqmYearly",
-    ],
+    fields: ["rentYearly", "rentPerSqmMonthly", "rentPerSqmYearly"],
   },
   {
     title: "Key Dates",
@@ -138,47 +135,17 @@ const LeaseDetails = () => {
           />
         );
       case "units":
-        return (
-          <Table
-            dataSource={tabData.units}
-            columns={tabColumns.units}
-            pagination={false}
-          />
-        );
+        return <UnitTable />;
       case "chargeSchedules":
         return <RentChargesTable />;
       case "amendments":
-        return (
-          <Table
-            dataSource={tabData.amendments}
-            columns={tabColumns.amendments}
-            pagination={false}
-          />
-        );
+        return <AmendmentsTable />;
       case "clauses":
-        return (
-          <Table
-            dataSource={tabData.clauses}
-            columns={tabColumns.clauses}
-            pagination={false}
-          />
-        );
+        return <ClausesTable />;
       case "options":
-        return (
-          <Table
-            dataSource={tabData.options}
-            columns={tabColumns.options}
-            pagination={false}
-          />
-        );
+        return <OptionsTable />;
       case "contacts":
-        return (
-          <Table
-            dataSource={tabData.contacts}
-            columns={tabColumns.contacts}
-            pagination={false}
-          />
-        );
+        return <ContactsTable />; // Updated to use ContactsTable component
       default:
         return null;
     }
