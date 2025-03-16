@@ -4,7 +4,7 @@ import {
 } from "antd";
 import { useNavigate } from "react-router-dom";
 
-import { renderFieldByType } from "../customFunctions/fieldRenderer";
+import { renderFieldByType } from "../components/customFunctions/fieldRenderer";
 
 const { TabPane } = Tabs;
 

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Descriptions, Table, Button, Form, Divider, Layout } from "antd";
 import { useNavigate } from "react-router-dom";
-import { renderFieldByType } from "../customFunctions/fieldRenderer";
-import BuildingDetailsSidebar from "./BuildingDetailsSidebar";
-import BuildingDetailsBasicInfo from "./BuildingDetailsBasicInfo";
+import BuildingDetailsSidebar from "../components/Building/BuildingDetailsSidebar";
+import BuildingDetailsBasicInfo from "../components/Building/BuildingDetailsBasicInfo";
 
 const { Sider, Content } = Layout;
 

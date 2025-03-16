@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Descriptions, Table, Button, Form, Divider } from "antd";
 import { useNavigate } from "react-router-dom";
-import { renderFieldByType } from "../customFunctions/fieldRenderer";
+import { renderFieldByType } from "../components/customFunctions/fieldRenderer";
 
 const unitTypeFieldConfig = {
   unitTypeCode: { type: "text" },

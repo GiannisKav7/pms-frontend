@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import RoomDetails from '../components/Room/RoomDetails';
+import RoomDetails from '../features/RoomDetails';
 
 const RoomPage = () => {
   const { id } = useParams();  // Get lease ID from the URL

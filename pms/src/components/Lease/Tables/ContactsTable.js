@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table } from "antd";
-import ExpandedRowForm from "./ExpandedRowForm";
+import ExpandedRowForm from "../ExpandedRowForm";
 
 const ContactsTable = () => {
   // Define table columns for the Contacts Table

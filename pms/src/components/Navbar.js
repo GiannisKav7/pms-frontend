@@ -2,41 +2,27 @@
 import React from "react";
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
+import styles from "./Navbar.module.css";
 
 const { Header } = Layout;
 
 const Navbar = () => {
   return (
-    <Header style={{ background: "#ADB2D4", padding: "0 24px" }}>
-      <div
-        className="logo"
-        style={{
-          float: "left",
-          marginRight: 24,
-          color: "#fff",
-          fontWeight: "bold",
-          fontSize: "18px",
-        }}
-      >
-        MyApp
-      </div>
-      <Menu
-        mode="horizontal"
-        defaultSelectedKeys={["home"]}
-        style={{ background: "#ADB2D4" }}
-      >
+    <Header className={styles.header}>
+      <div className={styles.logo}>MyApp</div>
+      <Menu mode="horizontal" defaultSelectedKeys={["home"]} className={styles.menu}>
         <Menu.Item key="home">
-          <Link to="/" style={{ color: "#fff" }}>
+          <Link to="/" className={styles.navLink}>
             Home
           </Link>
         </Menu.Item>
         <Menu.Item key="leases">
-          <Link to="/leases" style={{ color: "#fff" }}>
+          <Link to="/leases" className={styles.navLink}>
             Leases
           </Link>
         </Menu.Item>
         <Menu.Item key="about">
-          <Link to="/about" style={{ color: "#fff" }}>
+          <Link to="/about" className={styles.navLink}>
             About
           </Link>
         </Menu.Item>

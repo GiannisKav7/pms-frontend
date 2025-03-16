@@ -47,11 +47,11 @@ const LeaseBasicInfoBar = ({ leaseDetails }) => {
         <Col>
           <Row justify="end" align="middle">
             <div style={{ fontWeight: "lighter" }}>
-              Rent Monthly: {rentMonthly}
+              Rent Monthly: {rentMonthly} EUR
             </div>
           </Row>
           <div style={{ fontSize: 12, color: "#999" }}>
-            {leaseFromDate.format("DD MMMM YY")} - {leaseToDate.format("DD MMMM YY")}
+            {leaseFromDate.format("DD MMM YYYY")} - {leaseToDate.format("DD MMM YYYY")}
           </div>
         </Col>
       </Row>

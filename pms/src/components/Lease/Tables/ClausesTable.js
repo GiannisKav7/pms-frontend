@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table } from "antd";
-import ExpandedRowForm from "./ExpandedRowForm";
+import ExpandedRowForm from "../ExpandedRowForm";
 
 const ClausesTable = () => {
   // Define table columns for the Clauses Table with updated columns

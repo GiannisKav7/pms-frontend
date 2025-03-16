@@ -1,7 +1,7 @@
 // src/components/RentChargesTable.jsx
 import React, { useState } from "react";
 import { Table, Input, InputNumber } from "antd";
-import ExpandedRowForm from "./ExpandedRowForm";
+import ExpandedRowForm from "../ExpandedRowForm";
 
 const RentChargesTable = () => {
   // Example data; in real usage, fetch from API or pass as a prop

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import BuildingDetails from '../components/Building/BuildingDetails';
+import BuildingDetails from '../features/BuildingDetails';
 
 const BuildingPage = () => {
 
