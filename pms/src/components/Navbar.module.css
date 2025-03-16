@@ -1,0 +1,20 @@
+.header {
+  background: #adb2d4;
+  padding: 0 24px;
+}
+
+.logo {
+  float: left;
+  margin-right: 24px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.menu {
+  background: #adb2d4;
+}
+
+.navLink {
+  color: #fff;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Descriptions, Tabs, Table, Button, Input, Form, Divider } from "antd";
 import { useNavigate } from "react-router-dom";
-import { renderFieldByType } from "../customFunctions/fieldRenderer";
+import { renderFieldByType } from "../components/customFunctions/fieldRenderer";
 const { TabPane } = Tabs;
 
 // propertyFieldConfig.js (or inline in the same file)

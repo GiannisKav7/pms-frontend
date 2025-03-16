@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { Table, Button, Form, Layout } from "antd";
+import { Button, Form, Layout } from "antd";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
-import RentChargesTable from "./RentChargesTable";
-import UnitTable from "./UnitTable";
-import AmendmentsTable from "./AmendmentsTable";
-import ClausesTable from "./ClausesTable";
-import OptionsTable from "./OptionsTable";
-import ContactsTable from "./ContactsTable"; // <-- Added import
-import LeaseDetailsSidebar from "./LeaseDetailsSidebar";
-import { tabData } from "../../config/leaseTabData";
-import { getTabColumns } from "../../config/leaseTabColumns";
-import LeaseOverviewContent from "./LeaseOverviewContent";
-import LeaseBasicInfoBar from "./LeaseBasicInfoBar";
+import RentChargesTable from "../components/Lease/Tables/RentChargesTable";
+import UnitTable from "../components/Lease/Tables/UnitTable";
+import AmendmentsTable from "../components/Lease/Tables/AmendmentsTable";
+import ClausesTable from "../components/Lease/Tables/ClausesTable";
+import OptionsTable from "../components/Lease/Tables/OptionsTable";
+import ContactsTable from "../components/Lease/Tables/ContactsTable";
+import Sidebar from "../components/Layouts/Sidebar"; // Using Sidebar as props-based menu
+import { getTabColumns } from "../config/leaseTabColumns";
+import LeaseOverviewContent from "../components/Lease/LeaseOverviewContent";
+import LeaseBasicInfoBar from "../components/Lease/LeaseBasicInfoBar";
 
 const { Sider, Content } = Layout;
 
@@ -145,7 +144,7 @@ const LeaseDetails = () => {
       case "options":
         return <OptionsTable />;
       case "contacts":
-        return <ContactsTable />; // Updated to use ContactsTable component
+        return <ContactsTable />;
       default:
         return null;
     }
@@ -164,7 +163,7 @@ const LeaseDetails = () => {
           width={200}
           className="site-layout-background"
         >
-          <LeaseDetailsSidebar
+          <Sidebar
             selectedMenuItem={selectedMenuItem}
             setSelectedMenuItem={setSelectedMenuItem}
           />
@@ -186,9 +185,6 @@ const LeaseDetails = () => {
             }}
           >
             <div style={{ display: "flex", gap: "8px" }}>
-              <Button onClick={() => setSidebarCollapsed(!sidebarCollapsed)}>
-                {sidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-              </Button>
               {isEditing ? (
                 <>
                   <Button onClick={handleCancel}>Cancel</Button>

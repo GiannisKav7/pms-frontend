@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import FloorDetails from '../components/Floor/FloorDetails';
+import FloorDetails from '../features/FloorDetails';
 
 
 const FloorPage = () => {

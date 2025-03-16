@@ -1,12 +1,7 @@
 // src/components/ExpandedRowForm.jsx
 import React, { useEffect } from "react";
-import { Form, Input, InputNumber, Button } from "antd";
-
-const componentMap = {
-    Input,
-    InputNumber,
-    "Input.TextArea": Input.TextArea,
-};
+import { Form, Button } from "antd";
+import { renderFieldByType } from "../customFunctions/fieldRenderer";
 
 const ExpandedRowForm = ({ record, onSave, fields = [] }) => {
     const [form] = Form.useForm();
@@ -28,21 +23,17 @@ const ExpandedRowForm = ({ record, onSave, fields = [] }) => {
             onFinish={handleFinish}
             style={{ padding: "16px", background: "#fafafa", borderRadius: "4px" }}
         >
-            {fields.map((field) => {
-                const Component = componentMap[field.component];
-                if (!Component) return null;
-                return (
-                    <Form.Item
-                        key={field.name}
-                        name={field.name}
-                        label={field.label}
-                        rules={field.rules}
-                        {...(field.formItemProps || {})}
-                    >
-                        <Component {...(field.componentProps || {})} />
-                    </Form.Item>
-                );
-            })}
+            {fields.map((field) => (
+                <Form.Item
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    rules={field.rules}
+                    {...(field.formItemProps || {})}
+                >
+                    {renderFieldByType(field.name, field, form)}
+                </Form.Item>
+            ))}
             <Form.Item>
                 <Button type="primary" htmlType="submit">
                     Save

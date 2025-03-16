@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table } from "antd";
-import ExpandedRowForm from "./ExpandedRowForm";
+import ExpandedRowForm from "../ExpandedRowForm";
 
 const UnitTable = () => {
   // Example data; in real usage, fetch from an API or pass as a prop
@@ -77,7 +77,7 @@ const UnitTable = () => {
       movingInDate: "2023-02-05",
       movingOutDate: "2023-11-25",
     },
-    // ... more rows
+    
   ]);
 
   // Define form fields for the expanded row form
