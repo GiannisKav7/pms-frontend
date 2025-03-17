@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Table } from "antd";
-import ExpandedRowForm from "../ExpandedRowForm";
+import UnitForm from "../../Forms/UnitForm";
 
 const UnitTable = () => {
-  // Example data; in real usage, fetch from an API or pass as a prop
   const columns = [
     {
       title: "Unit Name",
@@ -77,68 +76,9 @@ const UnitTable = () => {
       movingInDate: "2023-02-05",
       movingOutDate: "2023-11-25",
     },
-    
   ]);
 
-  // Define form fields for the expanded row form
-  const editFields = [
-    {
-      name: "unitName",
-      label: "Unit Name",
-      component: "Input",
-      componentProps: { placeholder: "Enter unit name" },
-    },
-    {
-      name: "unitCode",
-      label: "Unit Code",
-      component: "Input",
-      componentProps: { placeholder: "Enter unit code" },
-    },
-    {
-      name: "buildingCode",
-      label: "Building Code",
-      component: "Input",
-      componentProps: { placeholder: "Enter building code" },
-    },
-    {
-      name: "floorCode",
-      label: "Floor Code",
-      component: "Input",
-      componentProps: { placeholder: "Enter floor code" },
-    },
-    {
-      name: "location",
-      label: "Location",
-      component: "Input",
-      componentProps: { placeholder: "Enter location" },
-    },
-    {
-      name: "fromDate",
-      label: "From Date",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "toDate",
-      label: "To Date",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "movingInDate",
-      label: "Moving In Date",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "movingOutDate",
-      label: "Moving Out Date",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-  ];
-
-  // Callback to save updated record from the expanded form
+  // Callback to save updated record from the inline editing form
   const handleSave = (updatedRecord) => {
     setData((prevData) =>
       prevData.map((item) =>
@@ -153,7 +93,7 @@ const UnitTable = () => {
       dataSource={data}
       expandable={{
         expandedRowRender: (record) => (
-          <ExpandedRowForm record={record} onSave={handleSave} fields={editFields} />
+          <UnitForm record={record} onSave={handleSave} />
         ),
         rowExpandable: () => true,
       }}

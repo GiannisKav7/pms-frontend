@@ -1,26 +1,19 @@
 import React from "react";
 import { Input, InputNumber, Switch, Select, Radio, DatePicker } from "antd";
 
-/**
- * Dynamically returns the correct form field component
- * based on a `fieldConfig` entry.
- *
- * @param {string} fieldName - The name/key of the field (e.g., "rentMonthly").
- * @param {Object} fieldConfig - Configuration mapping for all fields.
- * @param {Object} form - (Optional) antd Form instance if needed for advanced usage.
- * @returns React Element (Input, Select, Radio, etc.)
- */
 export function renderFieldByType(fieldName, fieldConfig, form) {
-  // fallback type
-  const config = fieldConfig[fieldName] || { type: "text" };
+  // fallback config if nothing exists for fieldName
+  const config = fieldConfig[fieldName] || fieldConfig || { type: "text" };
 
   switch (config.type) {
     case "text":
-      return <Input style={{ margin: "4px 0" }} {...config} />;
-
+      // If a component is provided in config use it, else Input
+      const TextInput = config.component || Input;
+      return <TextInput style={{ margin: "4px 0" }} {...(config.componentProps || {})} />;
+      
     case "select":
       return (
-        <Select style={{ width: "100%" }}>
+        <Select style={{ width: "100%" }} {...(config.componentProps || {})}>
           {config.options?.map((opt) => (
             <Select.Option key={opt.value} value={opt.value}>
               {opt.label}
@@ -30,7 +23,7 @@ export function renderFieldByType(fieldName, fieldConfig, form) {
       );
     case "multiSelect":
       return (
-        <Select mode="multiple" style={{ width: "100%" }}>
+        <Select mode="multiple" style={{ width: "100%" }} {...(config.componentProps || {})}>
           {config.options?.map((opt) => (
             <Select.Option key={opt.value} value={opt.value}>
               {opt.label}
@@ -38,10 +31,9 @@ export function renderFieldByType(fieldName, fieldConfig, form) {
           ))}
         </Select>
       );
-  
     case "radio":
       return (
-        <Radio.Group>
+        <Radio.Group {...(config.componentProps || {})}>
           {config.options?.map((opt) => (
             <Radio key={opt.value} value={opt.value}>
               {opt.label}
@@ -49,25 +41,22 @@ export function renderFieldByType(fieldName, fieldConfig, form) {
           ))}
         </Radio.Group>
       );
-
     case "date":
-      return <DatePicker format="YYYY-MM-DD" style={{ width: "100%" }} />;
-
+      // Use the provided component if available (like DatePicker)
+      const DateComp = config.component || DatePicker;
+      return <DateComp style={{ width: "100%" }} {...(config.componentProps || {})} />;
     case "number":
+      const NumberInput = config.component || InputNumber;
       return (
-        <InputNumber
+        <NumberInput
           style={{ width: "100%" }}
-          {...config} // spreads in things like min, max, prefix, step...
+          {...(config.componentProps || {})}
         />
       );
-
     case "switch":
-      // If you need to handle checked state manually, you can:
-      // return <Switch onChange={(checked) => form?.setFieldValue(fieldName, checked)} />;
-      // Otherwise, for a simple switch, do:
-      return <Switch checkedChildren="Yes" unCheckedChildren="No" />;
-
+      return <Switch {...(config.componentProps || {})} />;
     default:
-      return <Input style={{ margin: "4px 0" }} />;
+      const DefaultInput = config.component || Input;
+      return <DefaultInput style={{ margin: "4px 0" }} {...(config.componentProps || {})} />;
   }
 }
