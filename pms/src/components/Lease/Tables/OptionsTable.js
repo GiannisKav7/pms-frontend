@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Table } from "antd";
-import ExpandedRowForm from "../ExpandedRowForm";
 
 const OptionsTable = () => {
   // Define table columns for the Options Table
@@ -125,12 +124,6 @@ const OptionsTable = () => {
     <Table
       columns={columns}
       dataSource={data}
-      expandable={{
-        expandedRowRender: (record) => (
-          <ExpandedRowForm record={record} onSave={handleSave} fields={editFields} />
-        ),
-        rowExpandable: () => true,
-      }}
     />
   );
 };

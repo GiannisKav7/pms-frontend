@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Table } from "antd";
-import ExpandedRowForm from "../ExpandedRowForm";
 
 const ClausesTable = () => {
   // Define table columns for the Clauses Table with updated columns
@@ -112,12 +111,6 @@ const ClausesTable = () => {
     <Table
       columns={columns}
       dataSource={data}
-      expandable={{
-        expandedRowRender: (record) => (
-          <ExpandedRowForm record={record} onSave={handleSave} fields={editFields} />
-        ),
-        rowExpandable: () => true,
-      }}
     />
   );
 };

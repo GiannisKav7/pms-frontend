@@ -1,7 +1,6 @@
 // src/components/RentChargesTable.jsx
 import React, { useState } from "react";
-import { Table, Input, InputNumber } from "antd";
-import ExpandedRowForm from "../ExpandedRowForm";
+import { Table} from "antd";
 
 const RentChargesTable = () => {
   // Example data; in real usage, fetch from API or pass as a prop
@@ -155,16 +154,6 @@ const RentChargesTable = () => {
     <Table
       columns={columns}
       dataSource={data}
-      expandable={{
-        expandedRowRender: (record) => (
-          <ExpandedRowForm
-            record={record}
-            onSave={handleSave}
-            fields={editFields}
-          />
-        ),
-        rowExpandable: () => true,
-      }}
     />
   );
 };

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Table } from "antd";
-import UnitForm from "../../Forms/UnitForm";
 
 const UnitTable = () => {
   const columns = [
@@ -91,12 +90,6 @@ const UnitTable = () => {
     <Table
       columns={columns}
       dataSource={data}
-      expandable={{
-        expandedRowRender: (record) => (
-          <UnitForm record={record} onSave={handleSave} />
-        ),
-        rowExpandable: () => true,
-      }}
     />
   );
 };

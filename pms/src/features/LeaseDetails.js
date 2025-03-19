@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, Layout } from "antd";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import RentChargesTable from "../components/Lease/Tables/RentChargesTable";
 import UnitTable from "../components/Lease/Tables/UnitTable";
 import AmendmentsTable from "../components/Lease/Tables/AmendmentsTable";
@@ -159,7 +160,14 @@ const LeaseDetails = () => {
         <Sider
           collapsible
           collapsed={sidebarCollapsed}
-          onCollapse={(collapsed) => setSidebarCollapsed(collapsed)}
+          onCollapse={setSidebarCollapsed}
+          trigger={
+            sidebarCollapsed ? (
+              <MenuUnfoldOutlined style={{ color: "#fa8c16", fontSize: "18px" }} />
+            ) : (
+              <MenuFoldOutlined style={{ color: "#fa8c16", fontSize: "18px" }} />
+            )
+          }
           width={200}
           className="site-layout-background"
         >

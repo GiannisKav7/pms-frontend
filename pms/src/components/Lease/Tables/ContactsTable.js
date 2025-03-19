@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Table } from "antd";
-import ExpandedRowForm from "../ExpandedRowForm";
 
 const ContactsTable = () => {
   // Define table columns for the Contacts Table
@@ -164,12 +163,6 @@ const ContactsTable = () => {
     <Table
       columns={columns}
       dataSource={data}
-      expandable={{
-        expandedRowRender: (record) => (
-          <ExpandedRowForm record={record} onSave={handleSave} fields={editFields} />
-        ),
-        rowExpandable: () => true,
-      }}
     />
   );
 };
