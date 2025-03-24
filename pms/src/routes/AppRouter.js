@@ -15,7 +15,7 @@ import UnitTypePage from '../pages/UnitTypePage';
 
 const AppRouter = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
@@ -32,7 +32,7 @@ const AppRouter = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 
