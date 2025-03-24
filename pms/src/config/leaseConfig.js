@@ -79,4 +79,5 @@ export const fieldConfig = {
     step: 10,
     postfix: '€',
   },
+  
 };

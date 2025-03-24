@@ -13,20 +13,24 @@ import Sidebar from "../components/Layouts/Sidebar"; // Using Sidebar as props-b
 import { getTabColumns } from "../config/leaseTabColumns";
 import LeaseOverviewContent from "../components/Lease/LeaseOverviewContent";
 import LeaseBasicInfoBar from "../components/Lease/LeaseBasicInfoBar";
+import { HomeOutlined, DollarOutlined, CalendarOutlined, SafetyOutlined } from "@ant-design/icons";
 
 const { Sider, Content } = Layout;
 
 const overviewGroups = [
   {
     title: "Property Info",
+    icon: <HomeOutlined />,
     fields: ["propertyCode", "ownerCode", "contractedArea", "atRisk"],
   },
   {
     title: "Rent Info",
+    icon: <DollarOutlined />,
     fields: ["rentYearly", "rentPerSqmMonthly", "rentPerSqmYearly"],
   },
   {
     title: "Key Dates",
+    icon: <CalendarOutlined />,
     fields: [
       "moveInDate",
       "moveOutDate",
@@ -38,12 +42,8 @@ const overviewGroups = [
   },
   {
     title: "Security/Deposits",
-    fields: [
-      "security",
-      "depositsRequired",
-      "depositsBilled",
-      "depositsReceived",
-    ],
+    icon: <SafetyOutlined />,
+    fields: ["security", "depositsRequired", "depositsBilled", "depositsReceived"],
   },
 ];
 
@@ -78,7 +78,7 @@ const LeaseDetails = () => {
     signDate: dayjs("2023-01-01", "YYYY-MM-DD"),
     nextBreakDate: dayjs("2023-01-01", "YYYY-MM-DD"),
     nextRentReviewDate: dayjs("2023-01-01", "YYYY-MM-DD"),
-    security: true,
+    security: "Yes",
     depositsRequired: 2400,
     depositsBilled: 2400,
     depositsReceived: 2400,
@@ -132,6 +132,7 @@ const LeaseDetails = () => {
             form={form}
             overviewGroups={overviewGroups}
             leaseDetails={leaseDetails}
+            isEditing={isEditing}  // Pass the editing mode flag
           />
         );
       case "units":

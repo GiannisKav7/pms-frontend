@@ -9,6 +9,7 @@ import {
   SettingOutlined,
   ContactsOutlined,
 } from "@ant-design/icons";
+import styles from "./Sidebar.module.css"; // Import the CSS module
 
 // Default menu items configuration
 const defaultMenuItems = [
@@ -30,12 +31,7 @@ const Sidebar = ({
     mode="inline"
     selectedKeys={[selectedMenuItem]}
     onClick={(e) => setSelectedMenuItem(e.key)}
-    style={{
-      height: "100%",
-      borderRight: 0,
-      boxShadow: "2px 0 2px rgba(0, 0, 0, 0.15)",
-      background: "#fff",
-    }}
+    className={styles.sidebar}
   >
     {menuItems.map((item) => (
       <Menu.Item key={item.key} icon={item.icon}>
