@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Table } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const OptionsTable = () => {
-  // Define table columns for the Options Table
+  const navigate = useNavigate();
+  
   const columns = [
     {
       title: "Type",
@@ -33,6 +35,11 @@ const OptionsTable = () => {
       title: "Unit(s)",
       dataIndex: "units",
       key: "units",
+      render: (text, record) => (
+        <a onClick={() => navigate(`/unit/${record.unitCode}`)}>
+          {text}
+        </a>
+      ),
     },
     {
       title: "Area (sqm)",
@@ -41,8 +48,7 @@ const OptionsTable = () => {
     },
   ];
 
-  // Example data; adjust according to real usage
-  const [data, setData] = useState([
+  const [data] = useState([
     {
       key: "1",
       type: "Option A",
@@ -65,67 +71,7 @@ const OptionsTable = () => {
     },
   ]);
 
-  // Define form fields for the expanded row form
-  const editFields = [
-    {
-      name: "type",
-      label: "Type",
-      component: "Input",
-      componentProps: { placeholder: "Enter option type" },
-    },
-    {
-      name: "status",
-      label: "Status",
-      component: "Input",
-      componentProps: { placeholder: "Enter status" },
-    },
-    {
-      name: "expirationsDate",
-      label: "Expirations Date",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "noticeDate",
-      label: "Notice Date",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "description",
-      label: "Description (Notes)",
-      component: "Input",
-      componentProps: { placeholder: "Enter description or notes" },
-    },
-    {
-      name: "units",
-      label: "Unit(s)",
-      component: "Input",
-      componentProps: { placeholder: "Enter unit(s)" },
-    },
-    {
-      name: "area",
-      label: "Area (sqm)",
-      component: "Input",
-      componentProps: { placeholder: "Enter area in sqm" },
-    },
-  ];
-
-  // Callback to save updated record from the expanded row form
-  const handleSave = (updatedRecord) => {
-    setData((prevData) =>
-      prevData.map((item) =>
-        item.key === updatedRecord.key ? updatedRecord : item
-      )
-    );
-  };
-
-  return (
-    <Table
-      columns={columns}
-      dataSource={data}
-    />
-  );
+  return <Table columns={columns} dataSource={data} />;
 };
 
 export default OptionsTable;

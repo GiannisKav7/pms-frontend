@@ -1,8 +1,8 @@
+// src/components/RentChargesTable.jsx
 import React, { useState } from "react";
 import { Table } from "antd";
 
 const AmendmentsTable = () => {
-  // Define table columns based on your requirements
   const columns = [
     {
       title: "Type",
@@ -36,8 +36,8 @@ const AmendmentsTable = () => {
     },
   ];
 
-  // Example data; adjust according to real usage
-  const [data, setData] = useState([
+  // Example data in read-only mode
+  const [data] = useState([
     {
       key: "1",
       type: "Lease Extension",
@@ -58,61 +58,7 @@ const AmendmentsTable = () => {
     },
   ]);
 
-  // Define form fields for the expanded row form
-  const editFields = [
-    {
-      name: "type",
-      label: "Type",
-      component: "Input",
-      componentProps: { placeholder: "Enter amendment type" },
-    },
-    {
-      name: "status",
-      label: "Status",
-      component: "Input",
-      componentProps: { placeholder: "Enter status" },
-    },
-    {
-      name: "dateFrom",
-      label: "Date From",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "dateTo",
-      label: "Date To",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "period",
-      label: "Period",
-      component: "Input",
-      componentProps: { placeholder: "Enter period" },
-    },
-    {
-      name: "description",
-      label: "Description (Notes)",
-      component: "Input",
-      componentProps: { placeholder: "Enter description or notes" },
-    },
-  ];
-
-  // Callback to save updated record from the expanded form
-  const handleSave = (updatedRecord) => {
-    setData((prevData) =>
-      prevData.map((item) =>
-        item.key === updatedRecord.key ? updatedRecord : item
-      )
-    );
-  };
-
-  return (
-    <Table
-      columns={columns}
-      dataSource={data}
-    />
-  );
+  return <Table columns={columns} dataSource={data} />;
 };
 
 export default AmendmentsTable;

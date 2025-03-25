@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Row, Col, Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import Dashboard from "../features/Dashboard";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const HomePage = () => {
   return (
     <div style={{ padding: 24, background: "#f9f9f9" }}>
       <h1 style={{ textAlign: "center", marginBottom: "24px" }}>Dashboard</h1>
+      {/* <Dashboard/> */}
       <Row gutter={[16, 16]}>
         {pages.map((page) => (
           <Col xs={24} sm={12} md={8} lg={6} key={page.path}>

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Table } from "antd";
+import { useNavigate } from "react-router-dom";
+
 
 const ClausesTable = () => {
-  // Define table columns for the Clauses Table with updated columns
+  const navigate = useNavigate();
+  
   const columns = [
     {
       title: "Name",
@@ -33,11 +36,15 @@ const ClausesTable = () => {
       title: "Unit(s)",
       dataIndex: "units",
       key: "units",
+      render: (text, record) => (
+        <a onClick={() => navigate(`/unit/${record.unitCode}`)}>
+          {text}
+        </a>
+      ),
     },
   ];
 
-  // Example data; adjust according to real usage
-  const [data, setData] = useState([
+  const [data] = useState([
     {
       key: "1",
       name: "Clause A",
@@ -58,61 +65,7 @@ const ClausesTable = () => {
     },
   ]);
 
-  // Define form fields for the expanded row form with updated fields
-  const editFields = [
-    {
-      name: "name",
-      label: "Name",
-      component: "Input",
-      componentProps: { placeholder: "Enter clause name" },
-    },
-    {
-      name: "description",
-      label: "Description",
-      component: "Input",
-      componentProps: { placeholder: "Enter description" },
-    },
-    {
-      name: "date",
-      label: "Date",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "endDate",
-      label: "End Date",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "reference",
-      label: "Reference",
-      component: "Input",
-      componentProps: { placeholder: "Enter reference" },
-    },
-    {
-      name: "units",
-      label: "Unit(s)",
-      component: "Input",
-      componentProps: { placeholder: "Enter unit(s)" },
-    },
-  ];
-
-  // Callback to save updated record from the expanded row form
-  const handleSave = (updatedRecord) => {
-    setData((prevData) =>
-      prevData.map((item) =>
-        item.key === updatedRecord.key ? updatedRecord : item
-      )
-    );
-  };
-
-  return (
-    <Table
-      columns={columns}
-      dataSource={data}
-    />
-  );
+  return <Table columns={columns} dataSource={data} />;
 };
 
 export default ClausesTable;

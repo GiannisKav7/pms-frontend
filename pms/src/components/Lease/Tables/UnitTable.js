@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Table } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const UnitTable = () => {
+  const navigate = useNavigate();
+
   const columns = [
     {
       title: "Unit Name",
@@ -12,16 +15,31 @@ const UnitTable = () => {
       title: "Unit Code",
       dataIndex: "unitCode",
       key: "unitCode",
+      render: (text, record) => (
+        <a onClick={() => navigate(`/unit/${record.unitCode}`)}>
+          {text}
+        </a>
+      ),
     },
     {
       title: "Building Code",
       dataIndex: "buildingCode",
       key: "buildingCode",
+      render: (text, record) => (
+        <a onClick={() => navigate(`/building/${record.buildingCode}`)}>
+          {text}
+        </a>
+      ),
     },
     {
       title: "Floor Code",
       dataIndex: "floorCode",
       key: "floorCode",
+      render: (text, record) => (
+        <a onClick={() => navigate(`/floor/${record.floorCode}`)}>
+          {text}
+        </a>
+      ),
     },
     {
       title: "Location",
@@ -50,7 +68,7 @@ const UnitTable = () => {
     },
   ];
 
-  const [data, setData] = useState([
+  const [data] = useState([
     {
       key: "1",
       unitName: "Unit A",
@@ -77,21 +95,7 @@ const UnitTable = () => {
     },
   ]);
 
-  // Callback to save updated record from the inline editing form
-  const handleSave = (updatedRecord) => {
-    setData((prevData) =>
-      prevData.map((item) =>
-        item.key === updatedRecord.key ? updatedRecord : item
-      )
-    );
-  };
-
-  return (
-    <Table
-      columns={columns}
-      dataSource={data}
-    />
-  );
+  return <Table columns={columns} dataSource={data} />;
 };
 
 export default UnitTable;

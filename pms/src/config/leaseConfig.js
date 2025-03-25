@@ -79,5 +79,50 @@ export const fieldConfig = {
     step: 10,
     postfix: '€',
   },
+  address1: { type: "text" },
+  address2: { type: "text" },
+  address3: { type: "text" },
+  address4: { type: "text" },
+  city: {
+    type: "select",
+    options: [
+      { label: "Athens", value: "Athens" },
+      { label: "Thessaloniki", value: "Thessaloniki" },
+      // ...
+    ],
+  },
+  countyMunicipality: {
+    type: "select",
+    options: [
+      { label: "County1", value: "County1" },
+      { label: "County2", value: "County2" },
+      // ...
+    ],
+  },
+  prefecture: {
+    type: "select",
+    options: [
+      { label: "Attica", value: "Attica" },
+      { label: "Central Macedonia", value: "Central Macedonia" },
+      // ...
+    ],
+  },
+  region: {
+    type: "select",
+    options: [
+      { label: "Southern Greece", value: "Southern Greece" },
+      { label: "Northern Greece", value: "Northern Greece" },
+      // ...
+    ],
+  },
+  postcode: { type: "text" },
+  country: {
+    type: "select",
+    options: [
+      { label: "Greece", value: "Greece" },
+      { label: "Other", value: "Other" },
+      // ...
+    ],
+  },
   
 };

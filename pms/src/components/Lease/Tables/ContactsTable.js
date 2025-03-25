@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import { Table } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const ContactsTable = () => {
-  // Define table columns for the Contacts Table
+  const navigate = useNavigate();
+  
   const columns = [
     {
       title: "Contact Code",
       dataIndex: "contactCode",
       key: "contactCode",
+      render: (text, record) => (
+        <a onClick={() => navigate(`/contact/${record.contactCode}`)}>
+          {text}
+        </a>
+      ),
     },
     {
       title: "Role",
@@ -45,7 +52,7 @@ const ContactsTable = () => {
       key: "phone2",
     },
     {
-      title: "email",
+      title: "Email",
       dataIndex: "email",
       key: "email",
     },
@@ -56,8 +63,7 @@ const ContactsTable = () => {
     },
   ];
 
-  // Example data; adjust as needed
-  const [data, setData] = useState([
+  const [data] = useState([
     {
       key: "1",
       contactCode: "C001",
@@ -86,85 +92,7 @@ const ContactsTable = () => {
     },
   ]);
 
-  // Define form fields for the expanded row form
-  const editFields = [
-    {
-      name: "contactCode",
-      label: "Contact Code",
-      component: "Input",
-      componentProps: { placeholder: "Enter contact code" },
-    },
-    {
-      name: "role",
-      label: "Role",
-      component: "Input",
-      componentProps: { placeholder: "Enter role" },
-    },
-    {
-      name: "primary",
-      label: "Primary (flag)",
-      component: "Input",
-      componentProps: { placeholder: "true/false" },
-    },
-    {
-      name: "companyName",
-      label: "Company name",
-      component: "Input",
-      componentProps: { placeholder: "Enter company name" },
-    },
-    {
-      name: "firstName",
-      label: "First name",
-      component: "Input",
-      componentProps: { placeholder: "Enter first name" },
-    },
-    {
-      name: "lastName",
-      label: "Last name",
-      component: "Input",
-      componentProps: { placeholder: "Enter last name" },
-    },
-    {
-      name: "phone1",
-      label: "Phone number 1",
-      component: "Input",
-      componentProps: { placeholder: "Enter primary phone number" },
-    },
-    {
-      name: "phone2",
-      label: "Phone number 2",
-      component: "Input",
-      componentProps: { placeholder: "Enter secondary phone number" },
-    },
-    {
-      name: "email",
-      label: "email",
-      component: "Input",
-      componentProps: { placeholder: "Enter email address" },
-    },
-    {
-      name: "inactiveDate",
-      label: "Inactive Date",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-  ];
-
-  // Callback to save updated record from the expanded row form
-  const handleSave = (updatedRecord) => {
-    setData((prevData) =>
-      prevData.map((item) =>
-        item.key === updatedRecord.key ? updatedRecord : item
-      )
-    );
-  };
-
-  return (
-    <Table
-      columns={columns}
-      dataSource={data}
-    />
-  );
+  return <Table columns={columns} dataSource={data} />;
 };
 
 export default ContactsTable;

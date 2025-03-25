@@ -9,11 +9,12 @@ import AmendmentsTable from "../components/Lease/Tables/AmendmentsTable";
 import ClausesTable from "../components/Lease/Tables/ClausesTable";
 import OptionsTable from "../components/Lease/Tables/OptionsTable";
 import ContactsTable from "../components/Lease/Tables/ContactsTable";
-import Sidebar from "../components/Layouts/Sidebar"; // Using Sidebar as props-based menu
+import Sidebar from "../components/Layouts/Sidebar";
 import { getTabColumns } from "../config/leaseTabColumns";
 import LeaseOverviewContent from "../components/Lease/LeaseOverviewContent";
 import LeaseBasicInfoBar from "../components/Lease/LeaseBasicInfoBar";
 import { HomeOutlined, DollarOutlined, CalendarOutlined, SafetyOutlined } from "@ant-design/icons";
+import styles from "./LeaseDetails.module.css"; // Import our CSS module
 
 const { Sider, Content } = Layout;
 
@@ -132,7 +133,7 @@ const LeaseDetails = () => {
             form={form}
             overviewGroups={overviewGroups}
             leaseDetails={leaseDetails}
-            isEditing={isEditing}  // Pass the editing mode flag
+            isEditing={isEditing}
           />
         );
       case "units":
@@ -153,8 +154,8 @@ const LeaseDetails = () => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <div style={{ background: "#fff" }}>
+    <Layout className={styles.container}>
+      <div className={styles.header}>
         <LeaseBasicInfoBar leaseDetails={leaseDetails} />
       </div>
       <Layout style={{ padding: "0 0px 0px" }}>
@@ -172,42 +173,27 @@ const LeaseDetails = () => {
           width={200}
           className="site-layout-background"
         >
-          <Sidebar
-            selectedMenuItem={selectedMenuItem}
-            setSelectedMenuItem={setSelectedMenuItem}
-          />
+          <Sidebar selectedMenuItem={selectedMenuItem} setSelectedMenuItem={setSelectedMenuItem} />
         </Sider>
-        <Content
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-            background: "#f0f2f5",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 16,
-            }}
-          >
-            <div style={{ display: "flex", gap: "8px" }}>
-              {isEditing ? (
-                <>
-                  <Button onClick={handleCancel}>Cancel</Button>
-                  <Button type="primary" onClick={handleSave}>
-                    Save
+        <Content className={styles.content}>
+          {selectedMenuItem === "overview" && (
+            <div className={styles.buttonContainer}>
+              <div className={styles.buttons}>
+                {isEditing ? (
+                  <>
+                    <Button onClick={handleCancel}>Cancel</Button>
+                    <Button type="primary" onClick={handleSave}>
+                      Save
+                    </Button>
+                  </>
+                ) : (
+                  <Button type="primary" onClick={handleEditToggle}>
+                    Edit
                   </Button>
-                </>
-              ) : (
-                <Button type="primary" onClick={handleEditToggle}>
-                  Edit
-                </Button>
-              )}
+                )}
+              </div>
             </div>
-          </div>
+          )}
           {renderContent()}
         </Content>
       </Layout>

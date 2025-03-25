@@ -13,7 +13,7 @@ import styles from "./Sidebar.module.css"; // Import the CSS module
 
 // Default menu items configuration
 const defaultMenuItems = [
-  { key: "overview", label: "Lease Overview", icon: <HomeOutlined /> },
+  { key: "overview", label: "Overview", icon: <HomeOutlined /> },
   { key: "units", label: "Unit(s)", icon: <TableOutlined /> },
   { key: "chargeSchedules", label: "Charge Schedules", icon: <DollarOutlined /> },
   { key: "amendments", label: "Amendments", icon: <EditOutlined /> },

@@ -1,10 +1,13 @@
 // src/components/RentChargesTable.jsx
 import React, { useState } from "react";
-import { Table} from "antd";
+import { Table } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const RentChargesTable = () => {
+  const navigate = useNavigate();
+  
   // Example data; in real usage, fetch from API or pass as a prop
-  const [data, setData] = useState([
+  const [data] = useState([
     {
       key: "1",
       chargeType: "Base Rent",
@@ -29,10 +32,9 @@ const RentChargesTable = () => {
       amountPeriod: "Monthly",
       unit: "123122",
     },
-    // ... more rows
   ]);
 
-  // Main columns (collapsed view)
+  // Main columns (read-only view)
   const columns = [
     {
       title: "Charge Type",
@@ -78,84 +80,15 @@ const RentChargesTable = () => {
       title: "Unit",
       dataIndex: "unit",
       key: "unit",
+      render: (text, record) => (
+        <a onClick={() => navigate(`/unit/${record.unitCode}`)}>
+          {text}
+        </a>
+      ),
     },
   ];
 
-  // Define form fields for the expanded row form
-  const editFields = [
-    {
-      name: "chargeType",
-      label: "Charge Type",
-      component: "Input",
-      componentProps: { placeholder: "Enter charge type" },
-    },
-    {
-      name: "chargeCode",
-      label: "Charge Code",
-      component: "Input",
-      componentProps: { placeholder: "Enter charge code" },
-    },
-    {
-      name: "from",
-      label: "From",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "toInactive",
-      label: "To/Inactive",
-      component: "Input",
-      componentProps: { placeholder: "YYYY-MM-DD" },
-    },
-    {
-      name: "amount",
-      label: "Amount",
-      component: "InputNumber",
-      componentProps: { placeholder: "Enter amount" },
-    },
-    {
-      name: "currency",
-      label: "Currency",
-      component: "Input",
-      componentProps: { placeholder: "Enter currency" },
-    },
-    {
-      name: "amountPerContrArea",
-      label: "Amount/Contr.Area",
-      component: "InputNumber",
-      componentProps: {
-        placeholder: "Enter amount per contr. area",
-      },
-    },
-    {
-      name: "amountPeriod",
-      label: "Amount Period",
-      component: "Input",
-      componentProps: { placeholder: "Enter period" },
-    },
-    {
-      name: "unit",
-      label: "Unit",
-      component: "Input",
-      componentProps: { placeholder: "Enter unit" },
-    },
-  ];
-
-  // Callback to save updated record from the expanded form
-  const handleSave = (updatedRecord) => {
-    setData((prevData) =>
-      prevData.map((item) =>
-        item.key === updatedRecord.key ? updatedRecord : item
-      )
-    );
-  };
-
-  return (
-    <Table
-      columns={columns}
-      dataSource={data}
-    />
-  );
+  return <Table columns={columns} dataSource={data} />;
 };
 
 export default RentChargesTable;
