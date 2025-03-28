@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Layout } from "antd";
+import {Form, Layout } from "antd";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
@@ -87,7 +87,7 @@ const LeaseDetails = () => {
     depositsRequired: 2400,
     depositsBilled: 2400,
     depositsReceived: 2400,
-    type: "Commercial",
+    type: "Legal Entity",
     name: "Alpha Real Estate Management S.A.",
     taxid:"1023664",
   };

@@ -28,13 +28,17 @@ const Sidebar = ({
   menuItems = defaultMenuItems,
 }) => (
   <Menu
+    theme="light"
     mode="inline"
     selectedKeys={[selectedMenuItem]}
     onClick={(e) => setSelectedMenuItem(e.key)}
     className={styles.sidebar}
   >
     {menuItems.map((item) => (
-      <Menu.Item key={item.key} icon={item.icon}>
+      <Menu.Item 
+        className={styles.sidebar}       
+        key={item.key}
+        icon={item.icon}>
         {item.label}
       </Menu.Item>
     ))}

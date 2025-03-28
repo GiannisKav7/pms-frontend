@@ -42,13 +42,18 @@ const LeaseOverviewReadOnly = ({ overviewGroups, leaseDetails }) => {
               }
               
                 return (
-                <Col span={24} key={fieldKey}>
-                  <Form.Item name={fieldKey} label={label} layout="vertical">
+                  <Col span={20} key={fieldKey}>
+                  <Form.Item
+                    name={fieldKey}
+                    label={label}
+                    layout="vertical"
+                    className={styles.formItemCompact}
+                  >
                     <div className={styles.readOnlyField}>
                       <span>{displayValue}</span>
                     </div>
                   </Form.Item>
-                </Col>
+                  </Col>
                 );
             })}
           </Form>
