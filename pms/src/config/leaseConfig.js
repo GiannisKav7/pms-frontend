@@ -124,5 +124,12 @@ export const fieldConfig = {
       // ...
     ],
   },
+  type: { type: "text" },
+  name: { type: "text" },
+  firstName: { type: "text" },
+  lastName: { type: "text" },
+  fatherName: { type: "text" },
+  motherName: { type: "text" },
+  taxid: { type: "text" },
   
 };

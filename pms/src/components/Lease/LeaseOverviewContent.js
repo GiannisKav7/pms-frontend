@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Divider, Card, Row, Col } from "antd";
+import { Form, Divider, Card, Row, Col, Input } from "antd";
 import { fieldConfig } from "../../config/leaseConfig";
 import dayjs from "dayjs";
 import { renderFieldByType } from "../customFunctions/fieldRenderer";
@@ -20,7 +20,7 @@ const LeaseOverviewReadOnly = ({ overviewGroups, leaseDetails }) => {
           }
           className={styles.card}
         >
-          <Row gutter={16}>
+          <Form gutter={16} disabled={false} layout="vertical">
             {group.fields.map((fieldKey) => {
               const label = fieldKey
                 .replace(/([A-Z])/g, " $1")
@@ -40,17 +40,18 @@ const LeaseOverviewReadOnly = ({ overviewGroups, leaseDetails }) => {
               } else {
                 displayValue = `${displayValue}`;
               }
-
-              return (
+              
+                return (
                 <Col span={24} key={fieldKey}>
-                  <div style={{ marginBottom: 16 }}>
-                    <div style={{ fontWeight: "bold", marginBottom: 4 }}>{label}</div>
-                    <span>{displayValue}</span>
-                  </div>
+                  <Form.Item name={fieldKey} label={label} layout="vertical">
+                    <div className={styles.readOnlyField}>
+                      <span>{displayValue}</span>
+                    </div>
+                  </Form.Item>
                 </Col>
-              );
+                );
             })}
-          </Row>
+          </Form>
         </Card>
       ))}
     </div>
@@ -87,11 +88,11 @@ const LeaseOverviewEdit = ({ form, overviewGroups }) => {
   );
 };
 
-const LeaseOverviewContent = ({ form, overviewGroups, leaseDetails, isEditing }) => {
-  return isEditing ? (
-    <LeaseOverviewEdit form={form} overviewGroups={overviewGroups} />
-  ) : (
-    <LeaseOverviewReadOnly overviewGroups={overviewGroups} leaseDetails={leaseDetails} />
+const LeaseOverviewContent = ({ form, overviewGroups, leaseDetails}) => {
+  return (
+    <>
+      <LeaseOverviewReadOnly overviewGroups={overviewGroups} leaseDetails={leaseDetails} />
+    </>
   );
 };
 

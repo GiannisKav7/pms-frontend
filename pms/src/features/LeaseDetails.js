@@ -13,8 +13,8 @@ import Sidebar from "../components/Layouts/Sidebar";
 import { getTabColumns } from "../config/leaseTabColumns";
 import LeaseOverviewContent from "../components/Lease/LeaseOverviewContent";
 import LeaseBasicInfoBar from "../components/Lease/LeaseBasicInfoBar";
-import { HomeOutlined, DollarOutlined, CalendarOutlined, SafetyOutlined } from "@ant-design/icons";
-import styles from "./LeaseDetails.module.css"; // Import our CSS module
+import { HomeOutlined, DollarOutlined, CalendarOutlined, SafetyOutlined, UserOutlined} from "@ant-design/icons";
+import styles from "./LeaseDetails.module.css";
 
 const { Sider, Content } = Layout;
 
@@ -46,10 +46,14 @@ const overviewGroups = [
     icon: <SafetyOutlined />,
     fields: ["security", "depositsRequired", "depositsBilled", "depositsReceived"],
   },
+  {
+    title: "Customer Info",
+    icon: <UserOutlined />,
+    fields: ["type", "name", "firstName", "lastName", "taxid"]
+  }
 ];
 
 const LeaseDetails = () => {
-  const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [selectedMenuItem, setSelectedMenuItem] = useState("overview");
@@ -83,43 +87,12 @@ const LeaseDetails = () => {
     depositsRequired: 2400,
     depositsBilled: 2400,
     depositsReceived: 2400,
+    type: "Commercial",
+    name: "Alpha Real Estate Management S.A.",
+    taxid:"1023664",
   };
 
   const [leaseDetails, setLeaseDetails] = useState(initialDetails);
-
-  const handleEditToggle = () => {
-    setIsEditing(!isEditing);
-    if (!isEditing) {
-      form.setFieldsValue(leaseDetails);
-    }
-  };
-
-  const handleSave = () => {
-    form.validateFields().then((values) => {
-      const dateFields = [
-        "leaseFromDate",
-        "leaseToDate",
-        "moveInDate",
-        "moveOutDate",
-        "lastRenewalDate",
-        "signDate",
-        "nextBreakDate",
-        "nextRentReviewDate",
-      ];
-      dateFields.forEach((field) => {
-        if (values[field]) {
-          values[field] = values[field].format("YYYY-MM-DD");
-        }
-      });
-      setLeaseDetails(values);
-      setIsEditing(false);
-    });
-  };
-
-  const handleCancel = () => {
-    form.resetFields();
-    setIsEditing(false);
-  };
 
   const handleNavigation = (code, path) => {
     navigate(`/${path}/${code}`);
@@ -133,7 +106,6 @@ const LeaseDetails = () => {
             form={form}
             overviewGroups={overviewGroups}
             leaseDetails={leaseDetails}
-            isEditing={isEditing}
           />
         );
       case "units":
@@ -173,27 +145,12 @@ const LeaseDetails = () => {
           width={200}
           className="site-layout-background"
         >
-          <Sidebar selectedMenuItem={selectedMenuItem} setSelectedMenuItem={setSelectedMenuItem} />
+          <Sidebar
+            selectedMenuItem={selectedMenuItem}
+            setSelectedMenuItem={setSelectedMenuItem}
+          />
         </Sider>
         <Content className={styles.content}>
-          {selectedMenuItem === "overview" && (
-            <div className={styles.buttonContainer}>
-              <div className={styles.buttons}>
-                {isEditing ? (
-                  <>
-                    <Button onClick={handleCancel}>Cancel</Button>
-                    <Button type="primary" onClick={handleSave}>
-                      Save
-                    </Button>
-                  </>
-                ) : (
-                  <Button type="primary" onClick={handleEditToggle}>
-                    Edit
-                  </Button>
-                )}
-              </div>
-            </div>
-          )}
           {renderContent()}
         </Content>
       </Layout>
