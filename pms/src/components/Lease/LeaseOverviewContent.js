@@ -6,59 +6,46 @@ import { renderFieldByType } from "../customFunctions/fieldRenderer";
 import styles from "./LeaseOverviewContent.module.css";
 
 // Read-only component to display lease information
-const LeaseOverviewReadOnly = ({ overviewGroups, leaseDetails }) => {
+const LeaseOverviewReadOnly = ({ overviewGroups, leaseDetails}) => {
+  
   return (
     <div className={styles.container}>
-      {overviewGroups.map((group) => (
-        <Card
-          key={group.title}
-          title={
-            <span>
-              {group.icon && <span style={{ marginRight: 8 }}>{group.icon}</span>}
-              {group.title}
-            </span>
-          }
-          className={styles.card}
-        >
-          <Form gutter={16} disabled={false} layout="vertical">
-            {group.fields.map((fieldKey) => {
-              const label = fieldKey
+      <Card className={styles.card} title="Lease Overview" bordered={false}> 
+        <Row justify="space-evenly" gutter={16}>
+          {overviewGroups.map((group) => (            
+            <Col span={4} key={group.title}>
+              <span className={styles.groupTitle}>{group.title}</span>
+              {group.fields.map((fieldKey) => {
+                const label= fieldKey
                 .replace(/([A-Z])/g, " $1")
                 .replace(/^./, (str) => str.toUpperCase());
-              const fieldCfg = fieldConfig[fieldKey] || {};
-              const isDateField = fieldCfg.type === "date";
-              let displayValue = leaseDetails[fieldKey];
+                const fieldCfg = fieldConfig[fieldKey] || {};
+                const fieldType = fieldCfg.type || "text";
+                let displayValue = leaseDetails[fieldKey];
 
-              if (isDateField) {
-                displayValue = displayValue
-                  ? dayjs(displayValue).format(fieldCfg.format || "DD/MM/YYYY")
-                  : "";
-              } else if (fieldCfg.type === "number") {
-                displayValue = `${fieldCfg.prefix ? fieldCfg.prefix + " " : ""}${Number(
-                  displayValue
-                ).toLocaleString()}${fieldCfg.postfix ? " " + fieldCfg.postfix : ""}`;
-              } else {
-                displayValue = `${displayValue}`;
-              }
-              
-                return (
-                  <Col span={20} key={fieldKey}>
-                  <Form.Item
-                    name={fieldKey}
-                    label={label}
-                    layout="vertical"
-                    className={styles.formItemCompact}
-                  >
-                    <div className={styles.readOnlyField}>
-                      <span>{displayValue}</span>
+                if(fieldType === "date") {
+                  const dateFormat = fieldCfg.format || "DD/MM/YYYY";
+                  displayValue = dayjs(displayValue).format(dateFormat);
+                }else if(fieldType === "number") {
+                  displayValue = `${fieldCfg.prefix ? fieldCfg.prefix + " " : ""}
+                  ${Number(displayValue).toLocaleString()}${fieldCfg.postfix ? " " + fieldCfg.postfix : ""}`;
+                }else{
+                  displayValue = displayValue || "-";
+                }
+                
+                return(
+                  <Row key={fieldKey} gutter={16}>
+                    <div >
+                      <div className={styles.label}>{label}</div>
+                      <span className={styles.displayValue}>{displayValue}</span>
                     </div>
-                  </Form.Item>
-                  </Col>
+                  </Row>
                 );
-            })}
-          </Form>
-        </Card>
-      ))}
+              })}
+            </Col>
+          ))}
+        </Row>
+      </Card>   
     </div>
   );
 };
@@ -78,7 +65,7 @@ const LeaseOverviewEdit = ({ form, overviewGroups }) => {
                   .replace(/^./, (str) => str.toUpperCase());
                 const fieldCfg = fieldConfig[fieldKey] || {};
                 return (
-                  <Col span={24} key={fieldKey}>
+                  <Col span={4} key={fieldKey}>
                     <Form.Item name={fieldKey} label={label} style={{ marginBottom: 16 }}>
                       {renderFieldByType(fieldKey, fieldCfg, form)}
                     </Form.Item>
@@ -97,6 +84,7 @@ const LeaseOverviewContent = ({ form, overviewGroups, leaseDetails}) => {
   return (
     <>
       <LeaseOverviewReadOnly overviewGroups={overviewGroups} leaseDetails={leaseDetails} />
+      
     </>
   );
 };

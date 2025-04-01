@@ -13,7 +13,6 @@ import Sidebar from "../components/Layouts/Sidebar";
 import { getTabColumns } from "../config/leaseTabColumns";
 import LeaseOverviewContent from "../components/Lease/LeaseOverviewContent";
 import LeaseBasicInfoBar from "../components/Lease/LeaseBasicInfoBar";
-import { HomeOutlined, DollarOutlined, CalendarOutlined, SafetyOutlined, UserOutlined} from "@ant-design/icons";
 import styles from "./LeaseDetails.module.css";
 
 const { Sider, Content } = Layout;
@@ -21,17 +20,14 @@ const { Sider, Content } = Layout;
 const overviewGroups = [
   {
     title: "Property Info",
-    icon: <HomeOutlined />,
     fields: ["propertyCode", "ownerCode", "contractedArea", "atRisk"],
   },
   {
     title: "Rent Info",
-    icon: <DollarOutlined />,
     fields: ["rentYearly", "rentPerSqmMonthly", "rentPerSqmYearly"],
   },
   {
     title: "Key Dates",
-    icon: <CalendarOutlined />,
     fields: [
       "moveInDate",
       "moveOutDate",
@@ -43,12 +39,10 @@ const overviewGroups = [
   },
   {
     title: "Security/Deposits",
-    icon: <SafetyOutlined />,
     fields: ["security", "depositsRequired", "depositsBilled", "depositsReceived"],
   },
   {
     title: "Customer Info",
-    icon: <UserOutlined />,
     fields: ["type", "name", "firstName", "lastName", "taxid"]
   }
 ];

@@ -9,18 +9,23 @@
   border-radius: 8px;
 }
 
-.readOnlyField {
+.groupTitle{
+  font-weight: bold;
+
+}
+
+.label {
+  margin-bottom: 10px;
+  color: rgb(96, 96, 96);
+}
+
+.displayValue {
   border: 0px solid #d9d9d9;
   padding: 8px;
   border-radius: 5px;
   min-height: 37px;
-  margin-top: -8px;
   background-color: rgb(240, 240, 240);
   color: rgb(96, 96, 96);
 }
 
-.formItemCompact{
-  display: flexbox;
-  font-size: xx-small;
-  text-align: left;
-}
+
