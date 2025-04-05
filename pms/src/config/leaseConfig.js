@@ -11,14 +11,16 @@ export const fieldConfig = {
     options: [
       { label: 'Active', value: 'Active' },
       { label: 'Inactive', value: 'Inactive' }
-    ]
+    ],
+    
   },
   atRisk: {
     type: 'radio',
     options: [
       { label: 'Yes', value: 'Yes' },
       { label: 'No', value: 'No' },
-    ]
+    ],
+    editable: true,
   },
   contractedArea: {
     type: 'number',
@@ -57,9 +59,10 @@ export const fieldConfig = {
   lastRenewalDate: { type: 'date', format: 'DD/MM/YYYY' },
   signDate: { type: 'date', format: 'DD/MM/YYYY' },
   nextBreakDate: { type: 'date', format: 'DD/MM/YYYY' },
-  nextRentReviewDate: { type: 'date', format: 'DD/MM/YYYY' },
+  nextRentReviewDate: { type: 'date', format: 'DD/MM/YYYY',editable: true },
   security: {
     type: 'switch',
+    editable: true,
   },
   depositsRequired: {
     type: 'number',
