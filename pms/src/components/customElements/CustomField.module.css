@@ -1,0 +1,22 @@
+.customField {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.label {
+    margin-top: 10px;
+    margin-bottom: 4px;
+    color: rgb(96, 96, 96);
+}
+  
+.displayValue {
+    border: 0px solid #d9d9d9;
+    padding: 8px;
+    border-radius: 5px;
+    min-height: 37px;
+    background-color: rgb(240, 240, 240);
+    color: rgb(96, 96, 96);
+    margin-bottom: -20px;
+}

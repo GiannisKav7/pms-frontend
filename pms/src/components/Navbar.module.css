@@ -1,5 +1,5 @@
 .header {
-  background: #adb2d4;
+  background: #1A2B4C;
   padding: 0 24px;
 }
 
@@ -12,9 +12,19 @@
 }
 
 .menu {
-  background: #adb2d4;
+  background: #1A2B4C;
+  color: #fff;
+  border-bottom: none;
 }
 
+/* Override Ant Design default colors for menu item links */
+.menu :global(.ant-menu-item a),
 .navLink {
-  color: #fff;
+  color: #fff !important;
+}
+
+/* Change text color for selected menu item using :global */
+.menu :global(.ant-menu-item-selected) a,
+.menu :global(.ant-menu-item-selected) .navLink {
+  color: #0088ff !important;
 }

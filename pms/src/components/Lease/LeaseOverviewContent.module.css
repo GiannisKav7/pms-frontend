@@ -5,27 +5,14 @@
 }
 
 .card {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
 }
 
 .groupTitle{
   font-weight: bold;
-
+  font-size: 16px;
 }
 
-.label {
-  margin-bottom: 10px;
-  color: rgb(96, 96, 96);
-}
-
-.displayValue {
-  border: 0px solid #d9d9d9;
-  padding: 8px;
-  border-radius: 5px;
-  min-height: 37px;
-  background-color: rgb(240, 240, 240);
-  color: rgb(96, 96, 96);
-}
 
 

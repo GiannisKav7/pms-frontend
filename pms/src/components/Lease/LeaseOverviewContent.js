@@ -1,9 +1,11 @@
 import React from "react";
 import { Form, Divider, Card, Row, Col, Input } from "antd";
 import { fieldConfig } from "../../config/leaseConfig";
+import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { renderFieldByType } from "../customFunctions/fieldRenderer";
 import styles from "./LeaseOverviewContent.module.css";
+import CustomField from "../customElements/CustomField";
 
 // Read-only component to display lease information
 const LeaseOverviewReadOnly = ({ overviewGroups, leaseDetails}) => {
@@ -11,7 +13,7 @@ const LeaseOverviewReadOnly = ({ overviewGroups, leaseDetails}) => {
   return (
     <div className={styles.container}>
       <Card className={styles.card} title="Lease Overview" bordered={false}> 
-        <Row justify="space-evenly" gutter={16}>
+        <Row justify="space-evenly" gutter={[16, 24]}>
           {overviewGroups.map((group) => (            
             <Col span={4} key={group.title}>
               <span className={styles.groupTitle}>{group.title}</span>
@@ -33,13 +35,19 @@ const LeaseOverviewReadOnly = ({ overviewGroups, leaseDetails}) => {
                   displayValue = displayValue || "-";
                 }
                 
-                return(
-                  <Row key={fieldKey} gutter={16}>
-                    <div >
-                      <div className={styles.label}>{label}</div>
-                      <span className={styles.displayValue}>{displayValue}</span>
-                    </div>
-                  </Row>
+                // Wrap certain field values in a link (for example, propertyCode)
+                if(fieldKey === "propertyCode" && displayValue !== "-") {
+                  displayValue = <Link to={`/property/${displayValue}`}>{displayValue}</Link>;
+                }
+                
+
+                return (
+                  <CustomField 
+                  key={fieldKey}
+                  fieldKey={fieldKey}
+                  label={label}
+                  displayValue={displayValue}
+                  />
                 );
               })}
             </Col>

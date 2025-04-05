@@ -26,7 +26,6 @@ const Navbar = () => {
             About
           </Link>
         </Menu.Item>
-        {/* Add more nav items as needed */}
       </Menu>
     </Header>
   );
