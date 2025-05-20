@@ -8,7 +8,10 @@ const { Header } = Layout;
 
 const Navbar = () => {
   return (
-    <Header className={styles.header}>
+    <Header
+      className={styles.header}
+      style={{ position: "fixed", top: 0, width: "100%", zIndex: 100 }}
+    >
       <div className={styles.logo}>MyApp</div>
       <Menu mode="horizontal" defaultSelectedKeys={["home"]} className={styles.menu}>
         <Menu.Item key="home">

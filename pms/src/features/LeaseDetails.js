@@ -124,7 +124,7 @@ const LeaseDetails = () => {
       <div className={styles.header}>
         <LeaseBasicInfoBar leaseDetails={leaseDetails} />
       </div>
-      <Layout style={{ padding: "0 0px 0px" }}>
+      <Layout>
         <Sider
           collapsible
           collapsed={sidebarCollapsed}

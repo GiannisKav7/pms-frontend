@@ -1,5 +1,5 @@
 .header {
-  background: #1A2B4C;
+  background: #002045;
   padding: 0 24px;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .menu {
-  background: #1A2B4C;
+  background: #002045 !important;
   color: #fff;
   border-bottom: none;
 }

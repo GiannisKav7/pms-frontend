@@ -1,6 +1,8 @@
 .container {
   width: 100%;
+  
   padding: 16px;
+  padding-top: 80px; /* extra top padding to account for navbar height */
   border-radius: 8px;
   background-color: #ffffff;
   /* Removed box-shadow to remove card appearance */

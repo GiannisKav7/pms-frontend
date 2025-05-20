@@ -1,15 +1,41 @@
 .sidebar {
   height: 100%;
   border-right: 0;
-  background-color: rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
+  background-color: #fff !important;
+}
+.sidebarItems {
+  background-color: #fff !important;
+  color: #002045 !important;
+
+  border-radius: 0;
+  transition: background-color 0.3s ease;
+}
+
+.sidebarItems:hover {
+  background-color: #8291c0 !important;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
 }
 
 
-/* .menuItem{
-  color: white;
-  font-size: 16px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease; 
-} */
+/* Override the sider container */
+:global(.ant-layout-sider) {
+  background-color: #fff !important;
+}
+
+/* Override the inner wrapper of the sider */
+:global(.ant-layout-sider-inner) {
+  background-color: #fff !important;
+}
+
+/* Override the trigger (hide button) */
+:global(.ant-layout-sider-trigger) {
+  background-color: #fff !important;
+  color: #ffffff;
+}
+
+/* Optional: Override the hover state */
+:global(.ant-layout-sider-trigger:hover) {
+  background-color: #93a0c2 !important;
+  color: #ffffff;
+}

@@ -28,7 +28,7 @@ const Sidebar = ({
   menuItems = defaultMenuItems,
 }) => (
   <Menu
-    theme="light"
+    theme="dark"
     mode="inline"
     selectedKeys={[selectedMenuItem]}
     onClick={(e) => setSelectedMenuItem(e.key)}
@@ -36,7 +36,7 @@ const Sidebar = ({
   >
     {menuItems.map((item) => (
       <Menu.Item 
-        className={styles.sidebar}       
+        className={styles.sidebarItems}       
         key={item.key}
         icon={item.icon}>
         {item.label}
