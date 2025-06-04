@@ -1,41 +1,48 @@
 .sidebar {
-  height: 100%;
-  border-right: 0;
-  background-color: #fff !important;
-}
-.sidebarItems {
-  background-color: #fff !important;
-  color: #002045 !important;
-
-  border-radius: 0;
-  transition: background-color 0.3s ease;
+  width: 200px;
+  background-color: #f4f4f4;
+  
+  transition: width 0.3s;
+  min-height: 100vh;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.sidebarItems:hover {
-  background-color: #8291c0 !important;
-  border-radius: 2px;
-  transition: background-color 0.3s ease;
+.collapsed {
+  width: 60px;
 }
 
-
-/* Override the sider container */
-:global(.ant-layout-sider) {
-  background-color: #fff !important;
+.collapseBtn {
+  background-color: #002045;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-bottom: 16px;
+  width: 100%;
 }
 
-/* Override the inner wrapper of the sider */
-:global(.ant-layout-sider-inner) {
-  background-color: #fff !important;
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.item {
+  display: flex;
+  align-items: center;
+  padding: 10px 8px;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
-/* Override the trigger (hide button) */
-:global(.ant-layout-sider-trigger) {
-  background-color: #fff !important;
-  color: #ffffff;
+.item:hover {
+  background-color: #e0e0e0;
 }
 
-/* Optional: Override the hover state */
-:global(.ant-layout-sider-trigger:hover) {
-  background-color: #93a0c2 !important;
-  color: #ffffff;
+.icon {
+  margin-right: 8px;
+  font-size: 18px;
+  width: 24px; /* fixed width to align text */
+  text-align: center;
 }

@@ -1,0 +1,25 @@
+.formField {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.required {
+  color: red;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.error {
+  margin-top: 0.4rem;
+  font-size: 0.875rem;
+  color: red;
+}

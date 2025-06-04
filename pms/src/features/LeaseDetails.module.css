@@ -1,10 +1,3 @@
-/* Container for the whole lease details layout */
-.container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  
-}
 
 /* Header bar container (for LeaseBasicInfoBar) */
 .header {
@@ -15,26 +8,9 @@
 
 /* Content area styling */
 .content {
+  display: flex;
   padding: 24px;
   margin: 0;
-  background: #f0f2f5;
+  
   flex: 1;
-}
-
-/* Button container current header controls */
-.buttonContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-
-  border-radius: 4px;
-}
-
-/* Inner container for edit buttons with added elevation */
-.buttons {
-  display: flex;
-  gap: 8px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }

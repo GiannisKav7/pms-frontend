@@ -1,0 +1,26 @@
+.tabs {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.tabHeaders {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 0.5rem;
+  background: #f0f0f0;
+  border: none;
+  cursor: pointer;
+}
+
+.active {
+  background: #fff;
+  font-weight: bold;
+}
+
+.tabContent {
+  padding: 1rem;
+}

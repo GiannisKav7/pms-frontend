@@ -1,0 +1,11 @@
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.0rem; /* spacing between FormFields */
+  padding: 1.0rem;
+}
+
+.title{
+  font-weight: 700;
+  font-size: 16px;
+}

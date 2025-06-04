@@ -1,0 +1,42 @@
+import React from "react";
+import styles from "./LeaseBasicInfoBar.module.css";
+import Container from "../ui/Container";
+import Grid from "../ui/Grid";
+
+interface LeaseBasicInfoBarProps{
+  leaseBarDetails: {
+    leaseCode: String,
+    leaseName: String,
+    leaseType: String,
+    status: String,
+    customerCode: String,
+    rentMonthly: String,
+    leaseFromDate: Date,
+    leaseToDate: Date,
+  };
+}
+
+const LeaseBasicInfoBar: React.FC<LeaseBasicInfoBarProps> = ({ leaseBarDetails }) => {
+  const { leaseCode, leaseName, leaseType, status, customerCode, rentMonthly, leaseFromDate, leaseToDate } = leaseBarDetails;
+  // const statusColor = status === "Active" ? "green" : "red";
+
+  return (
+    <>
+      <Grid columns={2}>
+        <Container className={styles.leftColumn}>
+          <div className={styles.leaseName}>{leaseName}</div>
+          <Grid columns={5}>         
+            <div className={styles.leaseCode}>{leaseCode}</div>
+            <div className={styles.customerCode}>{customerCode}</div>
+          </Grid>
+        </Container>
+        <Container className={styles.rightColumn}>
+          <div className={styles.rentMonthly}>Rent Monthly: {rentMonthly} EUR</div>
+          <p className={styles.dateRange}>{new Date(leaseFromDate).toLocaleDateString("el-GR")} - {new Date(leaseToDate).toLocaleDateString("en-GR")}</p>
+        </Container>
+      </Grid>
+    </>
+  );
+};
+
+export default LeaseBasicInfoBar;

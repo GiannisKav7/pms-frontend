@@ -1,0 +1,30 @@
+.heading {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* You can customize heading levels more specifically if you want */
+h1.heading {
+  font-size: 2rem;
+}
+
+h2.heading {
+  font-size: 1.75rem;
+}
+
+h3.heading {
+  font-size: 1.5rem;
+}
+
+h4.heading {
+  font-size: 1.25rem;
+}
+
+h5.heading {
+  font-size: 1rem;
+}
+
+h6.heading {
+  font-size: 0.875rem;
+}
