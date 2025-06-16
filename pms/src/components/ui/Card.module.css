@@ -11,6 +11,7 @@
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .divider {
@@ -18,8 +19,3 @@
   background-color: #cccccc6a;
   margin-bottom: 16px;
 }
-
-.card:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
-

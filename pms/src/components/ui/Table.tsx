@@ -1,17 +1,18 @@
 import React from "react";
 import styles from "./Table.module.css";
 
-interface Column {
+interface Column<T = any> {
   header: string;
   accessor: string;
+  render?: (value: any, row: T) => React.ReactNode;
 }
 
-interface TableProps {
-  columns: Column[];
-  data: Record<string, any>[];
+interface TableProps<T = any> {
+  columns: Column<T>[];
+  data: T[];
 }
 
-const Table: React.FC<TableProps> = ({ columns, data }) => {
+const Table = <T extends Record<string, any>>({ columns, data }: TableProps<T>) => {
   return (
     <table className={styles.table}>
       <thead>
@@ -25,7 +26,9 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
         {data.map((row, i) => (
           <tr key={i}>
             {columns.map((col) => (
-              <td key={col.accessor}>{row[col.accessor]}</td>
+              <td key={col.accessor}>
+                {col.render ? col.render(row[col.accessor], row) : row[col.accessor]}
+              </td>
             ))}
           </tr>
         ))}

@@ -2,7 +2,6 @@ import React from "react";
 import Card from "../ui/Card";
 import Grid from "../ui/Grid";
 import FormGroup from "../ui/FormGroup";
-import { Link } from "react-router-dom";
 import styles from "./LeaseOverviewContent.module.css";
 import Input from "../ui/Input";
 import NumberWithPostfix from "../ui/NumberWithPostfix";

@@ -18,7 +18,7 @@ const AppRouter: React.FC = () => {
       <Routes>
           <Route index element={<HomePage />} />
           <Route path="home" element={<HomePage />} />
-          <Route path="lease/:id" element={<LeasePage />} />
+          <Route path="lease/:id/*" element={<LeasePage />} />
           {/*<Route path="unit/:id" element={<UnitPage />} />
           <Route path="legalentity/:id" element={<LegalEntityOwnerPage />} />
           <Route path="contact/:id" element={<ContactPage />} />
