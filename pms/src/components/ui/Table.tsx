@@ -1,18 +1,18 @@
 import React from "react";
 import styles from "./Table.module.css";
 
-interface Column<T = any> {
+interface Column {
   header: string;
   accessor: string;
-  render?: (value: any, row: T) => React.ReactNode;
+  render?: (value: any, row: any) => React.ReactNode;
 }
 
-interface TableProps<T = any> {
-  columns: Column<T>[];
-  data: T[];
+interface TableProps {
+  columns: Column[];
+  data: any[];
 }
 
-const Table = <T extends Record<string, any>>({ columns, data }: TableProps<T>) => {
+const Table: React.FC<TableProps> = ({ columns, data }) => {
   return (
     <table className={styles.table}>
       <thead>

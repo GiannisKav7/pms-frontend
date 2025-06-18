@@ -11,18 +11,19 @@ import OptionsTable from "../components/Lease/Tables/OptionsTable";
 import AmendmentsTable from "../components/Lease/Tables/AmendmentsTable";
 import ClausesTable from "../components/Lease/Tables/ClausesTable";
 import ContactsTable from "../components/Lease/Tables/ContactsTable";
+import { FaHome, FaBuilding, FaMoneyBill, FaEdit, FaScroll, FaCogs, FaAddressBook } from "react-icons/fa";
 
 const LeaseDetails: React.FC = () => {
 
   const items = [
-    { label: "Overview", path: `/lease/${initialLeaseDetails.leaseCode}`, icon: "🏠" },
-    { label: "Unit(s)", path: `/lease/${initialLeaseDetails.leaseCode}/units`, icon: "🏢" },
-    { label: "Charge Schedules", path: `/lease/${initialLeaseDetails.leaseCode}/charge-schedules`, icon: "💰" },
-    { label: "Amendments", path: `/lease/${initialLeaseDetails.leaseCode}/amendments`, icon: "✍️" },
-    { label: "Clauses", path: `/lease/${initialLeaseDetails.leaseCode}/clauses`, icon: "📜" },
-    { label: "Options", path: `/lease/${initialLeaseDetails.leaseCode}/options`, icon: "⚙️" },
-    { label: "Contacts", path: `/lease/${initialLeaseDetails.leaseCode}/contacts`, icon: "📇" },
-  ];
+  { label: "Overview", path: `/lease/${initialLeaseDetails.leaseCode}`, icon: FaHome },
+  { label: "Unit(s)", path: `/lease/${initialLeaseDetails.leaseCode}/units`, icon: FaBuilding },
+  { label: "Charge Schedules", path: `/lease/${initialLeaseDetails.leaseCode}/charge-schedules`, icon: FaMoneyBill },
+  { label: "Amendments", path: `/lease/${initialLeaseDetails.leaseCode}/amendments`, icon: FaEdit },
+  { label: "Clauses", path: `/lease/${initialLeaseDetails.leaseCode}/clauses`, icon: FaScroll },
+  { label: "Options", path: `/lease/${initialLeaseDetails.leaseCode}/options`, icon: FaCogs },
+  { label: "Contacts", path: `/lease/${initialLeaseDetails.leaseCode}/contacts`, icon: FaAddressBook },
+];
 
   const navigate = useNavigate();
   const [leaseDetails, setLeaseDetails] = useState<Lease>(initialLeaseDetails);

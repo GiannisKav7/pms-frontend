@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
 }
 
 .wrapper {
@@ -8,9 +8,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 4px;
   border: 2px solid #ccc;
   border-radius: 2px;
+  padding-right: 4px;
 }
 
 .label {
@@ -22,27 +22,24 @@
 .input {
   padding: 8px 12px;
   border: none;
+  color: #333;
   font-size: 14px;
   transition: border-color 0.2s ease;
 }
+.input:focus { outline: none; }
 
 .postfix {
-  color: #606060af;
+  color: #333;
   font-size: 14px;
   vertical-align: bottom;
   margin-left: 4px;
-  margin-right: 4px;  
+  margin-right: 8px;  
 }
 
 /* Updated readOnly style: The whole component becomes uninteractive */
 .readOnly {
-  background-color: #f5f5f575;
-  color: #606060af;
+  background-color: #f5f5f5;
+  color: #777;
+  font-size: 14px;
+
 }
-
-.container:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-

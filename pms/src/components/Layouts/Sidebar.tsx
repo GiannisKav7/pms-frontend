@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import styles from "./Sidebar.module.css";
 import { useNavigate } from "react-router-dom";
+import type { IconType } from "react-icons";
+import {FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/fa";
 
 
 export interface SidebarItem {
     label: string,
     path: string,
-    icon: string,
+    icon: IconType,
 };
 
 interface SidebarProps {
@@ -24,9 +26,6 @@ const Sidebar: React.FC <SidebarProps> = ({items}) => {
 
   return (
     <div className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}>
-      <button className={styles.collapseBtn} onClick={toggleCollapse}>
-        {collapsed ? "»" : "«"}
-      </button>
       <ul className={styles.list}>
         {items.map((item) => (
           <li
@@ -34,12 +33,14 @@ const Sidebar: React.FC <SidebarProps> = ({items}) => {
             className={styles.item}
             onClick={() => navigate(item.path)}
           >
-            <span className={styles.icon}>{item.icon}</span>
+            <span className={styles.icon}>{<item.icon />}</span>
             {!collapsed && <span className={styles.label}>{item.label}</span>}
           </li>
         ))}
       </ul>
-      
+      <button className={styles.collapseBtn} onClick={toggleCollapse}>
+        {collapsed ? <FaAngleDoubleRight /> : <FaAngleDoubleLeft />}
+      </button>
     </div>
   );
 };

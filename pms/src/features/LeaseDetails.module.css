@@ -9,7 +9,7 @@
 /* Content area styling */
 .content {
   display: flex;
-  padding: 24px;
+  /* padding: 24px; */
   margin: 0;
   
   flex: 1;

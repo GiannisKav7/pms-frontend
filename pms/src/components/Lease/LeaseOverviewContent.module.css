@@ -4,6 +4,7 @@
 
 .card {
   margin-bottom: 24px;
+  max-width: min-content;
 }
 
 .groupTitle{

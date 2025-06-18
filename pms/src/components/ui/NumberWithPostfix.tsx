@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./NumberWithPostfix.module.css";
 
 interface NumberWithPostfixProps extends React.InputHTMLAttributes<HTMLInputElement>{
-  
   postfix: string;
   readOnly?: boolean;
   label?: string;
@@ -39,7 +38,7 @@ const NumberWithPostfix: React.FC<NumberWithPostfixProps> = ({
             readOnly={readOnly}
             {...props}
         />
-        <span className={styles.postfix}>
+        <span className={`${styles.postfix}${readOnly ? styles.readOnly : ""}`}>
             {postfix}
         </span>
         </div>
