@@ -2,6 +2,9 @@ import React from "react";
 import styles from "./LeaseBasicInfoBar.module.css";
 import Container from "../ui/Container";
 import Grid from "../ui/Grid";
+import Tag from "../ui/Tag";
+import { useState } from "react";
+
 
 interface LeaseBasicInfoBarProps{
   leaseBarDetails: {
@@ -20,14 +23,18 @@ const LeaseBasicInfoBar: React.FC<LeaseBasicInfoBarProps> = ({ leaseBarDetails }
   const { leaseCode, leaseName, leaseType, status, customerCode, rentMonthly, leaseFromDate, leaseToDate } = leaseBarDetails;
   // const statusColor = status === "Active" ? "green" : "red";
 
+  const [isEditing, setEditing] = useState(false);
+  
+
   return (
     <>
-      <Grid columns={2}>
+      <Grid columns={2} className={styles.container}>
         <Container className={styles.leftColumn}>
           <div className={styles.leaseName}>{leaseName}</div>
           <Grid columns={5}>         
             <div className={styles.leaseCode}>{leaseCode}</div>
             <div className={styles.customerCode}>{customerCode}</div>
+            <Tag type="success">Active</Tag>
           </Grid>
         </Container>
         <Container className={styles.rightColumn}>
