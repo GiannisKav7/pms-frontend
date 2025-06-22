@@ -1,16 +1,13 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  
 }
-
 
 .label {
   font-weight: 500;
   font-size: 14px;
   color: #333;
 }
-
 .input {
   padding: 8px 12px;
   border: 2px solid #ccc;
@@ -24,4 +21,8 @@
   background-color: #f5f5f5;
   color: #777;
   font-size: 14px;
+}
+.link{
+  color: rgba(0, 0, 255, 0.565);
+  text-decoration: none;
 }

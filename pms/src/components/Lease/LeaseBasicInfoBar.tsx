@@ -4,7 +4,9 @@ import Container from "../ui/Container";
 import Grid from "../ui/Grid";
 import Tag from "../ui/Tag";
 import { useState } from "react";
-
+import { Button } from "antd";
+import { FaPen, FaCheck } from "react-icons/fa";
+import Input from "../ui/Input";
 
 interface LeaseBasicInfoBarProps{
   leaseBarDetails: {
@@ -23,19 +25,27 @@ const LeaseBasicInfoBar: React.FC<LeaseBasicInfoBarProps> = ({ leaseBarDetails }
   const { leaseCode, leaseName, leaseType, status, customerCode, rentMonthly, leaseFromDate, leaseToDate } = leaseBarDetails;
   // const statusColor = status === "Active" ? "green" : "red";
 
-  const [isEditing, setEditing] = useState(false);
+  const [isEditing, setEditing] = useState<Boolean>(false);
   
+  const toogleEdit = () => {
+    setEditing(prevIsOpen => !prevIsOpen)
+  };
+
 
   return (
     <>
       <Grid columns={2} className={styles.container}>
         <Container className={styles.leftColumn}>
-          <div className={styles.leaseName}>{leaseName}</div>
-          <Grid columns={5}>         
+          <div className={styles.row}>
+            {isEditing ? <Input /> :<div className={styles.leaseName}>{leaseName}</div>}
+            <Button className={styles.editButton} onClick={toogleEdit}>{isEditing ? <FaCheck />: <FaPen />}</Button>
+            
+          </div>
+          <div className={styles.row}>
             <div className={styles.leaseCode}>{leaseCode}</div>
             <div className={styles.customerCode}>{customerCode}</div>
             <Tag type="success">Active</Tag>
-          </Grid>
+          </div>
         </Container>
         <Container className={styles.rightColumn}>
           <div className={styles.rentMonthly}>Rent Monthly: {rentMonthly} EUR</div>

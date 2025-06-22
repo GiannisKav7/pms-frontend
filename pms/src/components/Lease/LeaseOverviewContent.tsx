@@ -16,7 +16,7 @@ const LeaseOverviewContent: React.FC<LeaseOverviewContentProps> = ({ leaseDetail
       <Card title="Lease Overview" className={styles.card}>
         <Grid columns={5} className={styles.grid}>
           <FormGroup title="Property Info">
-            <Input label="Property Code" value={leaseDetails.propertyCode} readOnly />
+            <Input label="Property Code" link={true} value={leaseDetails.propertyCode} readOnly />
             <Input label="Owner Code" value={leaseDetails.ownerCode} readOnly />      
             <NumberWithPostfix label="Contracted Area" value={leaseDetails.contractedArea} readOnly postfix="sqm" />
             <Input label="At Risk" value={leaseDetails.atRisk} readOnly />

@@ -17,9 +17,9 @@ interface SidebarProps {
 
 
 const Sidebar: React.FC <SidebarProps> = ({items}) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState<boolean>(false);
   const navigate = useNavigate();
-
+  const [selected, setSelected] = useState<string>('');
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
   };
@@ -30,8 +30,11 @@ const Sidebar: React.FC <SidebarProps> = ({items}) => {
         {items.map((item) => (
           <li
             key={item.path}
-            className={styles.item}
-            onClick={() => navigate(item.path)}
+            className={`${styles.item} ${selected === item.path ? styles.selected : ""}`}
+            onClick={() => {
+              navigate(item.path);
+              setSelected(item.path);
+            }}
           >
             <span className={styles.icon}>{<item.icon />}</span>
             {!collapsed && <span className={styles.label}>{item.label}</span>}

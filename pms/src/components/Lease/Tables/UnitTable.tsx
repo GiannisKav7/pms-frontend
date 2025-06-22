@@ -3,6 +3,7 @@ import Table from "../../ui/Table";
 import { unitTableData } from "../../../data/unitTableData";
 import Card from "../../ui/Card";
 import styles from "./UnitTable.module.css";
+import { Route } from "react-router-dom";
 
 const UnitTable:React.FC = () => {
 
@@ -14,11 +15,13 @@ const UnitTable:React.FC = () => {
     {
       header: "Unit Code",
       accessor: "unitCode",
-      
+      render: (row: number, value: string) => <a className={styles.link} href="https://www.google.com">{value}</a>
     },
     {
       header: "Building Code",
       accessor: "buildingCode",
+      render: (row: number, value: string) => <a className={styles.link} href="https://www.google.com">{value}</a>
+
      
     },
     {
@@ -50,8 +53,8 @@ const UnitTable:React.FC = () => {
 
   return(
     <div className={styles.container}>
-      <Card title="Unit Table" className={styles.card}>
-        <Table columns={columns} data={unitTableData} />
+      <Card className={styles.card}>
+        <Table columns={columns} caption="Unit Table" data={unitTableData} />
       </Card>
     </div>
   );

@@ -2,7 +2,7 @@
   padding: 16px;
 }
 
-.card {
-  margin-bottom: 24px;
+.link{
+  color: rgba(0, 0, 255, 0.565);
+  text-decoration: none;
 }
-

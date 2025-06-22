@@ -4,13 +4,20 @@
   padding-bottom: 20px;
   border-radius: 8px;
   background-color: #ffffff;
-  /* Removed box-shadow to remove card appearance */
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%; 
 }
 
 .leftColumn {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  
 }
 
 .leaseName {
@@ -23,6 +30,13 @@
 .customerCode {
   font-size: 14px;
   color: #777;
+}
+
+.editButton{
+  max-width: min-content;
+}
+.editButton:hover{
+  outline: transparent;
 }
 
 .leaseType {
