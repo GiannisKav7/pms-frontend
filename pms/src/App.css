@@ -1,4 +1,6 @@
-/* Basic CSS Starter */
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arial&display=swap');
+
 
 /* Reset some default browser styles */
 * {
@@ -9,8 +11,8 @@
 
 /* Set basic font and background for the page */
 body {
-    font-family: Roboto, Montserrat, sans-serif;
-    background-color: #f5f5f5;
+    font-family: 'Segoe UI','Inter', 'Arial', 'Helvetica', sans-serif;
+    background-color: #f0f2f5;
     color: #333;
     line-height: 1.6;
     

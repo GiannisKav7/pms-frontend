@@ -10,13 +10,14 @@ interface Column {
 interface TableProps {
   columns: Column[];
   caption?: string;
+  className?:string;
   data: any[];
 }
 
-const Table: React.FC<TableProps> = ({ columns, caption, data }) => {
+const Table: React.FC<TableProps> = ({ columns, caption, data, className, ...props }) => {
   return (
     <div>
-      <caption>{caption}</caption>
+      {caption ? <caption>{caption}</caption>: ""}
       <table className={styles.table}>
         <thead>
           <tr>

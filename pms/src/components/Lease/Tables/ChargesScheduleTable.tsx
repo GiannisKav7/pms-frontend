@@ -1,7 +1,6 @@
 import React from "react";
-import Card from "../../ui/Card";
 import Table from "../../ui/Table";
-import { chargesScheduleTableData } from "../../../data/ChargesScheduleTableData";
+import { chargesScheduleTableData } from "../../../data/chargesScheduleTableData";
 import styles from "./ChargesScheduleTable.module.css";
 
 const ChargesScheduleTable: React.FC = () => {
@@ -47,9 +46,7 @@ const ChargesScheduleTable: React.FC = () => {
     
     return (
     <div className={styles.container}>
-      <Card title="Charge Schedule Table" className={styles.card}>
         <Table columns={columns} data={chargesScheduleTableData} />
-      </Card>
     </div>
     );
 };

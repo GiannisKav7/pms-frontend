@@ -10,7 +10,7 @@ interface FormGroupProps {
 const FormGroup: React.FC<FormGroupProps> = ({ title,children, className }) => {
   return (
     <div className={`${styles.formGroup} ${className || ""}`}>
-      <span className={styles.title}>{title}</span>
+      <span>{title}</span>
       {children}
     </div>
     

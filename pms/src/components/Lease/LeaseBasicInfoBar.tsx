@@ -4,7 +4,7 @@ import Container from "../ui/Container";
 import Grid from "../ui/Grid";
 import Tag from "../ui/Tag";
 import { useState } from "react";
-import { Button } from "antd";
+import Button from "../ui/Button";
 import { FaPen, FaCheck } from "react-icons/fa";
 import Input from "../ui/Input";
 
@@ -34,11 +34,11 @@ const LeaseBasicInfoBar: React.FC<LeaseBasicInfoBarProps> = ({ leaseBarDetails }
 
   return (
     <>
-      <Grid columns={2} className={styles.container}>
+      <Grid columns={2} className={styles.container} marginLeft="-15px">
         <Container className={styles.leftColumn}>
           <div className={styles.row}>
             {isEditing ? <Input /> :<div className={styles.leaseName}>{leaseName}</div>}
-            <Button className={styles.editButton} onClick={toogleEdit}>{isEditing ? <FaCheck />: <FaPen />}</Button>
+            <Button mode="default" className={styles.editButton} onClick={toogleEdit}>{isEditing ? <FaCheck color="green"/>: <FaPen />}</Button>
             
           </div>
           <div className={styles.row}>

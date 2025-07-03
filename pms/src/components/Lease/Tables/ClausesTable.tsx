@@ -1,6 +1,5 @@
 import React from "react";
 import Table from "../../ui/Table";
-import Card from "../../ui/Card";
 import styles from "./ClausesTable.module.css";
 import { clauseTableData } from "../../../data/clausesTableData";
 
@@ -35,9 +34,7 @@ const ClausesTable: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Card title="Clauses Table" className={styles.card}>
         <Table columns={columns} data={clauseTableData} />
-      </Card>
     </div>
   );
 };

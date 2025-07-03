@@ -1,6 +1,5 @@
 import React from "react";
 import Table from "../../ui/Table";
-import Card from "../../ui/Card";
 import styles from "./ContactsTable.module.css";
 import { contactTableData } from "../../../data/contactsTableData";
 
@@ -50,9 +49,7 @@ const ContactsTable: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Card title="Contacts Table" className={styles.card}>
         <Table columns={columns} data={contactTableData} />
-      </Card>
     </div>
   );
 };

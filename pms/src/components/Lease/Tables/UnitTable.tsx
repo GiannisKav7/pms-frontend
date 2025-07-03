@@ -1,9 +1,8 @@
 import React from "react";
 import Table from "../../ui/Table";
 import { unitTableData } from "../../../data/unitTableData";
-import Card from "../../ui/Card";
 import styles from "./UnitTable.module.css";
-import { Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const UnitTable:React.FC = () => {
 
@@ -15,7 +14,7 @@ const UnitTable:React.FC = () => {
     {
       header: "Unit Code",
       accessor: "unitCode",
-      render: (row: number, value: string) => <a className={styles.link} href="https://www.google.com">{value}</a>
+      render: (row: number, value: string) => <Link to='/unit/' className={styles.link}>{value}</Link>
     },
     {
       header: "Building Code",
@@ -52,10 +51,8 @@ const UnitTable:React.FC = () => {
   ];
 
   return(
-    <div className={styles.container}>
-      <Card className={styles.card}>
-        <Table columns={columns} caption="Unit Table" data={unitTableData} />
-      </Card>
+    <div className={styles.container}>      
+      <Table columns={columns} data={unitTableData} />      
     </div>
   );
 };

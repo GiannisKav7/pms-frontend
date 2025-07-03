@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./Sidebar.module.css";
 import { useNavigate } from "react-router-dom";
 import type { IconType } from "react-icons";
-import {FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/fa";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 
 
 export interface SidebarItem {
@@ -42,7 +42,7 @@ const Sidebar: React.FC <SidebarProps> = ({items}) => {
         ))}
       </ul>
       <button className={styles.collapseBtn} onClick={toggleCollapse}>
-        {collapsed ? <FaAngleDoubleRight /> : <FaAngleDoubleLeft />}
+        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </button>
     </div>
   );

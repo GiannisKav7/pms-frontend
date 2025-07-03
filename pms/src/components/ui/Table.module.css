@@ -6,12 +6,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
   border-radius: 4px;
-}
-
-tr:nth-child(odd) {
-  background-color: #eee;
 }
 
 caption,
@@ -26,8 +21,19 @@ tr {
   text-align: left;
 }
 
+tbody tr {
+  border: 1px solid #eee;
+  background-color: white;
+}
+
 th{
-  background-color: #ddd;
+  background-color: #fafafa;
+  font-size: 0.9rem;
+  font-weight: 600;  
+}
+
+td{
+  font-size: 0.9rem;
 }
 
 caption{
@@ -36,4 +42,13 @@ caption{
   flex-direction: row;
   display: inline;
   
+}
+
+/* Add this to give the table header rounded corners */
+.table thead tr th:first-child {
+  border-top-left-radius: 4px;
+}
+
+.table thead tr th:last-child {
+  border-top-right-radius: 4px;
 }

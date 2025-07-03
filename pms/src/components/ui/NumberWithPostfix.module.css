@@ -8,13 +8,13 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 2px;
   padding-right: 4px;
 }
 
 .label {
-  font-weight: 500;
+  
   font-size: 14px;
   color: #333;
 }
@@ -25,6 +25,7 @@
   color: #333;
   font-size: 14px;
   transition: border-color 0.2s ease;
+
 }
 .input:focus { outline: none; }
 

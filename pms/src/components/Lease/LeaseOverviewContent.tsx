@@ -11,22 +11,24 @@ interface LeaseOverviewContentProps {
 }
 
 const LeaseOverviewContent: React.FC<LeaseOverviewContentProps> = ({ leaseDetails }) => {
+  
+  const propertyPath: string = "/property/"+leaseDetails.propertyCode;
   return (
     <div className={styles.container}>
       <Card title="Lease Overview" className={styles.card}>
-        <Grid columns={5} className={styles.grid}>
-          <FormGroup title="Property Info">
-            <Input label="Property Code" link={true} value={leaseDetails.propertyCode} readOnly />
+        <Grid columns={5} className={styles.grid} gap="0.1rem" marginLeft="-32px">
+          <FormGroup className={styles.groupTitle} title="Property Info">
+            <Input className={styles.groupLabels} label="Property Code" link={true} path={propertyPath} value={leaseDetails.propertyCode} readOnly />
             <Input label="Owner Code" value={leaseDetails.ownerCode} readOnly />      
             <NumberWithPostfix label="Contracted Area" value={leaseDetails.contractedArea} readOnly postfix="sqm" />
             <Input label="At Risk" value={leaseDetails.atRisk} readOnly />
           </FormGroup>
-          <FormGroup title="Rent Info">
+          <FormGroup className={styles.groupTitle} title="Rent Info">
             <NumberWithPostfix label="Rent Yearly" value={leaseDetails.rentYearly} postfix="€" readOnly />
             <NumberWithPostfix label="Rent Per Sqm Monthly" value={leaseDetails.rentPerSqmMonthly} postfix="€/sqm" readOnly />
             <NumberWithPostfix label="Rent Per Sqm Yearly" value={leaseDetails.rentPerSqmYearly} postfix="€/sqm" readOnly />
           </FormGroup>
-          <FormGroup title="Key Dates">
+          <FormGroup className={styles.groupTitle} title="Key Dates">
             <NumberWithPostfix label="Rent Yearly" value={leaseDetails.rentYearly} postfix="€" readOnly />
             <Input label="Move In Date" value={leaseDetails.moveInDate} readOnly />
             <Input label="Move Out Date" value={leaseDetails.moveOutDate} readOnly />
@@ -35,13 +37,13 @@ const LeaseOverviewContent: React.FC<LeaseOverviewContentProps> = ({ leaseDetail
             <Input label="Next Break Date" value={leaseDetails.nextBreakDates} readOnly />
             <Input label="Next Rent Review Date" value={leaseDetails.nextRentReviewDate} readOnly />
           </FormGroup>
-          <FormGroup title="Security/Deposits">
+          <FormGroup className={styles.groupTitle} title="Security/Deposits">
             <Input label="Security" value={leaseDetails.security} readOnly />
             <NumberWithPostfix label="Deposits Required" value={leaseDetails.depositsRequired} postfix="€" readOnly />
             <NumberWithPostfix label="Deposits Billed" value={leaseDetails.depositsBilled} postfix="€" readOnly />
             <NumberWithPostfix label="Deposits Received" value={leaseDetails.depositsReceived} postfix="€" readOnly />
           </FormGroup>
-          <FormGroup title="Customer Info">
+          <FormGroup className={styles.groupTitle} title="Customer Info">
             <Input label="Type" value={leaseDetails.type} readOnly />
             <Input label="Name" value={leaseDetails.name} readOnly />
             <Input label="First Name" value={leaseDetails.firstName} readOnly />

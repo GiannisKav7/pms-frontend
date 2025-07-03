@@ -1,6 +1,5 @@
 import React from "react";
 import Table from "../../ui/Table";
-import Card from "../../ui/Card";
 import { optionTableData } from "../../../data/optionsTableData";
 import styles from "./OptionsTable.module.css";
 
@@ -39,9 +38,7 @@ const OptionsTable: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Card title="Options Table" className={styles.card}>
         <Table columns={columns} data={optionTableData} />
-      </Card>
     </div>
   );};
 

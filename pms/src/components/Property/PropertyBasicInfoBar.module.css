@@ -6,44 +6,46 @@
   background-color: #ffffff;
 }
 
-.row{
+.row {
   display: flex;
-  justify-content: safe;
-  gap: 1.0rem;
+  justify-content: space-between;
   align-items: center;
-  width: 50%; 
+  width: 50%;
 }
 
 .leftColumn {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  
 }
 
-.leaseName {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #000000;
+.name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
 }
 
-.leaseCode,
-.customerCode {
+.propertyCode {
   font-size: 14px;
   color: #777;
 }
 
-.editButton{
+.city {
+  font-size: 14px;
+  color: #777;
+}
+
+.editButton {
   max-width: min-content;
 }
-.editButton:hover{
+.editButton:hover {
   outline: transparent;
 }
 
-.leaseType {
+.address {
   font-size: 16px;
-  font-weight: 500;
-  color: #555;
+  font-weight: 400;
+  color: #444;
 }
 
 .rightColumn {
@@ -53,13 +55,8 @@
   gap: 8px;
 }
 
-.rentMonthly {
+.regionCountry {
   font-size: 16px;
   font-weight: 400;
   color: #444;
-}
-
-.dateRange {
-  font-size: 14px;
-  color: #777;
 }
