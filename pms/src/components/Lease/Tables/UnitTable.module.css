@@ -1,9 +1,7 @@
 .container {
   padding: 1.0rem;
-}
-
-.table{
   width: 100%;
+  box-sizing: border-box;
 }
 
 .link{

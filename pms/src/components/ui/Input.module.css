@@ -1,13 +1,11 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
 .label {
-  font-size: 0.85rem;
+  font-size: 14px;
   color: #333;
-  
 }
 
 .input {
@@ -16,9 +14,7 @@
   border-radius: 2px;
   font-size: 14px;
   transition: border-color 0.2s ease;
-  line-height: 0.8rem;
-
-  
+  line-height: 14px;  
 }
 .input:focus{outline: none;}
 
@@ -30,4 +26,8 @@
 .link{
   color: rgb(22, 121, 255);
   text-decoration: none;
+}
+
+span{
+  line-height: 16px;
 }

@@ -6,6 +6,7 @@ interface NumberWithPostfixProps extends React.InputHTMLAttributes<HTMLInputElem
   readOnly?: boolean;
   label?: string;
   id?: string;
+  className?: string;
 }
 
 const NumberWithPostfix: React.FC<NumberWithPostfixProps> = ({
@@ -13,17 +14,11 @@ const NumberWithPostfix: React.FC<NumberWithPostfixProps> = ({
   readOnly,
   label,
   id,
+  className,
   ...props
 }) => {
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const num = parseFloat(e.target.value);
-//     if (!isNaN(num) && onChange) {
-//       onChange(num);
-//     }
-//   };
-
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className || ""}`}>
         {label && (
             <label htmlFor={id} className={styles.label}>
             {label}

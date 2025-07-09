@@ -1,5 +1,5 @@
 .title {
-  font-size: 16px;
+  font-size: 1.2rem;
   font-weight: bold;
   display: block;
 }
@@ -17,5 +17,5 @@
 .divider {
   height: 1px;
   background-color: #cccccc6a;
-  margin-bottom: 16px;
+  margin-top: 0.6rem;
 }

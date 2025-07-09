@@ -16,9 +16,10 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({ columns, caption, data, className, ...props }) => {
   return (
-    <div>
-      {caption ? <caption>{caption}</caption>: ""}
+    <div className={styles.wrapper}>
       <table className={styles.table}>
+        {caption ? <caption>{caption}</caption>: ""}
+
         <thead>
           <tr>
             {columns.map((col) => (
