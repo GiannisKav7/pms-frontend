@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./NumberWithPostfix.module.css";
 
 interface NumberWithPostfixProps extends React.InputHTMLAttributes<HTMLInputElement>{
-  postfix: string;
+  postfix?: string;
   readOnly?: boolean;
   label?: string;
   id?: string;
@@ -10,7 +10,7 @@ interface NumberWithPostfixProps extends React.InputHTMLAttributes<HTMLInputElem
 }
 
 const NumberWithPostfix: React.FC<NumberWithPostfixProps> = ({
-  postfix,
+  postfix="",
   readOnly,
   label,
   id,

@@ -1,51 +1,45 @@
 import React, { useState } from "react";
-import { useNavigate, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Sidebar from "../components/Layouts/Sidebar";
 import { initialPropertyDetails, type Property } from "../data/propertyDetails";
 import PropertyBasicInfoBar from "../components/Property/PropertyBasicInfoBar";
+import styles from "./PropertyDetails.module.css";
+import {HomeOutlined,  ContactsOutlined, FileTextOutlined } from '@ant-design/icons';
 
 
 const PropertyDetails: React.FC = () => {
 
+  const items = [
+    {label: "Overview", path: `/property/`, icon: HomeOutlined},
+    {label: "Contacts", path: `/contacts/`, icon: ContactsOutlined},
+    {label: "Tax Info", path: `/taxinfo/`, icon: FileTextOutlined}
+  ];
 
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  
-  const [details, setDetails] = useState<Property>(initialPropertyDetails);
-  const navigate = useNavigate();
-
-  // const handleEditToggle = (): void => {
-  //   setIsEditing(!isEditing);
-  //   if (!isEditing) {
-  //     form.setFieldsValue(details);
-  //   }
-  // };
-
-  // const handleSave = (): void => {
-  //   form.validateFields().then((values: PropertyDetailsType) => {
-  //     setDetails(values);
-  //     setIsEditing(false);
-  //   });
-  // };
-
-  // const handleNavigation = (code: string, path: string): void => {
-  //   navigate(`/${path}/${code}`);
-  // };
+  const [propertyDetails, setPropertyDetails] = useState<Property>(initialPropertyDetails);
 
   return (
     <>
       <div>
         <PropertyBasicInfoBar propertyBarDetails ={{
-          propertyCode: details.propertyCode,
-          name: details.name,
-          city: details.city,
-          region: details.region,
-          country: details.country,
-          address1: details.address1,
-          address2: details.address2,
-          postcode: details.postcode
-
+          units: propertyDetails.units,
+          occupancy: propertyDetails.occupancy,
+          size: propertyDetails.size,
+          type: propertyDetails.type
         }} />
       </div>
+      {/*<div>
+         <Sidebar items={items} /> 
+         <div>
+          <Routes>
+            <Route 
+              index
+              element={}
+            />
+
+            
+          </Routes>
+        </div> 
+      </div>*/}
     </>
   );
 };

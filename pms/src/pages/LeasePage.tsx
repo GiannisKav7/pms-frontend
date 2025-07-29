@@ -14,7 +14,6 @@ const LeasePage: React.FC = () => {
     <div>
       <Navbar />
       <LeaseDetails />
-      
     </div>
   );
 };

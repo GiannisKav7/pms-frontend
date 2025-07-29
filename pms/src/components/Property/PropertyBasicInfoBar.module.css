@@ -6,17 +6,19 @@
   background-color: #ffffff;
 }
 
-.row {
+.row{
   display: flex;
-  justify-content: space-between;
+  justify-content: safe;
+  gap: 1.0rem;
   align-items: center;
-  width: 50%;
+  width: 50%; 
 }
 
 .leftColumn {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  
 }
 
 .name {
