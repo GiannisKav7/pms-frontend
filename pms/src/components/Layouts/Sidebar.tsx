@@ -17,7 +17,7 @@ interface SidebarProps {
 
 
 const Sidebar: React.FC <SidebarProps> = ({items}) => {
-  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [collapsed, setCollapsed] = useState<boolean>(true);
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string>('');
   const toggleCollapse = () => {
