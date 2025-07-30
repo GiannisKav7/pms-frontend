@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import styles from "./Sidebar.module.css";
 import { useNavigate } from "react-router-dom";
 import type { IconType } from "react-icons";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-
+import { AiOutlineMenuUnfold , AiOutlineMenuFold } from "react-icons/ai";
 
 export interface SidebarItem {
     label: string,
@@ -14,7 +13,6 @@ export interface SidebarItem {
 interface SidebarProps {
   items: SidebarItem[];
 };
-
 
 const Sidebar: React.FC <SidebarProps> = ({items}) => {
   const [collapsed, setCollapsed] = useState<boolean>(true);
@@ -42,7 +40,7 @@ const Sidebar: React.FC <SidebarProps> = ({items}) => {
         ))}
       </ul>
       <button className={styles.collapseBtn} onClick={toggleCollapse}>
-        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        {collapsed ? <AiOutlineMenuUnfold /> : <AiOutlineMenuFold />}
       </button>
     </div>
   );

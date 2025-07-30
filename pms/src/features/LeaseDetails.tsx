@@ -11,18 +11,18 @@ import OptionsTable from "../components/Lease/Tables/OptionsTable";
 import AmendmentsTable from "../components/Lease/Tables/AmendmentsTable";
 import ClausesTable from "../components/Lease/Tables/ClausesTable";
 import ContactsTable from "../components/Lease/Tables/ContactsTable";
-import {  HomeOutlined, BuildOutlined, DollarCircleOutlined, EditOutlined, FileTextOutlined, SettingOutlined, ContactsOutlined } from '@ant-design/icons';
+import { AiOutlineHome, AiOutlineBuild, AiOutlineDollarCircle, AiOutlineEdit, AiOutlineFile, AiOutlineSetting, AiOutlineContacts } from 'react-icons/ai';
 
 const LeaseDetails: React.FC = () => {
 
   const items = [
-  { label: "Overview", path: `/lease/${initialLeaseDetails.leaseCode}`, icon: HomeOutlined },
-  { label: "Unit(s)", path: `/lease/${initialLeaseDetails.leaseCode}/units`, icon: BuildOutlined },
-  { label: "Charge Schedules", path: `/lease/${initialLeaseDetails.leaseCode}/charge-schedules`, icon: DollarCircleOutlined },
-  { label: "Amendments", path: `/lease/${initialLeaseDetails.leaseCode}/amendments`, icon: EditOutlined },
-  { label: "Clauses", path: `/lease/${initialLeaseDetails.leaseCode}/clauses`, icon: FileTextOutlined },
-  { label: "Options", path: `/lease/${initialLeaseDetails.leaseCode}/options`, icon: SettingOutlined },
-  { label: "Contacts", path: `/lease/${initialLeaseDetails.leaseCode}/contacts`, icon: ContactsOutlined },
+  { label: "Overview", path: `/lease/${initialLeaseDetails.leaseCode}`, icon: AiOutlineHome },
+  { label: "Unit(s)", path: `/lease/${initialLeaseDetails.leaseCode}/units`, icon: AiOutlineBuild },
+  { label: "Charge Schedules", path: `/lease/${initialLeaseDetails.leaseCode}/charge-schedules`, icon: AiOutlineDollarCircle },
+  { label: "Amendments", path: `/lease/${initialLeaseDetails.leaseCode}/amendments`, icon: AiOutlineEdit },
+  { label: "Clauses", path: `/lease/${initialLeaseDetails.leaseCode}/clauses`, icon: AiOutlineFile },
+  { label: "Options", path: `/lease/${initialLeaseDetails.leaseCode}/options`, icon: AiOutlineSetting },
+  { label: "Contacts", path: `/lease/${initialLeaseDetails.leaseCode}/contacts`, icon: AiOutlineContacts },
 ];
 
   const navigate = useNavigate();

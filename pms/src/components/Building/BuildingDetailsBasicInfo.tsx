@@ -1,72 +1,47 @@
-import React from "react";
-import { Form, Descriptions, Divider } from "antd";
-import type { FormInstance } from "antd";
-import { renderFieldByType } from "../customFunctions/fieldRenderer";
+import React, { useState } from "react";
+import styles from "./BuildingDetailsBasicInfo.module.css";
+import Container from "../ui/Container";
+import Grid from "../ui/Grid";
+import Tag from "../ui/Tag";
+import Button from "../ui/Button";
+import Input from "../ui/Input";
+import { FaPen, FaCheck } from "react-icons/fa";
 
 interface BuildingDetailsBasicInfoProps {
-  form: FormInstance<any>;
-  details: { [key: string]: any };
-  isEditing: boolean;
-  handleNavigation: (value: any, field: string) => void;
-  buildingFieldConfig: any;
+  buildingDetails: {
+    buildingCode: string;
+    buildingName: string;
+    address: string;
+    status: string;
+  };
 }
 
-const BuildingDetailsBasicInfo: React.FC<BuildingDetailsBasicInfoProps> = ({
-  form,
-  details,
-  isEditing,
-  handleNavigation,
-  buildingFieldConfig,
-}) => (
-  <Form form={form} layout="vertical">
-    <Divider>Basic Information</Divider>
-    <Descriptions
-      bordered
-      column={2}
-      style={{
-        background: "#fff",
-        padding: "16px",
-        borderRadius: "8px",
-      }}
-    >
-      {Object.entries(details).map(([key, value]) => (
-        <Descriptions.Item
-          label={
-            key.replace(/([A-Z])/g, " $1").replace(/^./, (str) =>
-              str.toUpperCase()
-            )
-          }
-          key={key}
-        >
-          {key.toLowerCase().includes("code") && !isEditing ? (
-            <a
-              style={{ color: "#1890ff" }}
-              onClick={() =>
-                handleNavigation(
-                  value,
-                  key.replace("Code", "").toLowerCase()
-                )
-              }
-            >
-              {value}
-            </a>
-          ) : isEditing ? (
-            <Form.Item
-              name={key}
-              noStyle
-              rules={[
-                { required: true, message: `${key} is required` },
-              ]}
-            >
-              {renderFieldByType(key, buildingFieldConfig)}
-            </Form.Item>
-          ) : (
-            <span style={{ color: "#595959" }}>{value}</span>
-          )}
-        </Descriptions.Item>
-      ))}
-    </Descriptions>
-  </Form>
-);
+const BuildingDetailsBasicInfo: React.FC<BuildingDetailsBasicInfoProps> = ({ buildingDetails }) => {
+  const { buildingCode, buildingName, address, status } = buildingDetails;
+  const [isEditing, setEditing] = useState<boolean>(false);
+
+  const toggleEdit = () => {
+    setEditing((prev) => !prev);
+  };
+
+  return (
+    <Grid columns={1} className={styles.container}>
+      <Container className={styles.leftColumn}>
+        <div className={styles.row}>
+          {isEditing ? <Input /> : <div className={styles.buildingName}>{buildingName}</div>}
+          <Button mode="default" className={styles.editButton} onClick={toggleEdit}>
+            {isEditing ? <FaCheck color="green" /> : <FaPen />}
+          </Button>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.buildingCode}>{buildingCode}</div>
+          <div className={styles.address}>{address}</div>
+          <Tag type="success">{status}</Tag>
+        </div>
+      </Container>
+      
+    </Grid>
+  );
+};
 
 export default BuildingDetailsBasicInfo;

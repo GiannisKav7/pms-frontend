@@ -1,6 +1,4 @@
-import { Option } from "antd/es/mentions";
-
-interface Option {
+export interface Option {
   key: string;
   type: string;
   status: string;
@@ -12,26 +10,25 @@ interface Option {
   area: number;
 }
 
-export const optionTableData: Option[] =
-[
-    {
-      key: "1",
-      type: "Option A",
-      status: "Active",
-      expirationsDate: "2024-12-31",
-      noticeDate: "2024-11-30",
-      description: "Option note details",
-      units: "Unit 1, Unit 2",
-      area: 1200,
-    },
-    {
-      key: "2",
-      type: "Option B",
-      status: "Inactive",
-      expirationsDate: "2023-06-30",
-      noticeDate: "2023-05-31",
-      description: "Some more option details",
-      units: "Unit 3",
-      area: 800,
-    },
-  ]
+export const optionTableData: Option[] = [
+  {
+    key: "1",
+    type: "Option A",
+    status: "Active",
+    expirationsDate: new Date("2024-12-31").toLocaleDateString("el-GR"),
+    noticeDate: new Date("2024-11-30").toLocaleDateString("el-GR"),
+    description: "Option note details",
+    units: "Unit 1, Unit 2",
+    area: 1200,
+  },
+  {
+    key: "2",
+    type: "Option B",
+    status: "Inactive",
+    expirationsDate: new Date("2023-06-30").toLocaleDateString("el-GR"),
+    noticeDate: new Date("2023-05-31").toLocaleDateString("el-GR"),
+    description: "Some more option details",
+    units: "Unit 3",
+    area: 800,
+  },
+];

@@ -5,15 +5,15 @@ import { initialPropertyDetails, type Property } from "../data/propertyDetails";
 import PropertyBasicInfoBar from "../components/Property/PropertyBasicInfoBar";
 import PropertyOverview from "../components/Property/PropertyOverview";
 import styles from "./PropertyDetails.module.css";
-import { HomeOutlined, ContactsOutlined, FileTextOutlined } from '@ant-design/icons';
+import { AiOutlineHome, AiOutlineContacts, AiOutlineFile } from 'react-icons/ai';
 import ContactsTable from "../components/Lease/Tables/ContactsTable";
 
 const PropertyDetails: React.FC = () => {
 
   const items = [
-    { label: "Overview", path: `/property/${initialPropertyDetails.propertyCode}`, icon: HomeOutlined },
-    { label: "Contacts", path: `/property/${initialPropertyDetails.propertyCode}/contacts`, icon: ContactsOutlined },
-    { label: "Tax Info", path: `/property/${initialPropertyDetails.propertyCode}/taxinfo`, icon: FileTextOutlined }
+    { label: "Overview", path: `/property/${initialPropertyDetails.propertyCode}`, icon: AiOutlineHome },
+    { label: "Contacts", path: `/property/${initialPropertyDetails.propertyCode}/contacts`, icon: AiOutlineContacts },
+    { label: "Tax Info", path: `/property/${initialPropertyDetails.propertyCode}/taxinfo`, icon: AiOutlineFile }
   ];
 
   const [propertyDetails, setPropertyDetails] = useState<Property>(initialPropertyDetails);

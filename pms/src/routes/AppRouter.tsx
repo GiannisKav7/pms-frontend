@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LeasePage from '../pages/LeasePage';
 // import NotFound from '../pages/NotFound';
-import UnitPage from '../pages/UnitPage';
+// import UnitPage from '../pages/UnitPage';
 import HomePage from '../pages/HomePage';
 // import LegalEntityOwnerPage from '../pages/LegalEntityOwnerPage';
 // import ContactPage from '../pages/ContactPage';
@@ -19,7 +19,7 @@ const AppRouter: React.FC = () => {
           <Route index element={<HomePage />} />
           <Route path="home" element={<HomePage />} />
           <Route path="lease/:id/*" element={<LeasePage />} />
-          <Route path="unit/:id" element={<UnitPage />} />
+          {/* <Route path="unit/:id" element={<UnitPage />} /> */}
           <Route path="property/:id/*" element={<PropertyPage />} />
 
           {/*<Route path="legalentity/:id" element={<LegalEntityOwnerPage />} />
