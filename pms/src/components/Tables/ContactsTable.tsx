@@ -1,7 +1,7 @@
 import React from "react";
-import Table from "../../ui/Table";
+import Table from "../ui/Table";
 import styles from "./ContactsTable.module.css";
-import { contactTableData } from "../../../data/contactsTableData";
+import { contactTableData } from "../../data/contactsTableData";
 
 const ContactsTable: React.FC = () => {
   const columns = [

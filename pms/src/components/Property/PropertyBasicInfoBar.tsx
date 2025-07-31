@@ -2,10 +2,12 @@ import React from "react";
 import styles from "./PropertyBasicInfoBar.module.css";
 import Container from "../ui/Container";
 import Grid from "../ui/Grid";
-import NumberWithPostfix from "../ui/NumberWithPostfix";
+import Tag from "../ui/Tag";
 
 interface PropertyBasicInfoBarProps {
-  propertyBarDetails:{
+  propertyBarDetails: {
+    name: string;
+    propertyCode: string;
     units: number;
     size: number;
     occupancy: number;
@@ -14,25 +16,24 @@ interface PropertyBasicInfoBarProps {
 }
 
 const PropertyBasicInfoBar: React.FC<PropertyBasicInfoBarProps> = ({ propertyBarDetails }) => {
-  const {units, size, occupancy, type} = propertyBarDetails;
-
+  const { name, propertyCode, units, size, occupancy, type } = propertyBarDetails;
+  
   return (
     <Grid columns={2} className={styles.container}>
       <Container className={styles.leftColumn}>
         <div className={styles.row}>
-          <span>Units:</span>
-          <div>{units}</div>
+         <div className={styles.name}>{name}</div> 
         </div>
         <div className={styles.row}>
-          <span>Size:</span>
-          <div>{size}</div>
-          <span>Occupancy:</span>
-          <div>{occupancy}</div>
+          <div className={styles.propertyCode}>{propertyCode}</div>
+          <Tag type="success">{occupancy > 0 ? "Occupied" : "Vacant"}</Tag>
         </div>
-        
       </Container>
       <Container className={styles.rightColumn}>
-        {type}
+        <div className={styles.propertyType}>{type.join(", ")}</div>
+        <div>
+          {units} Units | {size} sqm
+        </div>
       </Container>
     </Grid>
   );

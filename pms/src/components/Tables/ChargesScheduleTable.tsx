@@ -1,6 +1,6 @@
 import React from "react";
-import Table from "../../ui/Table";
-import { chargesScheduleTableData } from "../../../data/chargesScheduleTableData";
+import Table from "../ui/Table";
+import { chargesScheduleTableData } from "../../data/chargesScheduleTableData";
 import styles from "./ChargesScheduleTable.module.css";
 
 const ChargesScheduleTable: React.FC = () => {

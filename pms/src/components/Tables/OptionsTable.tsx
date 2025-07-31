@@ -1,6 +1,6 @@
 import React from "react";
-import Table from "../../ui/Table";
-import { optionTableData } from "../../../data/optionsTableData";
+import Table from "../ui/Table";
+import { optionTableData } from "../../data/optionsTableData";
 import styles from "./OptionsTable.module.css";
 
 const OptionsTable: React.FC = () => {

@@ -1,6 +1,6 @@
 import React from "react";
-import Table from "../../ui/Table";
-import { unitTableData } from "../../../data/unitTableData";
+import Table from "../ui/Table";
+import { unitTableData } from "../../data/unitTableData";
 import styles from "./UnitTable.module.css";
 import { Link } from "react-router-dom";
 
@@ -14,14 +14,11 @@ const UnitTable:React.FC = () => {
     {
       header: "Unit Code",
       accessor: "unitCode",
-      render: (row: number, value: string) => <Link to='/unit/' className={styles.link}>{value}</Link>
+      render: (row: number, value: string) => <Link to={`/unit/${value}`} className={styles.link}>{value}</Link>
     },
     {
       header: "Building Code",
-      accessor: "buildingCode",
-      render: (row: number, value: string) => <a className={styles.link} href="https://www.google.com">{value}</a>
-
-     
+      accessor: "buildingCode", 
     },
     {
       header: "Floor Code",

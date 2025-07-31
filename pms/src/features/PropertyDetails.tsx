@@ -6,7 +6,8 @@ import PropertyBasicInfoBar from "../components/Property/PropertyBasicInfoBar";
 import PropertyOverview from "../components/Property/PropertyOverview";
 import styles from "./PropertyDetails.module.css";
 import { AiOutlineHome, AiOutlineContacts, AiOutlineFile } from 'react-icons/ai';
-import ContactsTable from "../components/Lease/Tables/ContactsTable";
+import ContactsTable from "../components/Tables/ContactsTable";
+import { TaxInfoTable } from "../components/Tables/TaxInfoTable";
 
 const PropertyDetails: React.FC = () => {
 
@@ -16,12 +17,16 @@ const PropertyDetails: React.FC = () => {
     { label: "Tax Info", path: `/property/${initialPropertyDetails.propertyCode}/taxinfo`, icon: AiOutlineFile }
   ];
 
+
   const [propertyDetails, setPropertyDetails] = useState<Property>(initialPropertyDetails);
+  // const [name, setName] = useState<string>(propertyDetails.name || '');
 
   return (
     <>
       <div className={styles.header}>
         <PropertyBasicInfoBar propertyBarDetails={{
+          name: propertyDetails.name,
+          propertyCode: propertyDetails.propertyCode,
           units: propertyDetails.units,
           occupancy: propertyDetails.occupancy,
           size: propertyDetails.size,
@@ -42,7 +47,7 @@ const PropertyDetails: React.FC = () => {
           />
           <Route
             path="taxinfo"
-            element={<PropertyOverview propertyDetails={propertyDetails} />}
+            element={<TaxInfoTable />}
           />
         </Routes>
       </div>

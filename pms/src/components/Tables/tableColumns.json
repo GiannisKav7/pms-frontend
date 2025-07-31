@@ -1,0 +1,293 @@
+{
+    "amendments": [
+        {
+            "header": "Type",
+            "accessor": "type"
+        },
+        {
+            "header": "Status",
+            "accessor": "status"
+        },
+        {
+            "header": "Date From",
+            "accessor": "dateFrom"
+        },
+        {
+            "header": "Date To",
+            "accessor": "dateTo"
+        },
+        {
+            "header": "Period",
+            "accessor": "period"
+        },
+        {
+            "header": "Description (Notes)",
+            "accessor": "description"
+        }
+    ],
+    "chargesSchedule":[
+        {
+            "header": "Charge Type",
+            "accessor": "chargeType"
+        },
+        {
+            "header": "Charge Code",
+            "accessor": "chargeCode"
+        },
+        {
+            "header": "From",
+            "accessor": "from"
+        },
+        {
+            "header": "To/Inactive",
+            "accessor": "toInactive"
+        },
+        {
+            "header": "Amount",
+            "accessor": "amount"
+        },
+        {
+            "header": "Currency",
+            "accessor": "currency"
+        },
+        {
+            "header": "Amount/Contr.Area",
+            "accessor": "amountPerContrArea"
+        },
+        {
+            "header": "Amount Period",
+            "accessor": "amountPeriod"
+        },
+        {
+            "header": "Unit",
+            "accessor": "unit"
+        }
+    ],
+    "clauses":[
+        {
+            "header": "Name",
+            "accessor": "name"
+        },
+        {
+            "header": "Description",
+            "accessor": "description"
+        },
+        {
+            "header": "Date",
+            "accessor": "date"
+        },
+        {
+            "header": "End Date",
+            "accessor": "endDate"
+        },
+        {
+            "header": "Reference",
+            "accessor": "reference"
+        },
+        {
+            "header": "Unit(s)",
+            "accessor": "units"
+        }
+    ],
+    "contacts":[
+        {
+            "header": "Contact Code",
+            "accessor": "contactCode"
+        },
+        {
+            "header": "Role",
+            "accessor": "role"
+        },
+        {
+            "header": "Primary (flag)",
+            "accessor": "primary"
+        },
+        {
+            "header": "Company Name",
+            "accessor": "companyName"
+        },
+        {
+            "header": "First Name",
+            "accessor": "firstName"
+        },
+        {
+            "header": "Last Name",
+            "accessor": "lastName"
+        },
+        {
+            "header": "Phone Number 1",
+            "accessor": "phone1"
+        },
+        {
+            "header": "Phone Number 2",
+            "accessor": "phone2"
+        },
+        {
+            "header": "Email",
+            "accessor": "email"
+        },
+        {
+            "header": "Inactive Date",
+            "accessor": "inactiveDate"
+        }
+    ],
+    "occupancyInfo":[
+        {
+            "header": "Unit Status",
+            "accessor": "unitStatus"
+        },
+        {
+            "header": "Date Available",
+            "accessor": "dateAvailable"
+        },
+        {
+            "header": "Date Ready",
+            "accessor": "dateReady"
+        },
+        {
+            "header": "RESIDENTIAL - Furnished (Flag)",
+            "accessor": "residentialFurnished"
+        }
+    ],
+    "options":[
+        {
+            "header": "Type",
+            "accessor": "type"
+          },
+          {
+            "header": "Status",
+            "accessor": "status"
+          },
+          {
+            "header": "Expirations Date",
+            "accessor": "expirationsDate"
+          },
+          {
+            "header": "Notice Date",
+            "accessor": "noticeDate"
+          },
+          {
+            "header": "Description (Notes)",
+            "accessor": "description"
+          },
+          {
+            "header": "Unit(s)",
+            "accessor": "units"
+          },
+          {
+            "header": "Area (sqm)",
+            "accessor": "area"
+          }
+    ],
+    "rooms":[
+        {
+            "header": "Room Code",
+            "accessor": "roomCode"
+        },
+        {
+            "header": "Description - Notes",
+            "accessor": "description"
+        },
+        {
+            "header": "Room Status",
+            "accessor": "roomStatus"
+        },
+        {
+            "header": "Area",
+            "accessor": "area"
+        },
+        {
+            "header": "Accessible for Disabled",
+            "accessor": "accessible"
+        },
+        {
+            "header": "Date Available",
+            "accessor": "dateAvailable"
+        },
+        {
+            "header": "Date Vacant",
+            "accessor": "dateVacant"
+        },
+        {
+            "header": "Tenant Code",
+            "accessor": "tenantCode"
+        }
+    ],
+    "roomsTotalInfo":[
+        {
+            "header": "Total Room Count",
+            "accessor": "totalRoomCount"
+        },
+        {
+            "header": "Occupied Rooms",
+            "accessor": "occupiedRooms"
+        },
+        {
+            "header": "Unoccupied Rooms",
+            "accessor": "unoccupiedRooms"
+        },
+        {
+            "header": "Total Beds Count",
+            "accessor": "totalBedsCount"
+        },
+        {
+            "header": "Current Occupied Beds",
+            "accessor": "currentOccupiedBeds"
+        },
+        {
+            "header": "Unoccupied Beds",
+            "accessor": "unoccupiedBeds"
+        },
+        {
+            "header": "Assignable Capacity",
+            "accessor": "assignableCapacity"
+        },
+        {
+            "header": "Maximum Capacity",
+            "accessor": "maximumCapacity"
+        }
+    ],
+    "taxInfo":[
+        {
+            "header": "Legal Entity/Owner Code",
+            "accessor": "legalEntityCode"
+          },
+          {
+            "header": "Tax Authority",
+            "accessor": "taxAuthority"
+          },
+          {
+            "header": "Base currency",
+            "accessor": "baseCurrency"
+          },
+          {
+            "header": "Tax opted (Yes/No)",
+            "accessor": "taxOpted"
+          },
+          {
+            "header": "Tax Status Changed",
+            "accessor": "taxStatusChanged"
+          },
+          {
+            "header": "Status",
+            "accessor": "status"
+          },
+          {
+            "header": "Default Sales Transaction Type",
+            "accessor": "defaultSalesTransactionType"
+          },
+          {
+            "header": "Default Purchases Transaction Type",
+            "accessor": "defaultPurchasesTransactionType"
+          },
+          {
+            "header": "Tax Point",
+            "accessor": "taxPoint"
+          },
+          {
+            "header": "Report Entity Code",
+            "accessor": "reportEntityCode"
+          }
+    ]
+
+}

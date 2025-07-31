@@ -1,7 +1,21 @@
+/* FormGroup.module.css */
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 1.0rem; /* spacing between FormFields */
-  padding: 1.0rem;
+  gap: 0.5rem;
 }
 
+.title {
+  font-weight: 500;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.horizontal .content {
+  flex-direction: row;
+  align-items: center;
+}

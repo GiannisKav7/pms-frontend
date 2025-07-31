@@ -1,7 +1,7 @@
 import React from "react";
-import Table from "../../ui/Table";
+import Table from "../ui/Table";
 import styles from "./ClausesTable.module.css";
-import { clauseTableData } from "../../../data/clausesTableData";
+import { clauseTableData } from "../../data/clausesTableData";
 
 const ClausesTable: React.FC = () => {
 

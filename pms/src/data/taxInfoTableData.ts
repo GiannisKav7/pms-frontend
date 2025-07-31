@@ -12,7 +12,7 @@ export interface TaxInfo {
     reportEntityCode: string,
 }
 
-export const taxInfoData: TaxInfo = 
+export const taxInfoTableData: TaxInfo[] = [
 {
     key: "1",
     legalEntityOwnerCode: "LE-001",
@@ -25,4 +25,4 @@ export const taxInfoData: TaxInfo =
     defaultPurchasesTransactionType: "Wholesale",
     taxPoint: "Invoice Date",
     reportEntityCode: "REP-001",
-};
+}];

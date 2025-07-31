@@ -1,8 +1,8 @@
 // src/components/RentChargesTable.jsx
 import React from "react";
-import Table from "../../ui/Table";
+import Table from "../ui/Table";
 import styles from "./AmendmentsTable.module.css";
-import { amendmentsTableData } from "../../../data/amendmentsTableData";
+import { amendmentsTableData } from "../../data/amendmentsTableData";
 
 const columns = [
   {

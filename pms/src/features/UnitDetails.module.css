@@ -1,0 +1,15 @@
+/* Header bar container (for LeaseBasicInfoBar) */
+.header {
+  background: #fff;
+  padding: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Content area styling */
+.content {
+  display: flex;
+  margin: 0;
+  flex: 1;
+  width: 100%;         /* Add this */
+  box-sizing: border-box; /* Optional, for consistent sizing */
+}
