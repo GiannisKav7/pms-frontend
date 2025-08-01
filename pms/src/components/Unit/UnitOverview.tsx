@@ -68,13 +68,16 @@ const UnitOverview: React.FC<UnitOverviewProps> = ({ unitDetails }) => {
     return (
         <div className={styles.container}>
             <Card title="Unit Overview" className={styles.card}>
-                <Grid columns={3} className={styles.grid} gap="0.1rem">
-                    <FormGroup className={styles.groupTitle} title="Location">
+                <Grid columns={4} className={styles.grid} gap="0.1rem">
+                    <FormGroup className={styles.groupLabels} title="Location">
                         <Input label="Street Address" value={streetAddress} onChange={handleStreetAddressChange} />
                         <Input label="Number" value={number} onChange={handleNumberChange} />
                         <Input label="Address 3" value={address3} onChange={handleAddress3Change} />
                         <Input label="Address 4" value={address4} onChange={handleAddress4Change} />
                         <Input label="City" value={city} onChange={handleCityChange} />
+                       
+                    </FormGroup>
+                    <FormGroup className={styles.groupTitle}>   
                         <Input label="County/Municipality" value={countyMunicipality} onChange={handleCountyMunicipalityChange} />
                         <Input label="Prefecture" value={prefecture} onChange={handlePrefectureChange} />
                         <Input label="Region" value={region} onChange={handleRegionChange} />
@@ -82,16 +85,17 @@ const UnitOverview: React.FC<UnitOverviewProps> = ({ unitDetails }) => {
                         <Input label="Country" value={country} onChange={handleCountryChange} />
                     </FormGroup>
 
-                    <FormGroup className={styles.groupTitle} title="Residential Info" horizontal>
+                    <FormGroup className={styles.groupLabels} title="Residential Info" >
                         <Input label="Number of Bedrooms" value={bedrooms} onChange={handleBedroomsChange} />
                         <Input label="Number of Bathrooms" value={bathrooms} onChange={handleBathroomsChange} />
                     </FormGroup>
 
-                    <FormGroup className={styles.groupTitle} title="Additional Details">
+                    <FormGroup className={styles.groupLabels} title="Additional Details">
                         <Input
                             label="Description/Notes"
                             value={descriptionNotes}
                             onChange={handleDescriptionNotesChange}
+                            
                         />
                     </FormGroup>
                 </Grid>

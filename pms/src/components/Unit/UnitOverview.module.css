@@ -9,11 +9,11 @@
   
   .grid {
     padding: 0.2rem;
+    margin-top: 1.0rem;
   }
   
   .groupTitle {
-    font-weight: 600;
-    font-size: 0.9rem;
+    margin-top: 1.5rem;
   }
   
   .groupLabels {
