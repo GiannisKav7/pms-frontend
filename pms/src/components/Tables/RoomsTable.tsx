@@ -20,6 +20,7 @@ const RoomsTable: React.FC = () => {
         {
             header: "Area",
             accessor: "area",
+            postfix: "m²",
         },
         {
             header: "Accessible for Disabled",

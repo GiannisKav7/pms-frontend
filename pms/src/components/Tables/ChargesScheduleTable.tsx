@@ -33,6 +33,7 @@ const ChargesScheduleTable: React.FC = () => {
         {
             header: "Amount/Contr.Area",
             accessor: "amountPerContrArea",
+            postfix: "€/m²",
         },
         {
             header: "Amount Period",

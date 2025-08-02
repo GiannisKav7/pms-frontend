@@ -32,10 +32,12 @@ const RoomsTotalInfoTable: React.FC = () => {
         {
             header: "Assignable Capacity",
             accessor: "assignableCapacity",
+            postfix: "%"
         },
         {
             header: "Maximum Capacity",
             accessor: "maximumCapacity",
+            postfix: "%"
         },
     ];
 

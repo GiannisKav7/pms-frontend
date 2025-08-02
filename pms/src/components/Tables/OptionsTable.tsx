@@ -31,8 +31,9 @@ const OptionsTable: React.FC = () => {
       accessor: "units",
     },
     {
-      header: "Area (sqm)",
+      header: "Area",
       accessor: "area",
+      postfix: "m²",
     },
   ];
 
