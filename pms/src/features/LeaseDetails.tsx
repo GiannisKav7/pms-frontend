@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Sidebar from "../components/Layouts/Sidebar";
 import { initialLeaseDetails, type Lease } from "../data/leaseDetails";
 import LeaseOverviewContent from "../components/Lease/LeaseOverviewContent";
@@ -25,17 +25,13 @@ const LeaseDetails: React.FC = () => {
   { label: "Contacts", path: `/lease/${initialLeaseDetails.leaseCode}/contacts`, icon: AiOutlineContacts },
 ];
 
-  const navigate = useNavigate();
-  const [leaseDetails, setLeaseDetails] = useState<Lease>(initialLeaseDetails);
-   
+  const [leaseDetails, _setLeaseDetails] = useState<Lease>(initialLeaseDetails);
   return (
     <>
     <div className={styles.header}>
       <LeaseBasicInfoBar leaseBarDetails={{
         leaseCode: leaseDetails.leaseCode,
         leaseName: leaseDetails.leaseName,
-        leaseType: leaseDetails.leaseType,
-        status: leaseDetails.status,
         customerCode: leaseDetails.customerCode,
         rentMonthly: leaseDetails.rentMonthly.toString(),
         leaseFromDate: new Date(leaseDetails.leaseFromDate),

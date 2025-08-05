@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import Sidebar from "../components/Layouts/Sidebar";
 import { initialPropertyDetails, type Property } from "../data/propertyDetails";
@@ -11,26 +11,36 @@ import { TaxInfoTable } from "../components/Tables/TaxInfoTable";
 
 const PropertyDetails: React.FC = () => {
 
-  const items = [
+  const items = useMemo(() => [
     { label: "Overview", path: `/property/${initialPropertyDetails.propertyCode}`, icon: AiOutlineHome },
     { label: "Contacts", path: `/property/${initialPropertyDetails.propertyCode}/contacts`, icon: AiOutlineContacts },
     { label: "Tax Info", path: `/property/${initialPropertyDetails.propertyCode}/taxinfo`, icon: AiOutlineFile }
-  ];
+  ], [initialPropertyDetails.propertyCode]);
 
+  const [propertyDetails, _setPropertyDetails] = useState<Property>(initialPropertyDetails);
+  const [propCode, setPropCode] = useState<string>();
 
-  const [propertyDetails, setPropertyDetails] = useState<Property>(initialPropertyDetails);
-  // const [name, setName] = useState<string>(propertyDetails.name || '');
+  const url = "http://localhost:3000/properties"
+  useEffect(() => {
+    const fetchPropCode = async () => {
+      const res = await fetch(url);
+      const data = (await res.json()) as { property_code: string }[];
+      setPropCode(data[0].property_code);
+    }
+    fetchPropCode();
+
+  }, []);
 
   return (
     <>
       <div className={styles.header}>
         <PropertyBasicInfoBar propertyBarDetails={{
-          name: propertyDetails.name,
-          propertyCode: propertyDetails.propertyCode,
-          units: propertyDetails.units,
-          occupancy: propertyDetails.occupancy,
-          size: propertyDetails.size,
-          type: propertyDetails.type
+          name: propertyDetails?.name ?? "",
+          propertyCode: propCode ?? "",
+          units: propertyDetails?.units ?? 0,
+          occupancy: propertyDetails?.occupancy ?? 0,
+          size: propertyDetails?.size ?? 0,
+          type: propertyDetails?.type ?? "Unknown"
         }} />
       </div>
       

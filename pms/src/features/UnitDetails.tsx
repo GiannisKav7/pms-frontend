@@ -23,8 +23,8 @@ const UnitDetails: React.FC = () => {
         { label: "Contacts", path: `/unit/${initialUnitDetails.unitCode}/contacts`, icon: AiOutlineContacts },
     ];
 
-    const [unitDetails, setUnitDetails] = useState<Unit>(initialUnitDetails);
-
+    const [unitDetails, _setUnitDetails] = useState<Unit>(initialUnitDetails);
+    
     return (
         <>
             <div className={styles.header}>

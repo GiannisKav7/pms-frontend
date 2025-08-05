@@ -11,9 +11,7 @@ import Input from "../ui/Input";
 interface LeaseBasicInfoBarProps{
   leaseBarDetails: {
     leaseCode: String,
-    leaseName: String,
-    leaseType: String,
-    status: String,
+    leaseName: String, 
     customerCode: String,
     rentMonthly: String,
     leaseFromDate: Date,
@@ -22,7 +20,7 @@ interface LeaseBasicInfoBarProps{
 }
 
 const LeaseBasicInfoBar: React.FC<LeaseBasicInfoBarProps> = ({ leaseBarDetails }) => {
-  const { leaseCode, leaseName, leaseType, status, customerCode, rentMonthly, leaseFromDate, leaseToDate } = leaseBarDetails;
+  const { leaseCode, leaseName, customerCode, rentMonthly, leaseFromDate, leaseToDate } = leaseBarDetails;
   // const statusColor = status === "Active" ? "green" : "red";
 
   const [isEditing, setEditing] = useState<Boolean>(false);

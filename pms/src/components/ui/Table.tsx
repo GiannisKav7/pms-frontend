@@ -16,7 +16,7 @@ interface TableProps {
   data: any[];
 }
 
-const Table: React.FC<TableProps> = ({ columns, caption, data, className, ...props }) => {
+const Table: React.FC<TableProps> = ({ columns, caption, data }) => {
   return (
     <div className={styles.wrapper}>
       <table className={styles.table}>

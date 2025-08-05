@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "property-management-plat-37148"
-  }
+    "default": "property-management-plat-37148",
+    "dev": "prop-management-platform"
+  },
+  "targets": {},
+  "etags": {}
 }

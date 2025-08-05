@@ -1,4 +1,4 @@
-import React, { type JSX } from "react";
+import React from "react";
 import styles from "./Heading.module.css";
 
 interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {

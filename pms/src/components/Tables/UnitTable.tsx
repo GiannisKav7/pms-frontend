@@ -14,7 +14,7 @@ const UnitTable:React.FC = () => {
     {
       header: "Unit Code",
       accessor: "unitCode",
-      render: (row: number, value: string) => <Link to={`/unit/${value}`} className={styles.link}>{value}</Link>
+      render: (_row: number, value: string) => <Link to={`/unit/${value}`} className={styles.link}>{value}</Link>
     },
     {
       header: "Building Code",
