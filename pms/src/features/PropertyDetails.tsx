@@ -20,7 +20,8 @@ const PropertyDetails: React.FC = () => {
   const [propertyDetails, _setPropertyDetails] = useState<Property>(initialPropertyDetails);
   const [propCode, setPropCode] = useState<string>();
 
-  const url = "http://localhost:3000/properties"
+  // const url = "http://localhost:3000/properties"
+  const url = "https://prop-management-platform.web.app/properties"
   useEffect(() => {
     const fetchPropCode = async () => {
       const res = await fetch(url);
