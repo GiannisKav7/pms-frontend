@@ -13,7 +13,7 @@ const HomePage: React.FC = () => {
   const pages: Page[] = [
     { title: "Lease Page", path: "/lease/1" }, // Dummy ID for navigation
     { title: "Unit Page", path: "/unit/1" },
-    { title: "Legal Entity Owner Page", path: "/legalentity/1" },
+    { title: "Legal Entity Owner Page", path: "/owner/1" },
     { title: "Contact Page", path: "/contact/1" },
     { title: "Property Page", path: "/property/1" },
     { title: "Room Page", path: "/room/1" },

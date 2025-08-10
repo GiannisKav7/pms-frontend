@@ -1,5 +1,5 @@
 import React from 'react';
-import PropertyDetails from '../features/PropertyDetails';
+import PropertyDetails from '../components/Property/PropertyDetails';
 import Navbar from '../components/Layouts/Navbar';
 
 const PropertyPage: React.FC = () => {

@@ -13,7 +13,7 @@ interface PropertyBasicInfoBarProps {
     occupancy: number;
     type: string[];
   };
-}
+};
 
 const PropertyBasicInfoBar: React.FC<PropertyBasicInfoBarProps> = ({ propertyBarDetails }) => {
   const { name, propertyCode, units, size, occupancy, type } = propertyBarDetails;

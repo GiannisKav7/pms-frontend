@@ -1,5 +1,5 @@
 import React from 'react';
-import UnitDetails from '../features/UnitDetails';
+import UnitDetails from '../components/Unit/UnitDetails';
 import Navbar from '../components/Layouts/Navbar';
 
 const UnitPage: React.FC = () => {

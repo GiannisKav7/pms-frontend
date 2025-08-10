@@ -1,27 +1,27 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import Sidebar from "../components/Layouts/Sidebar";
-import { initialPropertyDetails, type Property } from "../data/propertyDetails";
-import PropertyBasicInfoBar from "../components/Property/PropertyBasicInfoBar";
-import PropertyOverview from "../components/Property/PropertyOverview";
+import Sidebar from "../Layouts/Sidebar";
+import { initialPropertyDetails, type Property } from "../../data/propertyDetails";
+import PropertyBasicInfoBar from "./PropertyBasicInfoBar";
+import PropertyOverview from "./PropertyOverview";
 import styles from "./PropertyDetails.module.css";
 import { AiOutlineHome, AiOutlineContacts, AiOutlineFile } from 'react-icons/ai';
-import ContactsTable from "../components/Tables/ContactsTable";
-import { TaxInfoTable } from "../components/Tables/TaxInfoTable";
+import ContactsTable from "../Tables/ContactsTable";
+import { TaxInfoTable } from "../Tables/TaxInfoTable";
 
 const PropertyDetails: React.FC = () => {
 
-  const items = useMemo(() => [
+  const items = [
     { label: "Overview", path: `/property/${initialPropertyDetails.propertyCode}`, icon: AiOutlineHome },
     { label: "Contacts", path: `/property/${initialPropertyDetails.propertyCode}/contacts`, icon: AiOutlineContacts },
     { label: "Tax Info", path: `/property/${initialPropertyDetails.propertyCode}/taxinfo`, icon: AiOutlineFile }
-  ], [initialPropertyDetails.propertyCode]);
+  ];
 
   const [propertyDetails, _setPropertyDetails] = useState<Property>(initialPropertyDetails);
   const [propCode, setPropCode] = useState<string>();
 
-  // const url = "http://localhost:3000/properties"
-  const url = "https://prop-management-platform.web.app/properties"
+  const url = `${import.meta.env.VITE_API_URL}/properties`;
+  
   useEffect(() => {
     const fetchPropCode = async () => {
       const res = await fetch(url);

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Sidebar from "../components/Layouts/Sidebar";
-import { initialLeaseDetails, type Lease } from "../data/leaseDetails";
-import LeaseOverviewContent from "../components/Lease/LeaseOverviewContent";
-import LeaseBasicInfoBar from "../components/Lease/LeaseBasicInfoBar";
+import Sidebar from "../Layouts/Sidebar";
+import { initialLeaseDetails, type Lease } from "../../data/leaseDetails";
+import LeaseOverviewContent from "./LeaseOverviewContent";
+import LeaseBasicInfoBar from "./LeaseBasicInfoBar";
 import styles from "./LeaseDetails.module.css";
-import UnitTable from "../components/Tables/UnitTable";
-import ChargesScheduleTable from "../components/Tables/ChargesScheduleTable";
-import OptionsTable from "../components/Tables/OptionsTable";
-import AmendmentsTable from "../components/Tables/AmendmentsTable";
-import ClausesTable from "../components/Tables/ClausesTable";
-import ContactsTable from "../components/Tables/ContactsTable";
+import UnitTable from "../Tables/UnitTable";
+import ChargesScheduleTable from "../Tables/ChargesScheduleTable";
+import OptionsTable from "../Tables/OptionsTable";
+import AmendmentsTable from "../Tables/AmendmentsTable";
+import ClausesTable from "../Tables/ClausesTable";
+import ContactsTable from "../Tables/ContactsTable";
 import { AiOutlineHome, AiOutlineBuild, AiOutlineDollarCircle, AiOutlineEdit, AiOutlineFile, AiOutlineSetting, AiOutlineContacts } from 'react-icons/ai';
 
 const LeaseDetails: React.FC = () => {
