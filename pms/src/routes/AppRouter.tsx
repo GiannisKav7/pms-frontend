@@ -7,6 +7,7 @@ import HomePage from '../pages/HomePage';
 // import ContactPage from '../pages/ContactPage';
 import PropertyPage from '../pages/PropertyPage';
 import OwnerPage from '../pages/OwnerPage';
+import LeaseAdminPage from '../pages/LeaseAdminPage';
 // import RoomPage from '../pages/RoomPage';
 // import BuildingPage from '../pages/BuildingPage';
 // import FloorPage from '../pages/FloorPage';
@@ -18,6 +19,7 @@ const AppRouter: React.FC = () => {
       <Routes>
           <Route index element={<HomePage />} />
           <Route path="home" element={<HomePage />} />
+          <Route path="leaseadmin" element={<LeaseAdminPage />} />
           <Route path="lease/:id/*" element={<LeasePage />} />
           <Route path="unit/:id*" element={<UnitPage />} />
           <Route path="property/:id/*" element={<PropertyPage />} />
