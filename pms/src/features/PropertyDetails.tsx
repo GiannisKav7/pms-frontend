@@ -21,7 +21,7 @@ const PropertyDetails: React.FC = () => {
   const [propCode, setPropCode] = useState<string>();
 
   // const url = "http://localhost:3000/properties"
-  const url = "https://prop-management-platform.web.app/properties"
+  const url = "https://pms-api.up.railway.app/properties"
   useEffect(() => {
     const fetchPropCode = async () => {
       const res = await fetch(url);
