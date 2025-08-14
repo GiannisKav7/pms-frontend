@@ -1,6 +1,5 @@
 import React from 'react';
-
-import LeaseDetails from '../features/LeaseDetails';
+import LeaseDetails from '../components/Lease/LeaseDetails';
 import Navbar from '../components/Layouts/Navbar';
 
 const LeasePage: React.FC = () => {

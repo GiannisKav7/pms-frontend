@@ -11,17 +11,17 @@ import { TaxInfoTable } from "../components/Tables/TaxInfoTable";
 
 const PropertyDetails: React.FC = () => {
 
-  const items = useMemo(() => [
+  const items = [
     { label: "Overview", path: `/property/${initialPropertyDetails.propertyCode}`, icon: AiOutlineHome },
     { label: "Contacts", path: `/property/${initialPropertyDetails.propertyCode}/contacts`, icon: AiOutlineContacts },
     { label: "Tax Info", path: `/property/${initialPropertyDetails.propertyCode}/taxinfo`, icon: AiOutlineFile }
-  ], [initialPropertyDetails.propertyCode]);
+  ];
 
   const [propertyDetails, _setPropertyDetails] = useState<Property>(initialPropertyDetails);
   const [propCode, setPropCode] = useState<string>();
 
   // const url = "http://localhost:3000/properties"
-  const url = "https://pms-api.up.railway.app/properties"
+  const url = `${import.meta.env.VITE_API_URL}/properties`;
   useEffect(() => {
     const fetchPropCode = async () => {
       const res = await fetch(url);

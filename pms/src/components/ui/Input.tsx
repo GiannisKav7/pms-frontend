@@ -7,11 +7,12 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id?: string;
   link?: boolean;
   path?: string;
+  orientation?: 'horizontal' | 'vertical';
 }
 
-const Input: React.FC<InputProps> = ({ label, id, link, path, ...props }) => {
+const Input: React.FC<InputProps> = ({ label, id, link, path, orientation = 'vertical', ...props }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${styles[orientation]}`}>
       {label && (
         <label htmlFor={id} className={styles.label}>
           {label}

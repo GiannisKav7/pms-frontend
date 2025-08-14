@@ -77,7 +77,7 @@ const UnitOverview: React.FC<UnitOverviewProps> = ({ unitDetails }) => {
                         <Input label="City" value={city} onChange={handleCityChange} />
                        
                     </FormGroup>
-                    <FormGroup className={styles.groupTitle}>   
+                    <FormGroup className={styles.groupNoTitle}>   
                         <Input label="County/Municipality" value={countyMunicipality} onChange={handleCountyMunicipalityChange} />
                         <Input label="Prefecture" value={prefecture} onChange={handlePrefectureChange} />
                         <Input label="Region" value={region} onChange={handleRegionChange} />

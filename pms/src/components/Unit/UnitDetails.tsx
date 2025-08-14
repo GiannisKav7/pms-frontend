@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Sidebar from "../components/Layouts/Sidebar";
-import { initialUnitDetails, type Unit } from "../data/unitDetails";
-import UnitBasicInfoBar from "../components/Unit/UnitBasicInfoBar";
-import UnitOverview from "../components/Unit/UnitOverview";
+import Sidebar from "../Layouts/Sidebar";
+import { initialUnitDetails, type Unit } from "../../data/unitDetails";
+import UnitBasicInfoBar from "./UnitBasicInfoBar";
+import UnitOverview from "./UnitOverview";
 import styles from "./UnitDetails.module.css";
 import { AiOutlineHome, AiOutlineContacts, AiOutlineUser, AiOutlineInfoCircle, AiOutlineDashboard, AiOutlineSetting } from 'react-icons/ai';
-import ContactsTable from "../components/Tables/ContactsTable";
-import OccupancyInfoTable from "../components/Tables/OccupancyInfoTable";
-import RoomsTotalInfoTable from "../components/Tables/RoomsTotalInfoTable";
-import RoomsTable from "../components/Tables/RoomsTable";
-import UserDefinedFieldsTable from "../components/Tables/UserDefinedFieldsTable";
+import ContactsTable from "../Tables/ContactsTable";
+import OccupancyInfoTable from "../Tables/OccupancyInfoTable";
+import RoomsTotalInfoTable from "../Tables/RoomsTotalInfoTable";
+import RoomsTable from "../Tables/RoomsTable";
+import UserDefinedFieldsTable from "../Tables/UserDefinedFieldsTable";
 
 const UnitDetails: React.FC = () => {
 

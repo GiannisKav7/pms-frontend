@@ -34,3 +34,8 @@ ui-debug.log
 functions/node_modules/
 functions/lib/
 functions/.env*
+
+# Env files
+.env.development
+.env.local
+.env.production
