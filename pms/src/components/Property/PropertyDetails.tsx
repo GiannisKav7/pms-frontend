@@ -45,7 +45,11 @@ const PropertyDetails: React.FC = () => {
 
     fetchPropCode();
   }, []);
-
+  
+  // Race condition: a request may last for more time than the next request
+  // and the order of data showing may reverse (like in pagination requests)
+  // Use useRef<AbortController >.abort() to cancel a previous request
+  
   if(isLoading){
     return <div>Loading...</div>
   }
