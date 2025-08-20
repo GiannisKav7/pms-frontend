@@ -5,7 +5,6 @@ interface DatePickerProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   id?: string;
   orientation?: 'horizontal' | 'vertical';
-
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({ label, id, orientation = "vertical", ...props }) => {
@@ -20,6 +19,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, id, orientation = "verti
         type="date"
         id={id}
         className={styles.input + (props.readOnly ? " " + styles.readOnly : "")}
+        value={props.value}
       {...props}
       />
     </div>

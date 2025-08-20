@@ -20,7 +20,7 @@ const PropertyDetails: React.FC = () => {
   const [propertyDetails, _setPropertyDetails] = useState<Property>(initialPropertyDetails);
   const [propCode, setPropCode] = useState<string>();
 
-  const url = `${import.meta.env.VITE_API_URL}/properties`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/property`;
   
   useEffect(() => {
     const fetchPropCode = async () => {

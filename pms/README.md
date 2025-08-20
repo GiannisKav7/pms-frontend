@@ -52,3 +52,16 @@ export default tseslint.config({
   },
 })
 ```
+
+# PMS
+
+## Environment
+
+- Development (.env.development)
+  ```
+  VITE_API_BASE_URL=http://localhost:5001/<YOUR_PROJECT>/us-central1/api
+  ```
+- Production (.env.production)
+  ```
+  VITE_API_BASE_URL=https://pms-api.up.railway.app
+  ```

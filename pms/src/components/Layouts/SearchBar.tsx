@@ -8,6 +8,8 @@ import styles from "./SearchBar.module.css";
 const SearchBar: React.FC = () => {
 
     const [tenant, setTenant] = useState<string>('');
+    // const [dateFrom, setDateFrom] = useState<Date>();
+    // const [dateTo, setDateTo] = useState<Date>();
 
     return(
         <>
@@ -20,8 +22,16 @@ const SearchBar: React.FC = () => {
                     value={tenant}
                     onChange={e => setTenant(e.target.value)}    
                 />
-                <DatePicker label="Date From" orientation="horizontal" value={(new Date()).toString()}/>
-                <DatePicker label="Date To" orientation="horizontal" value={(new Date()).toString()}/>
+                <DatePicker 
+                    label="Date From" 
+                    orientation="horizontal"
+                    
+                />
+                <DatePicker 
+                    label="Date To" 
+                    orientation="horizontal"                     
+                    
+                />
                 <Button mode="info">Search</Button>
             </Grid>
         </>

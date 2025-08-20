@@ -22,7 +22,7 @@ const OwnerDetails: React.FC = () =>{
         { label: "Contacts", path: "/owner/" + initialOwnerDetails.ownerCode + "/contacts", icon: AiOutlineContacts }
     ];
     
-    const [ownerDetails, setOwnerDetails] = useState<Owner>(initialOwnerDetails);
+    const [ownerDetails, _setOwnerDetails] = useState<Owner>(initialOwnerDetails);
 
     return(
         <>
