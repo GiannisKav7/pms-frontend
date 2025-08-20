@@ -21,7 +21,7 @@ const AppRouter: React.FC = () => {
           <Route path="home" element={<HomePage />} />
           <Route path="leaseadmin" element={<LeaseAdminPage />} />
           <Route path="lease/:id/*" element={<LeasePage />} />
-          <Route path="unit/:id*" element={<UnitPage />} />
+          <Route path="unit/:id/*" element={<UnitPage />} />
           <Route path="property/:id/*" element={<PropertyPage />} />
           <Route path="owner/:id/*" element={<OwnerPage />} />
           {/*

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import Sidebar from "../Layouts/Sidebar";
 import { initialPropertyDetails, type Property } from "../../data/propertyDetails";
@@ -9,6 +9,8 @@ import { AiOutlineHome, AiOutlineContacts, AiOutlineFile } from 'react-icons/ai'
 import ContactsTable from "../Tables/ContactsTable";
 import { TaxInfoTable } from "../Tables/TaxInfoTable";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const PropertyDetails: React.FC = () => {
 
   const items = [
@@ -18,19 +20,44 @@ const PropertyDetails: React.FC = () => {
   ];
 
   const [propertyDetails, _setPropertyDetails] = useState<Property>(initialPropertyDetails);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(); // type any because we just want to know if there is an error
   const [propCode, setPropCode] = useState<string>();
 
   const url = `${import.meta.env.VITE_API_BASE_URL}/property`;
   
   useEffect(() => {
     const fetchPropCode = async () => {
-      const res = await fetch(url);
-      const data = (await res.json()) as { property_code: string }[];
-      setPropCode(data[0].property_code);
-    }
-    fetchPropCode();
+      setIsLoading(true); // currently loading
+      
+      // use try catch for errors handling
+      try{ 
+        const response = await fetch(url);
+        const data = (await response.json()) as { property_code: string }[]; // ts has to know the datatype
+        setPropCode(data[0].property_code);
+      }catch (e: any) {
+        setError(e);
+      } finally{
+        // whatever happens finish loading
+        setIsLoading(false); 
+      }
+      
+    };
 
+    fetchPropCode();
   }, []);
+  
+  // Race condition: a request may last for more time than the next request
+  // and the order of data showing may reverse (like in pagination requests)
+  // Use useRef<AbortController >.abort() to cancel a previous request
+  
+  if(isLoading){
+    return <div>Loading...</div>
+  }
+
+  if(error){
+    return <div>Something went wrong ! Please trye again.</div>
+  }
 
   return (
     <>
