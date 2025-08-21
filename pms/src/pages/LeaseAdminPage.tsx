@@ -4,6 +4,7 @@ import SearchBar from '../components/Layouts/SearchBar';
 import Grid from '../components/ui/Grid';
 import Card from '../components/ui/Card';
 import styles from './LeaseAdminPage.module.css';
+import LeaseTable from '../components/LeaseAdmin/LeaseTable';
 
 const LeaseAdminPage: React.FC = () =>{
 
@@ -13,7 +14,7 @@ const LeaseAdminPage: React.FC = () =>{
             <SearchBar/>
             
             
-            <Grid className={styles.grid} columns={3}>
+            <Grid className={styles.wrapper} columns={3}>
                 <Card>
                     <div>Pie</div>
                 </Card>
@@ -24,6 +25,10 @@ const LeaseAdminPage: React.FC = () =>{
                     <div>Spaces</div>
                 </Card>
             </Grid>
+            <div className={styles.wrapper}>
+                <LeaseTable />
+            </div>
+            
         </>
 
     );
