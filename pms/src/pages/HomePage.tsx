@@ -1,4 +1,4 @@
-import React from "react";
+// removed unnecessary React default import
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Layouts/Navbar";
 
@@ -7,7 +7,7 @@ interface Page {
   path: string;
 }
 
-const HomePage: React.FC = () => {
+const HomePage = () => {
   const navigate = useNavigate();
 
   const pages: Page[] = [

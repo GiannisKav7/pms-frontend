@@ -1,5 +1,3 @@
-import React from "react";
-
 interface DataBlockProps {
   name: string;
   dataCode: string;

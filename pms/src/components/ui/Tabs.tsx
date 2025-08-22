@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./Tabs.module.css";
 
 interface Tab {
@@ -20,7 +20,9 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
           <button
             key={index}
             onClick={() => setActive(index)}
-            className={`${styles.tabButton} ${active === index ? styles.active : ""}`}
+            className={`${styles.tabButton} ${
+              active === index ? styles.active : ""
+            }`}
           >
             {tab.title}
           </button>
