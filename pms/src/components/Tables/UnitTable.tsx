@@ -4,8 +4,7 @@ import { unitTableData } from "../../data/unitTableData";
 import styles from "./UnitTable.module.css";
 import { Link } from "react-router-dom";
 
-const UnitTable:React.FC = () => {
-
+const UnitTable: React.FC = () => {
   const columns = [
     {
       header: "Unit Name",
@@ -14,16 +13,19 @@ const UnitTable:React.FC = () => {
     {
       header: "Unit Code",
       accessor: "unitCode",
-      render: (_row: number, value: string) => <Link to={`/unit/${value}`} className={styles.link}>{value}</Link>
+      render: (_row: number, value: string) => (
+        <Link to={`/unit/${value}`} className={styles.link}>
+          {value}
+        </Link>
+      ),
     },
     {
       header: "Building Code",
-      accessor: "buildingCode", 
+      accessor: "buildingCode",
     },
     {
       header: "Floor Code",
       accessor: "floorCode",
-      
     },
     {
       header: "Location",
@@ -47,12 +49,11 @@ const UnitTable:React.FC = () => {
     },
   ];
 
-  return(
-    <div className={styles.container}>      
-      <Table columns={columns} data={unitTableData} />      
+  return (
+    <div className={styles.container}>
+      <Table columns={columns} data={unitTableData} />
     </div>
   );
 };
-
 
 export default UnitTable;

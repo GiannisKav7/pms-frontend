@@ -75,7 +75,7 @@ const PropertyDetails: React.FC = () => {
   }
 
   if (error) {
-    return <div>Something went wrong ! Please trye again.</div>;
+    return <div>Something went wrong ! Please try again.</div>;
   }
 
   return (

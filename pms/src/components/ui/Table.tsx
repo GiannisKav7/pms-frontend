@@ -4,7 +4,7 @@ import styles from "./Table.module.css";
 interface Column {
   header: string;
   accessor: string;
-  component?: React.ComponentType<any>;     
+  component?: React.ComponentType<any>;
   render?: (row: number, value: any) => React.ReactNode;
   prefix?: string;
   postfix?: string;
@@ -13,7 +13,7 @@ interface Column {
 interface TableProps {
   columns: Column[];
   caption?: string;
-  className?:string;
+  className?: string;
   data: any[];
 }
 
@@ -21,7 +21,7 @@ const Table: React.FC<TableProps> = ({ columns, caption, data }) => {
   return (
     <div className={styles.wrapper}>
       <table className={styles.table}>
-        {caption ? <caption>{caption}</caption>: ""}
+        {caption ? <caption>{caption}</caption> : ""}
 
         <thead>
           <tr>
@@ -35,16 +35,17 @@ const Table: React.FC<TableProps> = ({ columns, caption, data }) => {
             <tr key={i}>
               {columns.map((col) => (
                 <td key={col.accessor}>
-                  {col.component 
-                    ? <col.component{...(row[col.accessor])}/> 
-                    :(
-                      <>
-                        {col.prefix ? col.prefix+" " : ""}
-                        {col.render ? col.render(i, row[col.accessor]) : row[col.accessor]}                  
-                        {col.postfix ? " "+col.postfix : ""}
-                      </>
-                    )
-                  }
+                  {col.component ? (
+                    <col.component {...row[col.accessor]} />
+                  ) : (
+                    <>
+                      {col.prefix ? col.prefix + " " : ""}
+                      {col.render
+                        ? col.render(i, row[col.accessor])
+                        : row[col.accessor]}
+                      {col.postfix ? " " + col.postfix : ""}
+                    </>
+                  )}
                 </td>
               ))}
             </tr>

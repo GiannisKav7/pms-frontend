@@ -12,10 +12,12 @@ const LeaseTable: React.FC = () => {
     {
       header: "Property",
       accessor: "property",
+      component: DataBlock,
     },
     {
       header: "Customer",
       accessor: "customer",
+      component: DataBlock,
     },
     {
       header: "Term",
@@ -43,10 +45,19 @@ const LeaseTable: React.FC = () => {
       lease: {
         name: "Deloitte Consulting",
         dataCode: "L2051516",
+        link: "/lease/L2051516",
         description: "Test Description",
       },
-      property: "Deloitte Tower 2",
-      customer: "Deloitte Consulting Audit and Tax Services - c299410",
+      property: {
+        name: "Deloitte Tower 2",
+        dataCode: "P5125166",
+        link: "/property/P5125166",
+      },
+      customer: {
+        name: "Deloitte Consulting Audit and Tax Services",
+        dataCode: "C299410",
+        link: "/customer/C299410",
+      },
       term: "204",
       leaseExpiration: "15/09/2029",
       annualRent: "5.014.242",
