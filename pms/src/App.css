@@ -1,48 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Arial&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arial&display=swap");
 
 /* Reset some default browser styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Set basic font and background for the page */
 body {
-    font-family: 'Segoe UI','Inter', 'Arial', 'Helvetica', sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
-    line-height: 1.6;
-    
+  font-family: "Segoe UI", "Inter", "Arial", "Helvetica", sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  line-height: 1.6;
 }
 
 /* Container to center your content */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-Header styling
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-    text-align: center;
+Header styling header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
 }
 
 /* Footer styling */
 footer {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-    text-align: center;
-    margin-top: 2rem;
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 2rem;
 }
 
 /* Main content styling */
 main {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }

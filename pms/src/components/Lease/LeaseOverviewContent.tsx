@@ -16,7 +16,7 @@ const LeaseOverviewContent: React.FC<LeaseOverviewContentProps> = ({
   return (
     <div className={styles.container}>
       <Card title="Lease Overview" className={styles.card}>
-        <Grid columns={5} className={styles.grid} gap="0.1rem">
+        <div className={styles.grid}>
           <FormGroup className={styles.groupTitle} title="Property Info">
             <Input
               className={styles.groupLabels}
@@ -117,7 +117,7 @@ const LeaseOverviewContent: React.FC<LeaseOverviewContentProps> = ({
             <Input label="Last Name" value={leaseDetails.lastName} readOnly />
             <Input label="Taxid" value={leaseDetails.taxid} readOnly />
           </FormGroup>
-        </Grid>
+        </div>
       </Card>
     </div>
   );

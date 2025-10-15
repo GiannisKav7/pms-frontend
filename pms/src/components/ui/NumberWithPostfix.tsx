@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./NumberWithPostfix.module.css";
 
-interface NumberWithPostfixProps extends React.InputHTMLAttributes<HTMLInputElement>{
+interface NumberWithPostfixProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   postfix?: string;
   readOnly?: boolean;
   label?: string;
@@ -10,7 +11,7 @@ interface NumberWithPostfixProps extends React.InputHTMLAttributes<HTMLInputElem
 }
 
 const NumberWithPostfix: React.FC<NumberWithPostfixProps> = ({
-  postfix="",
+  postfix = "",
   readOnly,
   label,
   id,
@@ -19,24 +20,23 @@ const NumberWithPostfix: React.FC<NumberWithPostfixProps> = ({
 }) => {
   return (
     <div className={`${styles.container} ${className || ""}`}>
-        {label && (
-            <label htmlFor={id} className={styles.label}>
-            {label}
-            </label>
-        )}
-        <div
-        className={`${styles.wrapper} ${readOnly ? styles.readOnly : ""}`}>        
+      {label && (
+        <label htmlFor={id} className={styles.label}>
+          {label}
+        </label>
+      )}
+      <div className={`${styles.wrapper} ${readOnly ? styles.readOnly : ""}`}>
         <input
-            type="number"
-            id={id}
-            className={`${styles.input} ${readOnly ? styles.readOnly : ""}`}
-            readOnly={readOnly}
-            {...props}
+          type="number"
+          id={id}
+          className={`${styles.input} ${readOnly ? styles.readOnly : ""}`}
+          readOnly={readOnly}
+          {...props}
         />
         <span className={`${styles.postfix}${readOnly ? styles.readOnly : ""}`}>
-            {postfix}
+          {postfix}
         </span>
-        </div>
+      </div>
     </div>
   );
 };
