@@ -9,7 +9,8 @@
 .grid {
   display: grid;
   gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  /* Define columns to match the named areas below */
+  grid-template-columns: repeat(5, 1fr);
   grid-template-areas: "property rent dates security customer";
   align-items: start;
 }
@@ -34,6 +35,7 @@
 /* Large-to-medium: collapse to 3 columns */
 @media (max-width: 1200px) {
   .grid {
+    grid-template-columns: repeat(3, 1fr);
     grid-template-areas:
       "property rent dates"
       "security customer customer";
@@ -43,6 +45,7 @@
 /* Tablet: two columns */
 @media (max-width: 900px) {
   .grid {
+    grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
       "property rent"
       "dates security"
@@ -53,6 +56,7 @@
 /* Mobile: single column */
 @media (max-width: 600px) {
   .grid {
+    grid-template-columns: 1fr;
     grid-template-areas:
       "property"
       "rent"

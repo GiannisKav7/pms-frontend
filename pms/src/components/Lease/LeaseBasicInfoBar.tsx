@@ -9,10 +9,10 @@ import Input from "../ui/Input";
 
 interface LeaseBasicInfoBarProps {
   leaseBarDetails: {
-    leaseCode: String;
-    leaseName: String;
-    customerCode: String;
-    rentMonthly: String;
+    leaseCode: string;
+    leaseName: string;
+    customerCode: string;
+    rentMonthly: string;
     leaseFromDate: Date;
     leaseToDate: Date;
   };
@@ -31,7 +31,7 @@ const LeaseBasicInfoBar: React.FC<LeaseBasicInfoBarProps> = ({
   } = leaseBarDetails;
   // const statusColor = status === "Active" ? "green" : "red";
 
-  const [isEditing, setEditing] = useState<Boolean>(false);
+  const [isEditing, setEditing] = useState<boolean>(false);
 
   const toogleEdit = () => {
     setEditing((prevIsOpen) => !prevIsOpen);
@@ -67,7 +67,7 @@ const LeaseBasicInfoBar: React.FC<LeaseBasicInfoBarProps> = ({
           </div>
           <p className={styles.dateRange}>
             {new Date(leaseFromDate).toLocaleDateString("el-GR")} -{" "}
-            {new Date(leaseToDate).toLocaleDateString("en-GR")}
+            {new Date(leaseToDate).toLocaleDateString("el-GR")}
           </p>
         </Container>
       </Grid>

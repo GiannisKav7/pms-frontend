@@ -1,5 +1,4 @@
 import Card from "../ui/Card";
-import Grid from "../ui/Grid";
 import FormGroup from "../ui/FormGroup";
 import styles from "./LeaseOverviewContent.module.css";
 import Input from "../ui/Input";
@@ -80,7 +79,7 @@ const LeaseOverviewContent: React.FC<LeaseOverviewContentProps> = ({
             <Input label="Sign Date" value={leaseDetails.signDate} readOnly />
             <Input
               label="Next Break Date"
-              value={leaseDetails.nextBreakDates}
+              value={leaseDetails.nextBreakDate}
               readOnly
             />
             <Input
