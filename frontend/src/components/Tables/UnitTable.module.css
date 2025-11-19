@@ -1,0 +1,10 @@
+.container {
+  padding: 1.0rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.link{
+  color: rgb(22, 121, 255);
+  text-decoration: none;
+}

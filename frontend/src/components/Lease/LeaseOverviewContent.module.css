@@ -1,0 +1,76 @@
+.container {
+  padding: 16px;
+}
+
+.card {
+  margin-bottom: 24px;
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+  /* Define columns to match the named areas below */
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "property rent dates security customer";
+  align-items: start;
+}
+
+/* Map each FormGroup (in order) to a named area */
+.grid > *:nth-child(1) {
+  grid-area: property;
+}
+.grid > *:nth-child(2) {
+  grid-area: rent;
+}
+.grid > *:nth-child(3) {
+  grid-area: dates;
+}
+.grid > *:nth-child(4) {
+  grid-area: security;
+}
+.grid > *:nth-child(5) {
+  grid-area: customer;
+}
+
+/* Large-to-medium: collapse to 3 columns */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      "property rent dates"
+      "security customer customer";
+  }
+}
+
+/* Tablet: two columns */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "property rent"
+      "dates security"
+      "customer customer";
+  }
+}
+
+/* Mobile: single column */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "property"
+      "rent"
+      "dates"
+      "security"
+      "customer";
+  }
+}
+
+.groupTitle {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.groupLabels {
+  font-weight: 400;
+}

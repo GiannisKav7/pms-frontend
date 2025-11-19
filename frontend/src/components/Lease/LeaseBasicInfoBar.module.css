@@ -1,0 +1,128 @@
+.container {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.leaseName {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #000000;
+  flex: 1 1 auto;
+  min-width: 200px;
+}
+
+.leaseCode,
+.customerCode {
+  font-size: 14px;
+  color: #777;
+}
+
+.editButton {
+  max-width: min-content;
+  margin-left: auto;
+}
+.editButton:hover {
+  outline: transparent;
+}
+
+.leaseType {
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.rentMonthly {
+  font-size: 16px;
+  font-weight: 400;
+  color: #444;
+}
+
+.dateRange {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .container {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .rightColumn {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .leaseName {
+    font-size: 1.1rem;
+  }
+
+  .rentMonthly {
+    font-size: 15px;
+  }
+
+  .dateRange {
+    font-size: 13px;
+  }
+
+  /* Collapse the edit button footprint on tablets */
+  .editButton {
+    padding: 4px 8px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaseName {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .row {
+    gap: 0.75rem;
+  }
+
+  .rentMonthly {
+    font-size: 14px;
+  }
+
+  .dateRange {
+    font-size: 12px;
+  }
+
+  /* Make the edit button a compact circular icon on small phones */
+  .editButton {
+    padding: 6px !important;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

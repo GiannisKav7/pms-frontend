@@ -1,0 +1,20 @@
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: block;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.divider {
+  height: 1px;
+  background-color: #cccccc6a;
+  margin-top: 0.6rem;
+}

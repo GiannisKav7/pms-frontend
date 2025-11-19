@@ -1,0 +1,21 @@
+.container {
+    padding: 16px;
+  }
+  
+  .card {
+    margin-bottom: 24px;
+    max-width: min-content;
+  }
+  
+  .grid {
+    padding: 0.2rem;
+    margin-top: 1.0rem;
+  }
+  
+  .groupNoTitle {
+    margin-top: 1.5rem;
+  }
+  
+  .groupLabels {
+    font-weight: 400;
+  }

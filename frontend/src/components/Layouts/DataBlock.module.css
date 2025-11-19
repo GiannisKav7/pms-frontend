@@ -1,0 +1,16 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* children start at top */
+  align-items: flex-start;
+  align-self: flex-start; /* place this section at the top of its parent flex container */
+}
+
+.heading{
+    font-weight: 400;
+}
+
+.link{
+  color: rgb(22, 121, 255);
+  text-decoration: none;
+}

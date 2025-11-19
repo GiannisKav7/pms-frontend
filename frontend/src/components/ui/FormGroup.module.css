@@ -1,0 +1,23 @@
+/* FormGroup.module.css */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: auto;
+}
+
+.horizontal .content {
+  flex-direction: row;
+  align-items: center;
+}
